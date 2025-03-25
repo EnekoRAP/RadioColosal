@@ -1,0 +1,72 @@
+.sidebar-link .dropdown-icon {
+    transition: transform 0.3s ease;
+}
+
+.sidebar-link[aria-expanded="true"] .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.first-level {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.first-level .sidebar-link {
+    padding-left: 2rem;
+}
+
+.sidebar-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-link.active {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-link.active .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.collapse {
+    transition: max-height 0.3s ease-out;
+}
+
+.first-level .sidebar-item:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.sidebar-item .sidebar-link .hide-menu {
+    font-size: 18px;
+}
+
+.sidebar-item .sidebar-link .fs-6 {
+    font-size: 22px;
+}
+
+.sidebar-item .sidebar-link .dropdown-icon {
+    font-size: 22px;
+}
+
+.sidebar-item .sidebar-link {
+    padding: 12px 16px;
+}
+
+.sidebar-item .sidebar-link d-flex {
+    font-size: 18px;
+}
+
+.sidebar-nav {
+    padding: 20px;
+}
+
+.logo-img {
+    color: black;
+}
+
+.logo-img iconify-icon {
+    color: black;
+}
+
+::placeholder {
+    font-size: 0.9rem; 
+}
