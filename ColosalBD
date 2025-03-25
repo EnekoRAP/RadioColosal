@@ -275,7 +275,7 @@ db.Oyentes.insertMany([
 	{
 	  "_id": 2,
 	  "nombre": "Brenda Rojas",
-	  "correo": "brpjas@gmail.com",
+	  "correo": "brojas@gmail.com",
 	  "telefono": "6101-8372",
 	  "fecha_registro": "2025-02-22",
 	  "generos": [
@@ -437,7 +437,7 @@ db.Clientes.insertMany([
 	}
 ]);
 
-10)Colección de Tarifas
+10) Colección de Tarifas
 db.Tarifas.insertMany([
 	{
 	  "_id": 1,
