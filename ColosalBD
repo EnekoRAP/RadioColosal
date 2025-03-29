@@ -2,16 +2,16 @@
 use ColosalBD
 
 -- Crear las colecciones
-db.CreateCollection("Locutores");
-db.CreateCollection("Programacion");
-db.CreateCollection("Publicidad");
-db.CreateCollection("Noticias");
-db.CreateCollection("Eventos");
-db.CreateCollection("Oyentes");
-db.CreateCollection("Comentarios");
-db.CreateCollection("Multimedios");
-db.CreateCollection("Clientes");
-db.CreateCollection("Tarifas");
+db.createCollection("Locutores");
+db.createCollection("Programacion");
+db.createCollection("Publicidad");
+db.createCollection("Noticias");
+db.createCollection("Eventos");
+db.createCollection("Oyentes");
+db.createCollection("Comentarios");
+db.createCollection("Multimedios");
+db.createCollection("Clientes");
+db.createCollection("Tarifas");
 
 -- Inserción de documentos
 
@@ -20,7 +20,7 @@ db.Locutores.insertMany([
 	{
 	  "_id": 1,
 	  "nombre": "Delbis Aguero",
-	  "biografía": "Locutor que tiene más años de estar en Colosal, operando desde 2002.",
+	  "biografia": "Locutor que tiene más años de estar en Colosal, operando desde 2002.",
 	  "redSocial": {
 		"instagram": "instagram.com/delbisaguero/",
 		"facebook": "facebook.com/delbis"
@@ -33,7 +33,7 @@ db.Locutores.insertMany([
 	{
 	  "_id": 2,
 	  "nombre": "Byron Obando",
-	  "biografía": "Locutor que le gusta pasar un rato agradable y mientras disfruta la buena música.",
+	  "biografia": "Locutor que le gusta pasar un rato agradable y mientras disfruta la buena música.",
 	  "redSocial": {
 		"instagram": "instagram.com/byron_locutor/",
 		"facebook": "facebook.com/ByronLocutor"
@@ -46,7 +46,7 @@ db.Locutores.insertMany([
 	{
 	  "_id": 3,
 	  "nombre": "Argenis Fernández",
-	  "biografía": "Primera voz que escuchan desde el amanecer, acompañándo a todos los oyentes que escuchan Colosal FM a esas horas.",
+	  "biografia": "Primera voz que escuchan desde el amanecer, acompañándo a todos los oyentes que escuchan Colosal FM a esas horas.",
 	  "redSocial": {
 		"instagram": "instagram.com/argenis_fernandez_el_profe/",
 		"facebook": "facebook.com/argenisaloyman"
@@ -59,7 +59,7 @@ db.Locutores.insertMany([
 	{
 	  "_id": 4,
 	  "nombre": "Dylan Castillo",
-	  "biografía": "Loctor que le encanta compartir en la hora del Prime Time en las noches.",
+	  "biografia": "Loctor que le encanta compartir en la hora del Prime Time en las noches.",
 	  "redSocial": {
 		"instagram": "instagram.com/d_castillo07/",
 		"facebook": "facebook.com/dilan.castillojimenez"
@@ -224,7 +224,7 @@ db.Noticias.insertMany([
 ]);
 
 5) Colección de eventos
-	db.Eventos.insertMany([
+db.Eventos.insertMany([
 	{
 	  "_id": 1,
 	  "nombre": "Corrida de Toros",
@@ -340,7 +340,7 @@ db.Comentarios.insertMany([
 ]);
 
 8) Colección de multimedios
-	db.Multimedios.insertMany([
+db.Multimedios.insertMany([
 	{
 	  "_id": 1,
 	  "titulo": "Santa Misa",
