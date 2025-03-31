@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const clienteSchema = new mongoose.Schema({
+
     tipo: { type: String, required: true },
     nombre: { type: String, required: true },
     telefono: { type: String, required: true },
@@ -10,7 +11,8 @@ const clienteSchema = new mongoose.Schema({
         x: { type: String },
         instagram: { type: String },
         youtube: { type: String }
-    }
+    },
+
 },
 
 { collection: 'Clientes' });
