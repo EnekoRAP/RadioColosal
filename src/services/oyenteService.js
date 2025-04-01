@@ -9,7 +9,7 @@ class oyenteService {
         return oyente;
     }
 
-    async getOyente() {
+    async getOyentes() {
         return await Oyente.find();
     }
 

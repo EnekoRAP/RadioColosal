@@ -9,7 +9,7 @@ class tarifaService {
         return tarifa;
     }
 
-    async getTarifa() {
+    async getTarifas() {
         return await Tarifa.find();
     }
 

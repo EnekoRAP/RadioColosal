@@ -9,7 +9,7 @@ class clienteService {
         return cliente;
     }
 
-    async getCliente() {
+    async getClientes() {
         return await Cliente.find();
     }
 

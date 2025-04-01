@@ -9,7 +9,7 @@ class programacionService {
         return programacion;
     }
 
-    async getProgramacion() {
+    async getProgramaciones() {
         return await Programacion.find();
     }
 

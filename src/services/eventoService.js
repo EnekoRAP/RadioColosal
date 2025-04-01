@@ -9,7 +9,7 @@ class eventoService {
         return evento;
     }
 
-    async getEvento() {
+    async getEventos() {
         return await Evento.find();
     }
 

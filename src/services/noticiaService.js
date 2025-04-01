@@ -9,7 +9,7 @@ class noticiaService {
         return noticia;
     }
 
-    async getNoticia() {
+    async getNoticias() {
         return await Noticia.find();
     }
 

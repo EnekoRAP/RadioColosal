@@ -9,7 +9,7 @@ class publicidadService {
         return publicidad;
     }
 
-    async getPublicidad() {
+    async getPublicidades() {
         return await Publicidad.find();
     }
 

@@ -26,7 +26,7 @@ class comentarioService {
         return comentario;
     }
     
-    async getComentario() {
+    async getComentarios() {
         return await Comentario.find()
         .populate('idOyente') 
         .populate('idPrograma');

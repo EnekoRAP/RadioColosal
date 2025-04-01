@@ -9,7 +9,7 @@ class multimedioService {
         return multimedio;
     }
 
-    async getMultimedio() {
+    async getMultimedios() {
         return await Multimedio.find();
     }
 
