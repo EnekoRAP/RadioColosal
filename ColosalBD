@@ -235,26 +235,18 @@ db.Eventos.insertMany([
 	},
 	{
 	  "_id": 2,
-	  "nombre": "Corrida de Toros",
+	  "nombre": "Super Promoción",
 	  "tipo": "Evento en Vivo",
-	  "descripcion": "El verano toreado visita Ciudad Neily, ven y acompáñanos al redondel para disfrutar una noche de corrida de toros.",
-	  "fecha": "2025-03-15",
+	  "descripcion": "El local #1 de Golfito ofrece una super promoción por el día de las madres, donde el ganador recibirá uno de nuestros increíbles premios",
+	  "fecha": "2024-08-15",
 	  "ubicacion": "Ciudad Neily"
 	},
 	{
 	  "_id": 3,
-	  "nombre": "Corrida de Toros",
+	  "nombre": "Concierto en Vivo",
 	  "tipo": "Evento en Vivo",
-	  "descripcion": "El verano toreado visita Ciudad Neily, ven y acompáñanos al redondel para disfrutar una noche de corrida de toros.",
-	  "fecha": "2025-03-15",
-	  "ubicacion": "Ciudad Neily"
-	},
-	{
-	  "_id": 4,
-	  "nombre": "Corrida de Toros",
-	  "tipo": "Evento en Vivo",
-	  "descripcion": "El verano toreado visita Ciudad Neily, ven y acompáñanos al redondel para disfrutar una noche de corrida de toros.",
-	  "fecha": "2025-03-15",
+	  "descripcion": "Cazzu llega a Costa Rica a cantar su nuevo tema titulado Con otra",
+	  "fecha": "2025-03-20",
 	  "ubicacion": "Ciudad Neily"
 	}
 ]);
