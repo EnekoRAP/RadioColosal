@@ -25,7 +25,7 @@ class comentarioController {
         }
     }
 
-    async createComentario(req, res) {
+    async createComentarios(req, res) {
         try {
             const { idOyente, idPrograma, comentario, calificacion } = req.body;
             const nuevoComenatrio = await comentarioService.createComentario({ idOyente, idPrograma, comentario, calificacion });

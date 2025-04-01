@@ -32,7 +32,7 @@ class clienteController {
         }
     }
     
-    async createCliente(req, res) {
+    async createClientes(req, res) {
         try {
             const { tipo, nombre, telefono, sitio_web, red_social } = req.body;
             const nuevoCliente = await clienteService.createCliente({ tipo, nombre, telefono, sitio_web, red_social });

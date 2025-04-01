@@ -34,7 +34,7 @@ class locutorController {
         }
     }
 
-    async createLocutor(req, res) {
+    async createLocutores(req, res) {
         try {
             const { nombre, biografia, redSocial, idProgramas } = req.body;
             const nuevoLocutor = await locutorService.createLocutor({

@@ -32,7 +32,7 @@ class tarifaController {
         }
     }
     
-    async createTarifa(req, res) {
+    async createTarifas(req, res) {
         try {
             const { tipo, cobertura, tiempo, precio } = req.body;
             const nuevaTarifa = await tarifaService.createTarifa({ tipo, cobertura, tiempo, precio });

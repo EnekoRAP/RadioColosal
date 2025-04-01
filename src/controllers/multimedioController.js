@@ -32,7 +32,7 @@ class multimedioController {
         }
     }
 
-    async createMultimedio(req, res) {
+    async createMultimedios(req, res) {
         try {
             const { titulo, tipo, descripcion, dia, horario } = req.body;
             const nuevoMultimedio = await multimedioService.createMultimedio({ titulo, tipo, descripcion, dia, horario });
