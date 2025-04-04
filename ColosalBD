@@ -239,7 +239,7 @@ db.Eventos.insertMany([
 	  "tipo": "Evento en Vivo",
 	  "descripcion": "El local #1 de Golfito ofrece una super promoción por el día de las madres, donde el ganador recibirá uno de nuestros increíbles premios",
 	  "fecha": "2024-08-15",
-	  "ubicacion": "Ciudad Neily"
+	  "ubicacion": "Golfito"
 	},
 	{
 	  "_id": 3,
@@ -248,6 +248,14 @@ db.Eventos.insertMany([
 	  "descripcion": "Cazzu llega a Costa Rica a cantar su nuevo tema titulado Con otra",
 	  "fecha": "2025-03-20",
 	  "ubicacion": "Ciudad Neily"
+	},
+	{
+	  "_id": 4,
+	  "nombre": "Inauguración de Mall",
+	  "tipo": "Evento en Vivo",
+	  "descripcion": "El mall Gold está a punto de finalizar su construcción, y se hará un evento en de inaugruación en vivo",
+	  "fecha": "2024-01-15",
+	  "ubicacion": "Paso Canoas"
 	}
 ]);
 
