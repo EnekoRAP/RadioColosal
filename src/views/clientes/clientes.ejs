@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Clientes</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .btn {
+            display: inline-block;
+            padding: 5px 10px;
+            margin-right: 5px;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        .btn-edit {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-add {
+            background-color: #2196F3;
+            color: white;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+        }
+        .btn-add {
+            background-color: #2196F3;
+            color: white;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+        }
+        .alert {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .alert-success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .alert-error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        hr {
+            margin: 10px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <h1>Clientes Registrados</h1>
+    <div class="nav-buttons">
+        <a href="/" class="btn btn-add">Volver al Inicio</a>
+    </div>
+    
+    <!-- Mensajes de éxito/error -->
+    <% if (typeof error !== 'undefined') { %>
+        <div class="alert alert-error">
+            <%= error === 'delete_error' ? 'Error al eliminar el cliente' : error %>
+        </div>
+    <% } %>
+    
+    <% if (typeof success !== 'undefined') { %>
+        <div class="alert alert-success">
+            Cliente eliminado correctamente
+        </div>
+    <% } %>
+    
+    <a href="/clientes/agregarCliente" class="btn btn-add">Agregar Cliente</a>
+    
+    <ul>
+        <% if (clientes.length > 0) { %>
+            <% clientes.forEach(cliente => { %>
+                <li>
+                    <strong><%= cliente.nombre %></strong> - <%= cliente.tipo %> - <%= cliente.telefono %><br>
+                    Sitio web: <a href="<%= cliente.sitio_web %>" target="_blank"><%= cliente.sitio_web %></a><br>
+                    
+                    <% if (cliente.red_social) { %>
+                        Redes:
+                        <ul>
+                            <% if (cliente.red_social.facebook) { %>
+                                <li>Facebook: <%= cliente.red_social.facebook %></li>
+                            <% } %>
+                            <% if (cliente.red_social.x) { %>
+                                <li>X: <%= cliente.red_social.x %></li>
+                            <% } %>
+                            <% if (cliente.red_social.instagram) { %>
+                                <li>Instagram: <%= cliente.red_social.instagram %></li>
+                            <% } %>
+                            <% if (cliente.red_social.youtube) { %>
+                                <li>YouTube: <%= cliente.red_social.youtube %></li>
+                            <% } %>
+                        </ul>
+                    <% } %>
+                    
+                    <!-- Botones de Acción -->
+                    <div>
+                        <a href="/clientes/editarCliente/<%= cliente._id %>" class="btn btn-edit">Editar</a>
+                        
+                        <form action="/clientes/<%= cliente._id %>?_method=DELETE" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-delete" 
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?')">
+                                Eliminar
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <hr>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <p>No hay clientes registrados.</p>
+        <% } %>
+    </ul>
+    
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteForms = document.querySelectorAll('form[action*="/clientes/"]');
+            
+            deleteForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    if (!confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

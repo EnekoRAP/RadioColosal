@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Cliente</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Cliente</h1>
+        <!-- Formulario de edicion del cliente -->
+        <form action="/clientes/<%= cliente._id %>/update" method="POST">
+            
+            <label for="tipo">Tipo:</label>
+            <input type="text" name="tipo" value="<%= cliente.tipo %>" required><br>
+    
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" value="<%= cliente.nombre %>" required><br>
+    
+            <label for="telefono">Teléfono:</label>
+            <input type="text" name="telefono" value="<%= cliente.telefono %>" required><br>
+    
+            <label for="sitio_web">Sitio Web:</label>
+            <input type="text" name="sitio_web" value="<%= cliente.sitio_web %>" required><br>
+    
+            <label for="red_social">Redes Sociales:</label><br>
+            <label for="facebook">Facebook:</label>
+            <input type="text" name="red_social[facebook]" value="<%= cliente.red_social.facebook %>"><br>
+            <label for="x">X:</label>
+            <input type="text" name="red_social[x]" value="<%= cliente.red_social.x %>"><br>
+            <label for="instagram">Instagram:</label>
+            <input type="text" name="red_social[instagram]" value="<%= cliente.red_social.instagram %>"><br>
+            <label for="youtube">YouTube:</label>
+            <input type="text" name="red_social[youtube]" value="<%= cliente.red_social.youtube %>"><br>
+    
+            <button type="submit">Actualizar Cliente</button>
+        </form>
+</body>
+</html>

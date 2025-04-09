@@ -14,51 +14,38 @@ const tarifaRoutes = require('./src/routes/tarifaRoutes');
 
 const app = express();
 
+// Conectar a la base de datos
 connectDB();
 
+// Middleware para parsear cuerpo de la solicitud (JSON y URL-encoded)
+app.use(express.urlencoded({ extended: true })); // Primero el body parser
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method')); // Luego method-override
 
+// Configuración de vistas con EJS
 app.set('view engine', 'ejs');
 app.set('views', './src/views');
 
+// Configuración de archivos estáticos (CSS, JS, imágenes, etc.)
 app.use(express.static('assets'));
 
 // Rutas: Index
 app.get('/', (req, res) => {
-    res.render('index'); // Renders src/views/index.ejs
+    res.render('index'); // Renderiza src/views/index.ejs
 });
 
-// Rutas: Locutores
+// Rutas de la aplicación
 app.use('/locutores', locutorRoutes);
-
-// Rutas: Programación
 app.use('/programacion', programacionRoutes);
-
-// Rutas: Publicidad
 app.use('/publicidad', publicidadRoutes);
-
-// Rutas: Noticias
 app.use('/noticias', noticiaRoutes);
-
-// Rutas: Eventos
 app.use('/eventos', eventoRoutes);
-
-// Rutas: Oyentes
 app.use('/oyentes', oyenteRoutes);
-
-// Rutas: Comentarios
 app.use('/comentarios', comentarioRoutes);
-
-// Rutas: Multimedios
 app.use('/multimedios', multimedioRoutes);
-
-// Rutas: Clientes
 app.use('/clientes', clienteRoutes);
-
-// Rutas: Tarifas
 app.use('/tarifas', tarifaRoutes);
 
+// Configuración del puerto
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
