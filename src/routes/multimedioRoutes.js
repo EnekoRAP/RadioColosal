@@ -2,22 +2,22 @@ const express = require('express');
 const router = express.Router();
 const multimedioController = require('../controllers/multimedioController');
 
-// Form de nuevo multimedio
-router.get('/agregarMultimedio', multimedioController.agregarMultimedio);
+// Formulario de creacion
+router.get('/agregarMultimedio', multimedioController.showCreateForm);
 
-// Lista de multimedios
-router.get('/', multimedioController.getMultimedios);
+// Procesar creacion
+router.post('/agregarMultimedio', multimedioController.createMultimedio);
 
-// Form de editar multimedio
-router.get('/editarMultimedio/:id', multimedioController.editarMultimedio);
+// Listar multimedios
+router.get('/', multimedioController.listMultimedios);
 
-// Eliminar multimedio desde el listado
+// Formulario de edicion
+router.get('/editarMultimedio/:id', multimedioController.showEditForm);
+
+// Procesar actualizacion
+router.put('/:id', multimedioController.updateMultimedio);
+
+// Eliminar multimedia
 router.delete('/:id', multimedioController.deleteMultimedio);
-
-// Solicitud de form de nuevo multimedio
-router.post('/agregarMultimedio', multimedioController.createMultimedios);
-
-// Solicitud de editar multimedio
-router.put('/editarMultimedio/:id', multimedioController.updateMultimedio);
 
 module.exports = router;

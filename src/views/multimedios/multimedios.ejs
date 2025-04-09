@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multimedios</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .multimedia-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .horario {
+            font-weight: bold;
+            color: #555;
+        }
+        .dia-badge {
+            background-color: #4CAF50;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .dias-container {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Programación de Multimedios</h1>
+        
+        <div class="nav-buttons">
+            <a href="/multimedios/agregarMultimedio" class="btn btn-add">Agregar Multimedia</a>
+            <a href="/" class="btn btn-home">Volver al Inicio</a>
+        </div>
+
+        <% if (multimedios.length > 0) { %>
+            <% diasSemana.forEach(function(dia) { %>
+                <% const multimediosDia = multimedios.filter(function(m) { return m.dia === dia; }); %>
+                <% if (multimediosDia.length > 0) { %>
+                    <div class="dias-container">
+                        <h2><%= dia %></h2>
+                        
+                        <% multimediosDia.forEach(function(multimedio) { %>
+                            <div class="multimedia-card">
+                                <div class="dia-badge"><%= multimedio.dia %></div>
+                                <h3><%= multimedio.titulo %></h3>
+                                <p><strong>Tipo:</strong> <%= multimedio.tipo %></p>
+                                <p><%= multimedio.descripcion %></p>
+                                <p class="horario">
+                                    <%= multimedio.horario.inicio %> - <%= multimedio.horario.fin %>
+                                </p>
+                                
+                                <div class="actions">
+                                    <a href="/multimedios/editarMultimedio/<%= multimedio._id %>" class="btn btn-edit">Editar</a>
+                                    <form action="/multimedios/<%= multimedio._id %>?_method=DELETE" method="POST" style="display: inline;">
+                                        <button type="submit" class="btn btn-delete" onclick="return confirm('¿Eliminar este multimedia?')">Eliminar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% } %>
+            <% }); %>
+        <% } else { %>
+            <p>No hay multimedios programados.</p>
+        <% } %>
+    </div>
+</body>
+</html>

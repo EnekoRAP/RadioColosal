@@ -1,45 +1,103 @@
 const multimedioService = require('../services/multimedioService');
 
-class multimedioController {
-
-    async agregarMultimedio(req, res) {
+class MultimedioController {
+    async showCreateForm(req, res) {
         try {
-            res.render('multimedios/agregarMultimedio');
+            res.render('multimedios/agregarMultimedio', {
+                multimedio: {
+                    horario: {
+                        inicio: '',
+                        fin: ''
+                    }
+                },
+                diasSemana: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+                tiposMultimedia: ['Película', 'Serie', 'Documental', 'Programa', 'Otro'],
+                error: null
+            });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al cargar el formulario');
         }
     }
 
-    async getMultimedios(req, res) {
+    async listMultimedios(req, res) {
         try {
             const multimedios = await multimedioService.getMultimedios();
-            res.render('multimedios/multimedios', { multimedios });
+            res.render('multimedios/multimedios', { 
+                multimedios,
+                diasSemana: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+            });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al obtener multimedios');
         }
     }
 
-    async editarMultimedio(req, res) {
+    async showEditForm(req, res) {
         try {
             const { id } = req.params;
             const multimedio = await multimedioService.getMultimedioById(id);
-            res.render('multimedios/editarMultimedio', { multimedio });
+            res.render('multimedios/editarMultimedio', { 
+                multimedio,
+                diasSemana: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+                tiposMultimedia: ['Película', 'Serie', 'Documental', 'Programa', 'Otro'],
+                error: null
+            });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al cargar el multimedio para edición');
         }
     }
 
-    async createMultimedios(req, res) {
+    async createMultimedio(req, res) {
         try {
-            const { titulo, tipo, descripcion, dia, horario } = req.body;
-            const nuevoMultimedio = await multimedioService.createMultimedio({ titulo, tipo, descripcion, dia, horario });
+            const { titulo, tipo, descripcion, dia } = req.body;
+            const horario = {
+                inicio: req.body['horario.inicio'],
+                fin: req.body['horario.fin']
+            };
+
+            await multimedioService.createMultimedio({ 
+                titulo, 
+                tipo, 
+                descripcion, 
+                dia, 
+                horario 
+            });
+            
             res.redirect('/multimedios');
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).render('multimedios/agregarMultimedio', {
+                error: 'Error al crear el multimedia',
+                multimedio: req.body,
+                diasSemana: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+                tiposMultimedia: ['Película', 'Serie', 'Documental', 'Programa', 'Otro']
+            });
+        }
+    }
+
+    async updateMultimedio(req, res) {
+        try {
+            const { id } = req.params;
+            const { titulo, tipo, descripcion, dia } = req.body;
+            const horario = {
+                inicio: req.body['horario.inicio'],
+                fin: req.body['horario.fin']
+            };
+
+            await multimedioService.updateMultimedio(id, { 
+                titulo, 
+                tipo, 
+                descripcion, 
+                dia, 
+                horario 
+            });
+            
+            res.redirect('/multimedios');
+        } catch (error) {
+            res.status(500).render('multimedios/editarMultimedio', {
+                error: 'Error al actualizar el multimedia',
+                multimedio: req.body,
+                diasSemana: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+                tiposMultimedia: ['Película', 'Serie', 'Documental', 'Programa', 'Otro']
+            });
         }
     }
 
@@ -49,23 +107,9 @@ class multimedioController {
             await multimedioService.deleteMultimedio(id);
             res.redirect('/multimedios');
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al eliminar el multimedia');
         }
     }
-
-    async updateMultimedio(req, res) {
-        try {
-            const { id } = req.params;
-            const { titulo, tipo, descripcion, dia, horario } = req.body;
-            const multimedioActualizado = await multimedioService.updateMultimedio(id, { titulo, tipo, descripcion, dia, horario });
-            res.redirect('/multimedios');
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
-        }
-    }
-
 }
 
-module.exports = new multimedioController();
+module.exports = new MultimedioController();

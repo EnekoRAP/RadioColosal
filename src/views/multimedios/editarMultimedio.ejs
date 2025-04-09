@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Multimedia</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .horario-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .horario-container div {
+            flex: 1;
+        }
+        .form-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        select, input[type="text"], input[type="time"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Multimedia</h1>
+        
+        <% if (error) { %>
+            <div class="alert alert-error"><%= error %></div>
+        <% } %>
+
+        <form action="/multimedios/<%= multimedio._id %>?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" value="<%= multimedio.titulo %>" required>
+            
+            <label for="tipo">Tipo:</label>
+            <select id="tipo" name="tipo" required>
+                <% tiposMultimedia.forEach(function(tipo) { %>
+                    <option value="<%= tipo %>" <%= multimedio.tipo === tipo ? 'selected' : '' %>>
+                        <%= tipo %>
+                    </option>
+                <% }); %>
+            </select>
+            
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" required><%= multimedio.descripcion %></textarea>
+            
+            <label for="dia">Día:</label>
+            <select id="dia" name="dia" required>
+                <% diasSemana.forEach(function(dia) { %>
+                    <option value="<%= dia %>" <%= multimedio.dia === dia ? 'selected' : '' %>>
+                        <%= dia %>
+                    </option>
+                <% }); %>
+            </select>
+            
+            <div class="horario-container">
+                <div>
+                    <label for="horario.inicio">Hora de inicio:</label>
+                    <input type="time" id="horario.inicio" name="horario.inicio" 
+                           value="<%= multimedio.horario.inicio %>" required>
+                </div>
+                <div>
+                    <label for="horario.fin">Hora de fin:</label>
+                    <input type="time" id="horario.fin" name="horario.fin" 
+                           value="<%= multimedio.horario.fin %>" required>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-submit">Guardar Cambios</button>
+                <a href="/multimedios" class="btn btn-cancel">Cancelar</a>
+                <a href="/" class="btn btn-home">Volver al Inicio</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

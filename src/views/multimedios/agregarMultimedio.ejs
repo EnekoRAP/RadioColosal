@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agregar Multimedia</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Agregar Nuevo Multimedia</h1>
+        
+        <% if (error) { %>
+            <div class="alert alert-error"><%= error %></div>
+        <% } %>
+
+        <form action="/multimedios/agregarMultimedio" method="POST">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" value="<%= multimedio.titulo || '' %>" required>
+            
+            <label for="tipo">Tipo:</label>
+            <select id="tipo" name="tipo" required>
+                <% tiposMultimedia.forEach(tipo => { %>
+                    <option value="<%= tipo %>" <%= multimedio.tipo === tipo ? 'selected' : '' %>>
+                        <%= tipo %>
+                    </option>
+                <% }); %>
+            </select>
+            
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" required><%= multimedio.descripcion || '' %></textarea>
+            
+            <label for="dia">Día:</label>
+            <select id="dia" name="dia" required>
+                <% diasSemana.forEach(dia => { %>
+                    <option value="<%= dia %>" <%= multimedio.dia === dia ? 'selected' : '' %>>
+                        <%= dia %>
+                    </option>
+                <% }); %>
+            </select>
+            
+            <div class="horario-container">
+                <div>
+                    <label for="horario.inicio">Hora de inicio:</label>
+                    <input type="time" id="horario.inicio" name="horario.inicio" 
+                           value="<%= multimedio.horario.inicio || '' %>" required>
+                </div>
+                <div>
+                    <label for="horario.fin">Hora de fin:</label>
+                    <input type="time" id="horario.fin" name="horario.fin" 
+                           value="<%= multimedio.horario.fin || '' %>" required>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-submit">Guardar</button>
+                <a href="/multimedios" class="btn btn-cancel">Cancelar</a>
+                <a href="/" class="btn btn-home">Volver al Inicio</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
