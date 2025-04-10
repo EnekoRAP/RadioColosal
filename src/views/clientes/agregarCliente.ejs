@@ -5,46 +5,212 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Nuevo Cliente</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --danger-color: #f72585;
+            --success-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        
+        .alert-error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #b91c1c;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .social-media-section {
+            background-color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .social-media-section h3 {
+            margin-top: 0;
+            color: var(--secondary-color);
+            font-size: 1.25rem;
+        }
+        
+        .social-input-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-cancel {
+            background-color: #e2e8f0;
+            color: var(--dark-color);
+        }
+        
+        .btn-cancel:hover {
+            background-color: #cbd5e1;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .social-input-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Agregar Nuevo Cliente</h1>
         
         <% if (error) { %>
-            <div class="alert alert-error"><%= error %></div>
+            <div class="alert-error"><%= error %></div>
         <% } %>
 
         <form action="/clientes/agregarCliente" method="POST">
-            <label for="tipo">Tipo:</label>
-            <input type="text" name="tipo" required><br>
-    
-            <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre" required><br>
-    
-            <label for="telefono">Teléfono:</label>
-            <input type="text" name="telefono" required><br>
-    
-            <label for="sitio_web">Sitio Web:</label>
-            <input type="text" name="sitio_web" required><br>
-    
-            <label>Redes Sociales:</label><br>
-<label for="facebook">Facebook:</label>
-<input type="text" name="red_social[facebook]" value="<%= cliente.red_social.facebook %>"><br>
-
-<label for="x">X (Twitter):</label>
-<input type="text" name="red_social[x]" value="<%= cliente.red_social.x %>"><br>
-
-<label for="instagram">Instagram:</label>
-<input type="text" name="red_social[instagram]" value="<%= cliente.red_social.instagram %>"><br>
-
-<label for="youtube">YouTube:</label>
-<input type="text" name="red_social[youtube]" value="<%= cliente.red_social.youtube %>"><br>
-    
-            <button type="submit">Crear Cliente</button>
+            <div class="form-group">
+                <label for="tipo">Tipo de Cliente:</label>
+                <input type="text" id="tipo" name="tipo" required placeholder="Ej: Corporativo, Individual, etc.">
+            </div>
+            
+            <div class="form-group">
+                <label for="nombre">Nombre Completo/Razón Social:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" required placeholder="Formato: +1234567890">
+            </div>
+            
+            <div class="form-group">
+                <label for="sitio_web">Sitio Web:</label>
+                <input type="text" id="sitio_web" name="sitio_web" required placeholder="https://ejemplo.com">
+            </div>
+            
+            <div class="social-media-section">
+                <h3>Redes Sociales</h3>
+                <div class="social-input-group">
+                    <div class="form-group">
+                        <label for="facebook">Facebook:</label>
+                        <input type="text" id="facebook" name="red_social[facebook]" value="<%= cliente.red_social.facebook %>" placeholder="URL de Facebook">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="x">X (Twitter):</label>
+                        <input type="text" id="x" name="red_social[x]" value="<%= cliente.red_social.x %>" placeholder="URL de Twitter">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="instagram">Instagram:</label>
+                        <input type="text" id="instagram" name="red_social[instagram]" value="<%= cliente.red_social.instagram %>" placeholder="URL de Instagram">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="youtube">YouTube:</label>
+                        <input type="text" id="youtube" name="red_social[youtube]" value="<%= cliente.red_social.youtube %>" placeholder="URL de YouTube">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Crear Cliente</button>
+                <a href="/" class="btn btn-cancel">Volver al Inicio</a>
+            </div>
         </form>
-        <div class="form-actions">
-            <a href="/" class="btn btn-cancel">Volver al Inicio</a>
-        </div>
     </div>
 </body>
 </html>

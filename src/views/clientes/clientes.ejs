@@ -1,146 +1,387 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Lista de Clientes</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes Registrados</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --danger-color: #f72585;
+            --success-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
             line-height: 1.6;
-            margin: 20px;
+            margin: 0;
+            padding: 20px;
         }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
         h1 {
-            color: #333;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent-color);
         }
-        li {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+        
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
-        .btn {
-            display: inline-block;
-            padding: 5px 10px;
-            margin-right: 5px;
-            text-decoration: none;
-            border-radius: 3px;
-            font-size: 14px;
-        }
-        .btn-edit {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .btn-delete {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-add {
-            background-color: #2196F3;
-            color: white;
-            margin-bottom: 20px;
-            padding: 8px 15px;
-        }
-        .btn-add {
-            background-color: #2196F3;
-            color: white;
-            margin-bottom: 20px;
-            padding: 8px 15px;
-        }
+        
         .alert {
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            font-weight: 500;
         }
-        .alert-success {
-            background-color: #dff0d8;
-            color: #3c763d;
-        }
+        
         .alert-error {
-            background-color: #f2dede;
-            color: #a94442;
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border-left: 4px solid #b91c1c;
         }
-        hr {
-            margin: 10px 0;
-            border: 0;
-            border-top: 1px solid #eee;
+        
+        .alert-success {
+            background-color: #dcfce7;
+            color: #166534;
+            border-left: 4px solid #166534;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            gap: 8px;
+        }
+        
+        .btn i {
+            font-size: 0.9em;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c1121f;
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .client-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .client-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .client-header {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+        }
+        
+        .client-name {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .client-type {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 3px 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .client-body {
+            padding: 20px;
+        }
+        
+        .client-info {
+            margin-bottom: 15px;
+        }
+        
+        .client-info i {
+            width: 20px;
+            color: var(--gray-color);
+            margin-right: 10px;
+        }
+        
+        .social-links {
+            margin-top: 15px;
+        }
+        
+        .social-links h4 {
+            margin-bottom: 10px;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .social-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .social-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .social-item a {
+            display: flex;
+            align-items: center;
+            color: var(--gray-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .social-item a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-item i {
+            margin-right: 5px;
+            font-size: 1rem;
+        }
+        
+        .client-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            grid-column: 1 / -1;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--gray-color);
+            margin-bottom: 20px;
+        }
+        
+        .empty-state h3 {
+            color: var(--gray-color);
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .clients-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Clientes Registrados</h1>
-    <div class="nav-buttons">
-        <a href="/" class="btn btn-add">Volver al Inicio</a>
-    </div>
-    
-    <!-- Mensajes de éxito/error -->
-    <% if (typeof error !== 'undefined') { %>
-        <div class="alert alert-error">
-            <%= error === 'delete_error' ? 'Error al eliminar el cliente' : error %>
-        </div>
-    <% } %>
-    
-    <% if (typeof success !== 'undefined') { %>
-        <div class="alert alert-success">
-            Cliente eliminado correctamente
-        </div>
-    <% } %>
-    
-    <a href="/clientes/agregarCliente" class="btn btn-add">Agregar Cliente</a>
-    
-    <ul>
-        <% if (clientes.length > 0) { %>
-            <% clientes.forEach(cliente => { %>
-                <li>
-                    <strong><%= cliente.nombre %></strong> - <%= cliente.tipo %> - <%= cliente.telefono %><br>
-                    Sitio web: <a href="<%= cliente.sitio_web %>" target="_blank"><%= cliente.sitio_web %></a><br>
-                    
-                    <% if (cliente.red_social) { %>
-                        Redes:
-                        <ul>
-                            <% if (cliente.red_social.facebook) { %>
-                                <li>Facebook: <%= cliente.red_social.facebook %></li>
-                            <% } %>
-                            <% if (cliente.red_social.x) { %>
-                                <li>X: <%= cliente.red_social.x %></li>
-                            <% } %>
-                            <% if (cliente.red_social.instagram) { %>
-                                <li>Instagram: <%= cliente.red_social.instagram %></li>
-                            <% } %>
-                            <% if (cliente.red_social.youtube) { %>
-                                <li>YouTube: <%= cliente.red_social.youtube %></li>
-                            <% } %>
-                        </ul>
-                    <% } %>
-                    
-                    <!-- Botones de Acción -->
-                    <div>
-                        <a href="/clientes/editarCliente/<%= cliente._id %>" class="btn btn-edit">Editar</a>
-                        
-                        <form action="/clientes/<%= cliente._id %>?_method=DELETE" method="POST" style="display: inline;">
-                            <button type="submit" class="btn btn-delete" 
-                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?')">
-                                Eliminar
-                            </button>
-                        </form>
-                    </div>
-                    
-                    <hr>
-                </li>
-            <% }); %>
-        <% } else { %>
-            <p>No hay clientes registrados.</p>
-        <% } %>
-    </ul>
-    
-    <script>
+    <div class="container">
+        <h1>Clientes Registrados</h1>
         
+        <div class="header-actions">
+            <a href="/" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+            <a href="/clientes/agregarCliente" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Agregar Cliente
+            </a>
+        </div>
+        
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i> <%= error === 'delete_error' ? 'Error al eliminar el cliente' : error %>
+            </div>
+        <% } %>
+        
+        <% if (typeof success !== 'undefined') { %>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> Cliente eliminado correctamente
+            </div>
+        <% } %>
+        
+        <% if (clientes.length > 0) { %>
+            <div class="clients-grid">
+                <% clientes.forEach(cliente => { %>
+                    <div class="client-card">
+                        <div class="client-header">
+                            <h3 class="client-name"><%= cliente.nombre %></h3>
+                            <span class="client-type"><%= cliente.tipo %></span>
+                        </div>
+                        
+                        <div class="client-body">
+                            <div class="client-info">
+                                <p><i class="fas fa-phone"></i> <%= cliente.telefono %></p>
+                                <p><i class="fas fa-globe"></i> 
+                                    <a href="<%= cliente.sitio_web %>" target="_blank"><%= cliente.sitio_web %></a>
+                                </p>
+                            </div>
+                            
+                            <% if (cliente.red_social && (cliente.red_social.facebook || cliente.red_social.x || cliente.red_social.instagram || cliente.red_social.youtube)) { %>
+                                <div class="social-links">
+                                    <h4>Redes Sociales</h4>
+                                    <div class="social-list">
+                                        <% if (cliente.red_social.facebook) { %>
+                                            <div class="social-item">
+                                                <a href="<%= cliente.red_social.facebook %>" target="_blank">
+                                                    <i class="fab fa-facebook-f"></i> Facebook
+                                                </a>
+                                            </div>
+                                        <% } %>
+                                        
+                                        <% if (cliente.red_social.x) { %>
+                                            <div class="social-item">
+                                                <a href="<%= cliente.red_social.x %>" target="_blank">
+                                                    <i class="fab fa-twitter"></i> Twitter
+                                                </a>
+                                            </div>
+                                        <% } %>
+                                        
+                                        <% if (cliente.red_social.instagram) { %>
+                                            <div class="social-item">
+                                                <a href="<%= cliente.red_social.instagram %>" target="_blank">
+                                                    <i class="fab fa-instagram"></i> Instagram
+                                                </a>
+                                            </div>
+                                        <% } %>
+                                        
+                                        <% if (cliente.red_social.youtube) { %>
+                                            <div class="social-item">
+                                                <a href="<%= cliente.red_social.youtube %>" target="_blank">
+                                                    <i class="fab fa-youtube"></i> YouTube
+                                                </a>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                        
+                        <div class="client-actions">
+                            <a href="/clientes/editarCliente/<%= cliente._id %>" class="btn btn-outline">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <form action="/clientes/<%= cliente._id %>?_method=DELETE" method="POST" style="display: inline;">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este cliente?')">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="empty-state">
+                <i class="fas fa-user-friends"></i>
+                <h3>No hay clientes registrados</h3>
+                <p>Aún no has agregado ningún cliente a tu base de datos</p>
+                <a href="/clientes/agregarCliente" class="btn btn-primary" style="margin-top: 20px;">
+                    <i class="fas fa-plus"></i> Agregar Primer Cliente
+                </a>
+            </div>
+        <% } %>
+    </div>
+
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const deleteForms = document.querySelectorAll('form[action*="/clientes/"]');
             

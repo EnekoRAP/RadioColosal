@@ -1,36 +1,210 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Multimedia</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .horario-container {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --danger-color: #f72585;
+            --success-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
-        .horario-container div {
-            flex: 1;
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
         }
-        .form-actions {
-            margin-top: 20px;
+        
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+        
+        .alert-error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 25px;
+            border-left: 4px solid #b91c1c;
             display: flex;
+            align-items: center;
             gap: 10px;
         }
-        textarea {
-            width: 100%;
-            min-height: 100px;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+        
+        .alert-error i {
+            font-size: 1.2em;
         }
-        select, input[type="text"], input[type="time"] {
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        input, select, textarea {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .schedule-container {
+            background-color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .schedule-container h3 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .schedule-container h3 i {
+            color: var(--primary-color);
+        }
+        
+        .time-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .time-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .time-input-group i {
+            color: var(--gray-color);
+            font-size: 1.2rem;
+            min-width: 25px;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            gap: 8px;
+        }
+        
+        .btn i {
+            font-size: 0.9em;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .time-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -39,56 +213,98 @@
         <h1>Editar Multimedia</h1>
         
         <% if (error) { %>
-            <div class="alert alert-error"><%= error %></div>
+            <div class="alert-error">
+                <i class="fas fa-exclamation-circle"></i> <%= error %>
+            </div>
         <% } %>
 
         <form action="/multimedios/<%= multimedio._id %>?_method=PUT" method="POST">
             <input type="hidden" name="_method" value="PUT">
             
-            <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" value="<%= multimedio.titulo %>" required>
+            <div class="form-group">
+                <label for="titulo">Título del Multimedia</label>
+                <input type="text" id="titulo" name="titulo" value="<%= multimedio.titulo %>" required
+                       placeholder="Ej: Entrevista exclusiva con el alcalde">
+            </div>
             
-            <label for="tipo">Tipo:</label>
-            <select id="tipo" name="tipo" required>
-                <% tiposMultimedia.forEach(function(tipo) { %>
-                    <option value="<%= tipo %>" <%= multimedio.tipo === tipo ? 'selected' : '' %>>
-                        <%= tipo %>
-                    </option>
-                <% }); %>
-            </select>
+            <div class="form-group">
+                <label for="tipo">Tipo de Contenido</label>
+                <select id="tipo" name="tipo" required>
+                    <% tiposMultimedia.forEach(function(tipo) { %>
+                        <option value="<%= tipo %>" <%= multimedio.tipo === tipo ? 'selected' : '' %>>
+                            <%= tipo %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
             
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" required><%= multimedio.descripcion %></textarea>
+            <div class="form-group">
+                <label for="descripcion">Descripción del Contenido</label>
+                <textarea id="descripcion" name="descripcion" required
+                          placeholder="Describe el contenido multimedia..."><%= multimedio.descripcion %></textarea>
+            </div>
             
-            <label for="dia">Día:</label>
-            <select id="dia" name="dia" required>
-                <% diasSemana.forEach(function(dia) { %>
-                    <option value="<%= dia %>" <%= multimedio.dia === dia ? 'selected' : '' %>>
-                        <%= dia %>
-                    </option>
-                <% }); %>
-            </select>
+            <div class="form-group">
+                <label for="dia">Día de Publicación</label>
+                <select id="dia" name="dia" required>
+                    <% diasSemana.forEach(function(dia) { %>
+                        <option value="<%= dia %>" <%= multimedio.dia === dia ? 'selected' : '' %>>
+                            <%= dia %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
             
-            <div class="horario-container">
-                <div>
-                    <label for="horario.inicio">Hora de inicio:</label>
-                    <input type="time" id="horario.inicio" name="horario.inicio" 
-                           value="<%= multimedio.horario.inicio %>" required>
-                </div>
-                <div>
-                    <label for="horario.fin">Hora de fin:</label>
-                    <input type="time" id="horario.fin" name="horario.fin" 
-                           value="<%= multimedio.horario.fin %>" required>
+            <div class="schedule-container">
+                <h3><i class="fas fa-clock"></i> Configuración de Horario</h3>
+                <div class="time-grid">
+                    <div class="form-group">
+                        <div class="time-input-group">
+                            <i class="fas fa-play"></i>
+                            <input type="time" id="horario.inicio" name="horario.inicio" 
+                                   value="<%= multimedio.horario.inicio %>" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="time-input-group">
+                            <i class="fas fa-stop"></i>
+                            <input type="time" id="horario.fin" name="horario.fin" 
+                                   value="<%= multimedio.horario.fin %>" required>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div class="form-actions">
-                <button type="submit" class="btn btn-submit">Guardar Cambios</button>
-                <a href="/multimedios" class="btn btn-cancel">Cancelar</a>
-                <a href="/" class="btn btn-home">Volver al Inicio</a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+                <a href="/multimedios" class="btn btn-outline">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
             </div>
         </form>
     </div>
+
+    <script>
+        // Validación básica del formulario
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const inicio = document.getElementById('horario.inicio').value;
+            const fin = document.getElementById('horario.fin').value;
+            
+            if (inicio && fin && inicio >= fin) {
+                alert('La hora de inicio debe ser anterior a la hora de fin');
+                e.preventDefault();
+            }
+            
+            const titulo = document.getElementById('titulo').value.trim();
+            if (!titulo) {
+                alert('Por favor ingresa un título para el multimedia');
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
 

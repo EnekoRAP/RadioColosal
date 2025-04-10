@@ -4,37 +4,276 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Cliente</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --danger-color: #f72585;
+            --success-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .social-section {
+            background-color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .social-section h3 {
+            margin-top: 0;
+            color: var(--secondary-color);
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .social-section h3 i {
+            color: var(--primary-color);
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .social-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .social-input-group i {
+            color: var(--gray-color);
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            gap: 8px;
+        }
+        
+        .btn i {
+            font-size: 0.9em;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Editar Cliente</h1>
-        <!-- Formulario de edicion del cliente -->
+        
         <form action="/clientes/<%= cliente._id %>/update" method="POST">
+            <div class="form-group">
+                <label for="tipo">Tipo de Cliente</label>
+                <input type="text" id="tipo" name="tipo" value="<%= cliente.tipo %>" required 
+                       placeholder="Ej: Corporativo, Individual, etc.">
+            </div>
             
-            <label for="tipo">Tipo:</label>
-            <input type="text" name="tipo" value="<%= cliente.tipo %>" required><br>
-    
-            <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre" value="<%= cliente.nombre %>" required><br>
-    
-            <label for="telefono">Teléfono:</label>
-            <input type="text" name="telefono" value="<%= cliente.telefono %>" required><br>
-    
-            <label for="sitio_web">Sitio Web:</label>
-            <input type="text" name="sitio_web" value="<%= cliente.sitio_web %>" required><br>
-    
-            <label for="red_social">Redes Sociales:</label><br>
-            <label for="facebook">Facebook:</label>
-            <input type="text" name="red_social[facebook]" value="<%= cliente.red_social.facebook %>"><br>
-            <label for="x">X:</label>
-            <input type="text" name="red_social[x]" value="<%= cliente.red_social.x %>"><br>
-            <label for="instagram">Instagram:</label>
-            <input type="text" name="red_social[instagram]" value="<%= cliente.red_social.instagram %>"><br>
-            <label for="youtube">YouTube:</label>
-            <input type="text" name="red_social[youtube]" value="<%= cliente.red_social.youtube %>"><br>
-    
-            <button type="submit">Actualizar Cliente</button>
+            <div class="form-group">
+                <label for="nombre">Nombre Completo/Razón Social</label>
+                <input type="text" id="nombre" name="nombre" value="<%= cliente.nombre %>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="text" id="telefono" name="telefono" value="<%= cliente.telefono %>" required 
+                       placeholder="Formato: +1234567890">
+            </div>
+            
+            <div class="form-group">
+                <label for="sitio_web">Sitio Web</label>
+                <input type="text" id="sitio_web" name="sitio_web" value="<%= cliente.sitio_web %>" required 
+                       placeholder="https://ejemplo.com">
+            </div>
+            
+            <div class="social-section">
+                <h3><i class="fas fa-share-alt"></i> Redes Sociales</h3>
+                <div class="social-grid">
+                    <div class="form-group">
+                        <div class="social-input-group">
+                            <i class="fab fa-facebook-f"></i>
+                            <input type="text" id="facebook" name="red_social[facebook]" 
+                                   value="<%= cliente.red_social.facebook %>" placeholder="URL de Facebook">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="social-input-group">
+                            <i class="fab fa-twitter"></i>
+                            <input type="text" id="x" name="red_social[x]" 
+                                   value="<%= cliente.red_social.x %>" placeholder="URL de Twitter">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="social-input-group">
+                            <i class="fab fa-instagram"></i>
+                            <input type="text" id="instagram" name="red_social[instagram]" 
+                                   value="<%= cliente.red_social.instagram %>" placeholder="URL de Instagram">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="social-input-group">
+                            <i class="fab fa-youtube"></i>
+                            <input type="text" id="youtube" name="red_social[youtube]" 
+                                   value="<%= cliente.red_social.youtube %>" placeholder="URL de YouTube">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+                <a href="/clientes" class="btn btn-outline">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
         </form>
+    </div>
+
+    <script>
+        // Validación básica del formulario
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const sitioWeb = document.getElementById('sitio_web').value;
+            if (sitioWeb && !sitioWeb.startsWith('http://') && !sitioWeb.startsWith('https://')) {
+                document.getElementById('sitio_web').value = 'https://' + sitioWeb;
+            }
+            
+            
+        });
+    </script>
 </body>
 </html>
