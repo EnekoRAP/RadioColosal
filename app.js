@@ -46,8 +46,6 @@ app.use('/multimedios', multimedioRoutes);
 app.use('/clientes', clienteRoutes);
 app.use('/tarifas', tarifaRoutes);
 
-
-
 // Configuración del puerto
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
