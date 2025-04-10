@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Tarifa</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Tarifa</h1>
+        
+        <% if (error) { %>
+            <div class="alert alert-error"><%= error %></div>
+        <% } %>
+
+        <form action="/tarifas/<%= tarifa._id %>?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            
+            <div class="form-group">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" name="tipo" required>
+                    <% tiposTarifa.forEach(tipo => { %>
+                        <option value="<%= tipo %>" <%= tarifa.tipo === tipo ? 'selected' : '' %>>
+                            <%= tipo %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="cobertura">Cobertura:</label>
+                <select id="cobertura" name="cobertura" required>
+                    <% coberturas.forEach(cob => { %>
+                        <option value="<%= cob %>" <%= tarifa.cobertura === cob ? 'selected' : '' %>>
+                            <%= cob %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="tiempo">Tiempo:</label>
+                <input type="text" id="tiempo" name="tiempo" required 
+                       value="<%= tarifa.tiempo %>">
+            </div>
+            
+            <div class="form-group">
+                <label for="precio">Precio ($):</label>
+                <input type="number" id="precio" name="precio" min="0" step="0.01" required
+                       value="<%= tarifa.precio %>">
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-submit">Guardar Cambios</button>
+                <a href="/tarifas" class="btn btn-cancel">Cancelar</a>
+                <a href="/" class="btn btn-home">Volver al Inicio</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

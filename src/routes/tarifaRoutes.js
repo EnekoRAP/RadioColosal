@@ -2,22 +2,22 @@ const express = require('express');
 const router = express.Router();
 const tarifaController = require('../controllers/tarifaController');
 
-// Form de nueva tarifa
-router.get('/agregarTarifa', tarifaController.agregarTarifa);
+// Formulario de creacion
+router.get('/agregarTarifa', tarifaController.showCreateForm);
 
-// Lista de tarifas
-router.get('/', tarifaController.getTarifas);
+// Procesar creacion
+router.post('/agregarTarifa', tarifaController.createTarifa);
 
-// Form de editar tarifa
-router.get('/editarTarifa/:id', tarifaController.editarTarifa);
+// Listar tarifas
+router.get('/', tarifaController.listTarifas);
 
-// Eliminar tarifa desde el listado
+// Formulario de edicion
+router.get('/editarTarifa/:id', tarifaController.showEditForm);
+
+// Procesar actualizacion
+router.put('/:id', tarifaController.updateTarifa);
+
+// Eliminar tarifa
 router.delete('/:id', tarifaController.deleteTarifa);
-
-// Solicitud de form de nueva tarifa
-router.post('/agregarTarifa', tarifaController.createTarifas);
-
-// Solicitud de editar tarifas
-router.put('/editarTarifa/:id', tarifaController.updateTarifa);
 
 module.exports = router;

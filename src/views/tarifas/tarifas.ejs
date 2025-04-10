@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tarifas</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .tarifa-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .tarifa-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .tarifa-tipo {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.2em;
+        }
+        .tarifa-precio {
+            font-size: 1.4em;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tarifas Disponibles</h1>
+        
+        <div class="nav-buttons">
+            <a href="/tarifas/agregarTarifa" class="btn btn-add">Agregar Tarifa</a>
+            <a href="/" class="btn btn-home">Volver al Inicio</a>
+        </div>
+
+        <% if (tarifas.length > 0) { %>
+            <% tiposTarifa.forEach(tipo => { %>
+                <% const tarifasTipo = tarifas.filter(t => t.tipo === tipo); %>
+                <% if (tarifasTipo.length > 0) { %>
+                    <h2><%= tipo %></h2>
+                    
+                    <% tarifasTipo.forEach(tarifa => { %>
+                        <div class="tarifa-card">
+                            <div class="tarifa-header">
+                                <span class="tarifa-tipo"><%= tarifa.cobertura %> - <%= tarifa.tiempo %></span>
+                                <span class="tarifa-precio">$<%= tarifa.precio.toFixed(2) %></span>
+                            </div>
+                            
+                            <div class="actions">
+                                <a href="/tarifas/editarTarifa/<%= tarifa._id %>" class="btn btn-edit">Editar</a>
+                                <form action="/tarifas/<%= tarifa._id %>?_method=DELETE" method="POST" style="display: inline;">
+                                    <button type="submit" class="btn btn-delete" onclick="return confirm('¿Eliminar esta tarifa?')">Eliminar</button>
+                                </form>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } %>
+            <% }); %>
+        <% } else { %>
+            <p>No hay tarifas registradas.</p>
+        <% } %>
+    </div>
+</body>
+</html>

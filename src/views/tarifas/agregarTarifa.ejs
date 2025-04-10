@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agregar Tarifa</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Agregar Nueva Tarifa</h1>
+        
+        <% if (error) { %>
+            <div class="alert alert-error"><%= error %></div>
+        <% } %>
+
+        <form action="/tarifas/agregarTarifa" method="POST">
+            <div class="form-group">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" name="tipo" required>
+                    <% tiposTarifa.forEach(tipo => { %>
+                        <option value="<%= tipo %>"><%= tipo %></option>
+                    <% }); %>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="cobertura">Cobertura:</label>
+                <select id="cobertura" name="cobertura" required>
+                    <% coberturas.forEach(cob => { %>
+                        <option value="<%= cob %>"><%= cob %></option>
+                    <% }); %>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="tiempo">Tiempo:</label>
+                <input type="text" id="tiempo" name="tiempo" required 
+                       placeholder="Ej: 30 segundos, 1 minuto, etc.">
+            </div>
+            
+            <div class="form-group">
+                <label for="precio">Precio ($):</label>
+                <input type="number" id="precio" name="precio" min="0" step="0.01" required>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-submit">Guardar Tarifa</button>
+                <a href="/tarifas" class="btn btn-cancel">Cancelar</a>
+                <a href="/" class="btn btn-home">Volver al Inicio</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
