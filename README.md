@@ -1,6 +1,6 @@
 # Colosal 88.3 🎧📻🎶📡
 
-This project is a desktop application developed in Node.js, using Swing for the graphical interface, and connected to an MongoDB database. The application allows you to perform CRUD (Create, Read, Update, Delete) operations in various collections of a Costa Rican radio station system, such as announcers, programming, advertising, news, events, listeners, comments, multimedia, clients, and rates.
+This project is a desktop application developed in Node.js, using SCSS for the graphical interface, and connected to an MongoDB database. The application allows you to perform CRUD (Create, Read, Update, Delete) operations in various collections of a Costa Rican radio station system, such as announcers, programming, advertising, news, events, listeners, comments, multimedia, clients, and rates.
 
 ## Requirements 📋🧰
 
