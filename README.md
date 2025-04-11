@@ -36,20 +36,13 @@ npm install apexcharts@^3.37.0 bootstrap@^5.3.0 ejs@^3.1.10 express@^4.21.1 jque
 npm install --save-dev nodemon@^3.1.7 sass@^1.54.8
   ```
 
-### Step 4: Open VS Code and install all the application dependencies 🔁📦
-
-```bash
-npm init -y
-npm install apexcharts@^3.37.0 bootstrap@^5.3.0 ejs@^3.1.10 express@^4.21.1 jquery@^3.6.3 method-override@^3.0.0 mongoose@^8.8.3
-npm install --save-dev nodemon@^3.1.7 sass@^1.54.8
-  ```
-### Step 5: Run the application ▶️🚀
+### Step 4: Run the application ▶️🚀
 
 ```bash
 npm run dev
   ```
 
-### Step 6: Access the application in the browser with the URL 🌐🔗
+### Step 5: Access the application in the browser with the URL 🌐🔗
 
 ```bash
 http://localhost:${PORT}
