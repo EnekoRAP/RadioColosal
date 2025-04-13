@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Incluir head -->
+<%- include('../layout/locutores/agregarLocutorHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!--  Body wrapper -->
+    <div class="container">
+        <h1>Agregar Nuevo Locutor</h1>
+        
+        <!-- Mensaje de error -->
+        <% if (error) { %>
+            <div class="alert-error"><%= error %></div>
+        <% } %>
+
+        <form action="/locutores/agregarLocutor" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre del Locutor:</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Nombre completo del locutor">
+            </div>
+
+            <div class="form-group">
+                <label for="biografia">Biografía:</label>
+                <textarea id="biografia" name="biografia" required placeholder="Breve biografía del locutor"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="idProgramas">Programa Asignado:</label>
+                <select id="idProgramas" name="idProgramas" required>
+                    <% programas.forEach(programa => { %>
+                        <option value="<%= programa._id %>"><%= programa.nombre %></option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="social-media-section">
+                <h3>Redes Sociales</h3>
+                <div class="social-input-group">
+                    <div class="form-group">
+                        <label for="facebook">Facebook:</label>
+                        <input type="text" id="facebook" name="redSocial[facebook]" value="<%= locutor?.redSocial?.facebook || '' %>" placeholder="URL de Facebook">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instagram">Instagram:</label>
+                        <input type="text" id="instagram" name="redSocial[instagram]" value="<%= locutor?.redSocial?.instagram || '' %>" placeholder="URL de Instagram">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Crear Locutor</button>
+                <a href="/" class="btn btn-cancel">Volver al Inicio</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/locutores/agregarLocutorScripts') %>
+</body>
+</html>

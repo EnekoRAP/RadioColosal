@@ -13,7 +13,7 @@ class locutorController {
         }
     }
 
-    async getLocutores(req, re) {
+    async getLocutores(req, res) {
         try {
             const locutores = await locutorService.getLocutores();
             res.render('locutores/locutores', { locutores });

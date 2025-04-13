@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Incluir head -->
+<%- include('../layout/locutores/editarLocutorHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <div class="container">
+        <h1>Editar Locutor</h1>
+
+        <form action="/locutores/<%= locutor._id %>/update" method="POST">
+            
+            <div class="form-group">
+                <label for="nombre">Nombre del Locutor</label>
+                <input type="text" id="nombre" name="nombre" value="<%= locutor.nombre %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="biografia">Biografía</label>
+                <textarea id="biografia" name="biografia" rows="5" required><%= locutor.biografia %></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="idProgramas">Programa Asignado</label>
+                <select id="idProgramas" name="idProgramas" required>
+                    <% programas.forEach(programa => { %>
+                        <option value="<%= programa._id %>" <%= programa._id.toString() === locutor.idProgramas._id.toString() ? 'selected' : '' %>>
+                            <%= programa.nombre %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="social-section">
+                <h3><i class="fas fa-share-alt"></i> Redes Sociales</h3>
+                <div class="social-grid">
+                    <div class="form-group">
+                        <div class="social-input-group">
+                            <i class="fab fa-facebook-f"></i>
+                            <input type="text" id="facebook" name="redSocial[facebook]" 
+                                   value="<%= locutor.redSocial?.facebook || '' %>" placeholder="URL de Facebook">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="social-input-group">
+                            <i class="fab fa-instagram"></i>
+                            <input type="text" id="instagram" name="redSocial[instagram]" 
+                                   value="<%= locutor.redSocial?.instagram || '' %>" placeholder="URL de Instagram">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+                <a href="/locutores" class="btn btn-outline">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Incluir scripts -->
+    <%- include('../layout/locutores/editarLocutorScripts') %>
+</body>
+</html>
