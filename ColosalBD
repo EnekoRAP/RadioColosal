@@ -267,10 +267,10 @@ db.Oyentes.insertMany([
 	  "correo": "crodriguez@gmail.com",
 	  "telefono": "6283-7138",
 	  "fecha_registro": "2025-02-19",
-	  "generos": [
-		"Rock",
-		"Hip-hop"
-	  ]
+	  "generos": {
+		"genero1": "Rock",
+		"genero2": "Hip-hop"
+	  }
 	},
 	{
 	  "_id": 2,
@@ -278,10 +278,10 @@ db.Oyentes.insertMany([
 	  "correo": "brojas@gmail.com",
 	  "telefono": "6101-8372",
 	  "fecha_registro": "2025-02-22",
-	  "generos": [
-		"Bachata",
-		"K-pop"
-	  ]
+	  "generos": {
+		"genero1": "Bachata",
+		"genero2": "K-pop"
+	  }
 	},
 	{
 	  "_id": 3,
@@ -289,10 +289,10 @@ db.Oyentes.insertMany([
 	  "correo": "mvargas@gmail.com",
 	  "telefono": "6042-8705",
 	  "fecha_registro": "2025-22-10",
-	  "generos": [
-		"Romántica",
-		"Tropical"
-	  ]
+	  "generos": {
+		"genero1": "Romántica",
+		"genero2": "Tropical"
+	  }
 	},
 	{
 	  "_id": 4,
@@ -300,10 +300,10 @@ db.Oyentes.insertMany([
 	  "correo": "rpereira@gmail.com",
 	  "telefono": "7200-7283",
 	  "fecha_registro": "2025-02-23",
-	  "generos": [
-		"Latina",
-		"Rock"
-	  ]
+	  "generos": {
+		"genero1": "Latina",
+		"genero2": "Rock"
+	  }
 	}
 ]);
 
