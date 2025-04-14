@@ -1,52 +1,75 @@
 const locutorService = require('../services/locutorService');
-const Programacion = require('../models/programacion');
 
-class locutorController {
-
-    async agregarLocutor(req, res) {
+class LocutorController {
+    async showCreateForm(req, res) {
         try {
-            const programacion = await Programacion.find();
-            res.render('programacion/agregarProgramacion', { programacion });
+            res.render('locutores/agregarLocutor', {
+                locutor: {
+                    nombre: '',
+                    apellido: '',
+                    alias: '',
+                    email: '',
+                    telefono: '',
+                    estado: 'Activo'
+                },
+                estados: ['Activo', 'Inactivo', 'Vacaciones'],
+                error: null
+            });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al cargar el formulario');
         }
     }
 
-    async getLocutores(req, res) {
+    async listLocutores(req, res) {
         try {
             const locutores = await locutorService.getLocutores();
-            res.render('locutores/locutores', { locutores });
+            res.render('locutores/locutores', { 
+                locutores,
+                estados: ['Activo', 'Inactivo', 'Vacaciones']
+            });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al obtener locutores');
         }
     }
 
-    async editarLocutor(req, res) {
+    async showEditForm(req, res) {
         try {
             const { id } = req.params;
             const locutor = await locutorService.getLocutorById(id);
-            res.render('locutores/editarLocutor', { locutor });
+            res.render('locutores/editarLocutor', { 
+                locutor,
+                estados: ['Activo', 'Inactivo', 'Vacaciones'],
+                error: null
+            });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al cargar el locutor para edición');
         }
     }
 
-    async createLocutores(req, res) {
+    async createLocutor(req, res) {
         try {
-            const { nombre, biografia, redSocial, idProgramas } = req.body;
-            const nuevoLocutor = await locutorService.createLocutor({
-                nombre,
-                biografia,
-                redSocial,
-                idProgramas
-            });
+            await locutorService.createLocutor(req.body);
             res.redirect('/locutores');
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).render('locutores/agregarLocutor', {
+                error: 'Error al crear el locutor',
+                locutor: req.body,
+                estados: ['Activo', 'Inactivo', 'Vacaciones']
+            });
+        }
+    }
+
+    async updateLocutor(req, res) {
+        try {
+            const { id } = req.params;
+            await locutorService.updateLocutor(id, req.body);
+            res.redirect('/locutores');
+        } catch (error) {
+            res.status(500).render('locutores/editarLocutor', {
+                error: 'Error al actualizar el locutor',
+                locutor: req.body,
+                estados: ['Activo', 'Inactivo', 'Vacaciones']
+            });
         }
     }
 
@@ -56,23 +79,9 @@ class locutorController {
             await locutorService.deleteLocutor(id);
             res.redirect('/locutores');
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al eliminar el locutor');
         }
     }
-
-    async updateLocutor(req, res) {
-        try {
-            const { id } = req.params;
-            const { nombre, biografia, redSocial, idProgramas } = req.body;
-            const programacionActualizada = await locutorService.updateLocutor(id, { nombre, biografia, redSocial, idProgramas });
-            res.redirect('/locutores');
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
-        }
-    }
-
 }
 
-module.exports = new locutorController();
+module.exports = new LocutorController();

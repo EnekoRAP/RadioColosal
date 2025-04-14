@@ -1,62 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<!-- Incluir head -->
-<%- include('../layout/locutores/agregarLocutorHead') %>
+<html>
+<head>
+    <title>Agregar Locutor</title>
+</head>
+<body>
+    <h1>Agregar Nuevo Locutor</h1>
 
-<body class="min-vh-100 d-flex flex-column">
+    <% if (error) { %>
+        <div style="color: red;">
+            Error: <%= error %>
+        </div>
+    <% } %>
 
-    <!--  Body wrapper -->
-    <div class="container">
-        <h1>Agregar Nuevo Locutor</h1>
+    <form action="/locutores/agregarLocutor" method="POST">
+        <div>
+            <label>Nombre:</label>
+            <input type="text" name="nombre" value="<%= locutor.nombre %>" required>
+        </div>
         
-        <!-- Mensaje de error -->
-        <% if (error) { %>
-            <div class="alert-error"><%= error %></div>
-        <% } %>
-
-        <form action="/locutores/agregarLocutor" method="POST">
-            <div class="form-group">
-                <label for="nombre">Nombre del Locutor:</label>
-                <input type="text" id="nombre" name="nombre" required placeholder="Nombre completo del locutor">
-            </div>
-
-            <div class="form-group">
-                <label for="biografia">Biografía:</label>
-                <textarea id="biografia" name="biografia" required placeholder="Breve biografía del locutor"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="idProgramas">Programa Asignado:</label>
-                <select id="idProgramas" name="idProgramas" required>
-                    <% programas.forEach(programa => { %>
-                        <option value="<%= programa._id %>"><%= programa.nombre %></option>
-                    <% }) %>
-                </select>
-            </div>
-
-            <div class="social-media-section">
-                <h3>Redes Sociales</h3>
-                <div class="social-input-group">
-                    <div class="form-group">
-                        <label for="facebook">Facebook:</label>
-                        <input type="text" id="facebook" name="redSocial[facebook]" value="<%= locutor?.redSocial?.facebook || '' %>" placeholder="URL de Facebook">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="instagram">Instagram:</label>
-                        <input type="text" id="instagram" name="redSocial[instagram]" value="<%= locutor?.redSocial?.instagram || '' %>" placeholder="URL de Instagram">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Crear Locutor</button>
-                <a href="/" class="btn btn-cancel">Volver al Inicio</a>
-            </div>
-        </form>
-    </div>
-
-    <!-- Incluir scripts de js -->
-    <%- include('../layout/locutores/agregarLocutorScripts') %>
+        <div>
+            <label>Apellido:</label>
+            <input type="text" name="apellido" value="<%= locutor.apellido %>" required>
+        </div>
+        
+        <div>
+            <label>Alias:</label>
+            <input type="text" name="alias" value="<%= locutor.alias %>">
+        </div>
+        
+        <div>
+            <label>Email:</label>
+            <input type="email" name="email" value="<%= locutor.email %>" required>
+        </div>
+        
+        <div>
+            <label>Teléfono:</label>
+            <input type="text" name="telefono" value="<%= locutor.telefono %>" required>
+        </div>
+        
+        <div>
+            <label>Estado:</label>
+            <select name="estado" required>
+                <% estados.forEach(estado => { %>
+                    <option value="<%= estado %>" <%= locutor.estado === estado ? 'selected' : '' %>>
+                        <%= estado %>
+                    </option>
+                <% }); %>
+            </select>
+        </div>
+        
+        <div>
+            <button type="submit">Guardar</button>
+            <a href="/locutores">Cancelar</a>
+        </div>
+    </form>
 </body>
 </html>

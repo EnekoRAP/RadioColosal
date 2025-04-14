@@ -1,30 +1,18 @@
 const Programacion = require('../models/programacion');
 
-class programacionService {
-
-    // Operaciones CRUD
-    async createProgramacion(data) {
-        const programacion = new Programacion(data);
-        await programacion.save();
-        return programacion;
+class ProgramacionService {
+    async getAllProgramas() {
+        return await Programacion.find().sort({ dia: 1, 'horario.inicio': 1 });
     }
 
-    async getProgramaciones() {
-        return await Programacion.find();
+    async createPrograma(programaData) {
+        const programa = new Programacion(programaData);
+        return await programa.save();
     }
 
-    async getProgramacionById(id) {
+    async getProgramaById(id) {
         return await Programacion.findById(id);
     }
-
-    async updateProgramacion(id, data) {
-        return await Programacion.findByIdAndUpdate(id, data, { new: true })
-    }
-
-    async deleteProgramacion(id) {
-        return await Programacion.findByIdAndDelete(id);
-    }
-
 }
 
-module.exports = new programacionService();
+module.exports = new ProgramacionService();

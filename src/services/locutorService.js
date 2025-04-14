@@ -1,54 +1,30 @@
 const Locutor = require('../models/locutor');
 
-class locutorService {
-
-    // Crear locutor
+class LocutorService {
     async createLocutor(data) {
-        const redSocial = {
-            facebook: data.redSocial?.facebook || '',
-            instagram: data.redSocial?.instagram || ''
-        };
-
-        const locutor = new Locutor({
-            nombre: data.nombre,
-            biografia: data.biografia,
-            idProgramas: data.idProgramas,
-            redSocial: redSocial
-        });
-
+        const locutor = new Locutor(data);
         await locutor.save();
         return locutor;
     }
 
-    // Obtener todos los locutores
     async getLocutores() {
-        return await Locutor.find().populate('idProgramas');
+        return await Locutor.find().sort({ apellido: 1, nombre: 1 });
     }
 
-    // Obtener locutor por ID
     async getLocutorById(id) {
-        return await Locutor.findById(id).populate('idProgramas');
+        return await Locutor.findById(id);
     }
 
-    // Actualizar locutor
     async updateLocutor(id, updateData) {
-        return await Locutor.findByIdAndUpdate(id, updateData, { new: true });
+        return await Locutor.findByIdAndUpdate(id, updateData, {
+            new: true,
+            runValidators: true
+        });
     }
 
-    // Eliminar locutor
     async deleteLocutor(id) {
-        try {
-            const result = await Locutor.findByIdAndDelete(id);
-            if (!result) {
-                throw new Error('Locutor no encontrado');
-            }
-            return result;
-        } catch (error) {
-            console.error('Error en servicio al eliminar locutor:', error);
-            throw error;
-        }
+        return await Locutor.findByIdAndDelete(id);
     }
-
 }
 
-module.exports = new locutorService();
+module.exports = new LocutorService();

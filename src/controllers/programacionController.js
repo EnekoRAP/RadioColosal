@@ -1,71 +1,26 @@
 const programacionService = require('../services/programacionService');
 
-class programacionController {
-
-    async agregarProgramacion(req, res) {
+class ProgramacionController {
+    async listProgramas(req, res) {
         try {
-            res.render('programacion/agregarprogramacion');
+            const programas = await programacionService.getAllProgramas();
+            res.json(programas); 
         } catch (error) {
-            console.error(error);
             res.status(500).json({ error: error.message });
         }
     }
 
-    async getProgramaciones(req, res) {
+    async getPrograma(req, res) {
         try {
-            const programacion = await programacionService.getProgramaciones();
-            res.render('programacion/programacion', { programacion });
+            const programa = await programacionService.getProgramaById(req.params.id);
+            if (!programa) {
+                return res.status(404).json({ error: 'Programa no encontrado' });
+            }
+            res.json(programa);
         } catch (error) {
-            console.error(error);
             res.status(500).json({ error: error.message });
         }
     }
-
-    async editarProgramacion(req, res) {
-        try {
-            const { id } = req.params;
-            const programacion = await programacionService.getProgramacionById(id);
-            res.render('programacion/editarProgramacion', { programacion });
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
-        }
-    }
-
-    async createProgramacion(req, res) {
-        try {
-            const { dia, horario, nombre, descripcion } = req.body;
-            const nuevaProgramacion = await programacionService.createProgramacion({dia, horario, nombre, descripcion});
-            res.redirect('/programacion');
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
-        }
-    }
-
-    async deleteProgramacion(req, res) {
-        try {
-            const { id } = req.params;
-            await programacionService.deleteProgramacion(id);
-            res.redirect('/programacion');
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message })
-        }
-    }
-
-    async updateProgramacion(req, res) {
-        try {
-            const { id } = req.params;
-            const { dia, horario, nombre, descripcion } = req.body;
-            const programacionActualizada = await programacionService.updateProgramacion(id, { dia, horario, nombre, descripcion });
-            res.redirect('/programacion');
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
-        }
-    }
-
 }
 
-module.exports = new programacionController();
+module.exports = new ProgramacionController();

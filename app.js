@@ -34,6 +34,17 @@ app.get('/', (req, res) => {
     res.render('index'); // Renderiza src/views/index.ejs
 });
 
+
+// Rutas
+app.use('/locutores', locutorRoutes);
+
+
+// Manejo de errores
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).render('error', { error: err.message });
+});
+
 // Rutas de la aplicación
 app.use('/locutores', locutorRoutes);
 app.use('/programacion', programacionRoutes);

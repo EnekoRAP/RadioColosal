@@ -2,22 +2,22 @@ const express = require('express');
 const router = express.Router();
 const locutorController = require('../controllers/locutorController');
 
-// Form de nuevo locutor
-router.get('/agregarLocutor', locutorController.agregarLocutor);
+// Formulario de creación
+router.get('/agregarLocutor', locutorController.showCreateForm);
 
-// Lista de locutores
-router.get('/', locutorController.getLocutores);
+// Procesar creación
+router.post('/agregarLocutor', locutorController.createLocutor);
 
-// Form de editar locutor
-router.get('/editarLocutor/:id', locutorController.editarLocutor);
+// Listar locutores
+router.get('/', locutorController.listLocutores);
 
-// Eliminar locutor desde el listado
+// Formulario de edición
+router.get('/editarLocutor/:id', locutorController.showEditForm);
+
+// Procesar actualización
+router.put('/:id', locutorController.updateLocutor);
+
+// Eliminar locutor
 router.delete('/:id', locutorController.deleteLocutor);
-
-// Solicitud de form de nuevo locutor
-router.post('/agregarLocutor', locutorController.createLocutores);
-
-// Solicitud de editar locutor
-router.put('/editarLocutor/:id', locutorController.updateLocutor);
 
 module.exports = router;
