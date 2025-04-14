@@ -2,6 +2,80 @@
     transition: transform 0.3s ease;
 }
 
+body {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+main.contenido {
+    margin-left: 250px; 
+  }
+
+  main.contenido img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .contenido-interno {
+    padding: 0 40px; 
+    margin-top: 30px;
+    margin-left: 17px;
+  }
+  
+  .card-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+
+  @media (max-width: 768px) {
+    .card {
+      width: 100%;
+    }
+  }
+  
+  
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: calc(33.333% - 13.33px); 
+    min-width: 250px;
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card img {
+    width: 100% !important;
+    height: 160px !important;
+    object-fit: cover !important;
+    display: block;
+  }
+  
+  
+  
+  .card h3 {
+    margin: 15px;
+    font-size: 1.2rem;
+  }
+  
+  .card p {
+    margin: 0 15px 15px;
+    color: #555;
+  }
+  
+  
+  
+
 .sidebar-link[aria-expanded="true"] .dropdown-icon {
     transform: rotate(180deg);
 }
