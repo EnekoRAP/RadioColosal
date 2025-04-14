@@ -267,10 +267,7 @@ db.Oyentes.insertMany([
 	  "correo": "crodriguez@gmail.com",
 	  "telefono": "6283-7138",
 	  "fecha_registro": "2025-02-19",
-	  "generos": {
-		"genero1": "Rock",
-		"genero2": "Hip-hop"
-	  }
+	  "generos": "Rock, Hip-hop"
 	},
 	{
 	  "_id": 2,
@@ -278,21 +275,15 @@ db.Oyentes.insertMany([
 	  "correo": "brojas@gmail.com",
 	  "telefono": "6101-8372",
 	  "fecha_registro": "2025-02-22",
-	  "generos": {
-		"genero1": "Bachata",
-		"genero2": "K-pop"
-	  }
+	  "generos": "Bachata, K-pop"
 	},
 	{
 	  "_id": 3,
 	  "nombre": "Melani Vargas",
 	  "correo": "mvargas@gmail.com",
 	  "telefono": "6042-8705",
-	  "fecha_registro": "2025-22-10",
-	  "generos": {
-		"genero1": "Romántica",
-		"genero2": "Tropical"
-	  }
+	  "fecha_registro": "2025-02-10",
+	  "generos": "Romántica, Tropical"
 	},
 	{
 	  "_id": 4,
@@ -300,10 +291,7 @@ db.Oyentes.insertMany([
 	  "correo": "rpereira@gmail.com",
 	  "telefono": "7200-7283",
 	  "fecha_registro": "2025-02-23",
-	  "generos": {
-		"genero1": "Latina",
-		"genero2": "Rock"
-	  }
+	  "generos": "Latina, Rock"
 	}
 ]);
 
