@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Incluir head -->
+<%- include('../layout/noticias/agregarNoticiaHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1>Publicar Noticia</h1>
+        
+        <!-- Mensaje de error -->
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert-error"><%= error %></div>
+        <% } %>
+
+        <!-- Formulario -->
+        <form action="/noticias/agregarNoticia" method="POST">
+            <div class="form-group">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="contenido">Contenido:</label>
+                <textarea id="contenido" name="contenido" rows="5" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="fecha">Fecha de publicación:</label>
+                <input type="date" id="fecha" name="fecha" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="autor">Autor:</label>
+                <input type="text" id="autor" name="autor" required placeholder="Nombre completo">
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Publicar</button>
+                <a href="/" class="btn btn-cancel">Volver al Inicio</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/noticias/agregarNoticiaScripts') %>
+</body>
+</html>

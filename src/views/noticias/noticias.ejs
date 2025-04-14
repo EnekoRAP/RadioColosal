@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Incluir head -->
+<%- include('../layout/noticias/noticiaHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1 class="my-4">Noticias</h1>
+
+        <!-- Acciones del encabezado -->
+        <div class="header-actions mb-4">
+            <a href="/" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+        </div>
+
+        <!-- Mensajes de error o éxito -->
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i> <%= error === 'delete_error' ? 'Error al eliminar la noticia' : error %>
+            </div>
+        <% } %>
+
+        <% if (typeof success !== 'undefined') { %>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> <%= success %>
+            </div>
+        <% } %>
+
+        <!-- Mostrar noticias -->
+        <% if (noticias.length > 0) { %>
+            <div class="news-grid">
+                <% noticias.forEach(noticia => { %>
+                    <div class="news-card">
+                        <div class="news-header">
+                            <h3 class="news-title"><%= noticia.titulo %></h3>
+                            <span class="news-date">
+                                <i class="fas fa-calendar-alt"></i> 
+                                <%= noticia.fecha
+                                    ? new Date(noticia.fecha).toLocaleDateString('es-ES') 
+                                    : 'Sin fecha' %>
+                            </span>
+                        </div>
+
+                        <div class="news-body">
+                            <p class="news-author">
+                                <i class="fas fa-user"></i> 
+                                <strong>Autor:</strong> <%= noticia.autor || 'Desconocido' %>
+                            </p>
+                            <p class="news-content"><%= noticia.contenido %></p>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="empty-state text-center mt-5">
+                <i class="fa-solid fa-newspaper fa-3x mb-3"></i>
+                <h3>No hay noticias</h3>
+                <p>Por el momento, no hay ninguna noticia registrada</p>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/noticias/noticiaScripts') %>
+
+</body>
+</html>
