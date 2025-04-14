@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Incluir head -->
+<%- include('../layout/oyentes/oyenteHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1 class="my-4">Oyentes</h1>
+
+        <!-- Acciones del encabezado -->
+        <div class="header-actions mb-4">
+            <a href="/" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+        </div>
+
+        <!-- Mensajes de error o éxito -->
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i> <%= error === 'delete_error' ? 'Error al eliminar el oyente' : error %>
+            </div>
+        <% } %>
+
+        <% if (typeof success !== 'undefined') { %>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> <%= success %>
+            </div>
+        <% } %>
+
+        <!-- Mostrar oyentes -->
+        <% if (oyentes.length > 0) { %>
+            <div class="listeners-grid">
+                <% oyentes.forEach(oyente => { %>
+                    <div class="listeners-card">
+                        <div class="listeners-header">
+                            <h3 class="listeners-name"><%= oyente.nombre %></h3>
+                            <span class="listeners-date">
+                                <i class="fas fa-calendar-alt"></i> 
+                                <%= oyente.fecha_registro
+                                    ? new Date(oyente.fecha_registro).toLocaleDateString('es-ES') 
+                                    : 'Sin fecha de registro' %>
+                            </span>
+                        </div>
+
+                        <div class="listeners-body">
+                            <p class="listeners-items">
+                                <i class="fas fa-envelope"></i> 
+                                <strong>Correo Electrónico:</strong> <%= oyente.correo %>
+                            </p>
+                            <p class="listeners-items">
+                                <i class="fas fa-phone"></i> 
+                                <strong>Teléfono:</strong> <%= oyente.telefono %>
+                            </p>
+                            <p class="listeners-items">
+                                <i class="fas fa-music"></i> 
+                                <strong>Géneros Favoritos:</strong> <%= oyente.generos %>
+                            </p>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="empty-state text-center mt-5">
+                <i class="fa-solid fa-newspaper fa-3x mb-3"></i>
+                <h3>No hay oyentes</h3>
+                <p>Por el momento, no hay ningún oyente registrado</p>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/noticias/noticiaScripts') %>
+
+</body>
+</html>
