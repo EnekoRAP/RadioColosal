@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Incluir head -->
+<%- include('../layout/publicidad/agregarPublicidadHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1>Agregar Publicidad</h1>
+        
+        <!-- Mensaje de error -->
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert-error"><%= error %></div>
+        <% } %>
+
+        <!-- Formulario -->
+        <form action="/publicidad/agregarPublicidad" method="POST">
+            <div class="form-group">
+                <label for="patrocinador">Patrocinador:</label>
+                <input type="text" id="patrocinador" name="patrocinador" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="contenido">Contenido:</label>
+                <textarea id="contenido" name="contenido" rows="5" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" name="tipo" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="fecha_inicio">Fecha de inicio:</label>
+                <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_fin">Fecha de fin:</label>
+                <input type="date" id="fecha_fin" name="fecha_fin" required>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Agregar</button>
+                <a href="/" class="btn btn-cancel">Volver al Inicio</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/publicidad/agregarPublicidadScripts') %>
+</body>
+</html>

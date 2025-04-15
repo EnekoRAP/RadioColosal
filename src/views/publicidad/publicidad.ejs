@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Incluir head -->
+<%- include('../layout/publicidad/publicidadHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1 class="my-4">Publicidad</h1>
+
+        <!-- Acciones del encabezado -->
+        <div class="header-actions mb-4">
+            <a href="/" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+        </div>
+
+        <!-- Mensajes de error o éxito -->
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i> <%= error === 'delete_error' ? 'Error al eliminar la publicidad' : error %>
+            </div>
+        <% } %>
+
+        <% if (typeof success !== 'undefined') { %>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> <%= success %>
+            </div>
+        <% } %>
+
+        <!-- Mostrar publicidades -->
+        <% if (publicidades.length > 0) { %>
+            <div class="advertising-grid">
+                <% publicidades.forEach(publicidad => { %>
+                    <div class="advertising-card">
+                        <div class="advertising-header">
+                            <h3 class="advertising-sponsor"><%= publicidad.patrocinador %></h3>
+                            <span class="advertising-start-date">
+                                <i class="fas fa-calendar-alt"></i> 
+                                <%= publicidad.fecha_inicio
+                                    ? new Date(publicidad.fecha_inicio).toLocaleDateString('es-ES') 
+                                    : 'Sin fecha de inicio' %>
+                            </span>
+                        </br>
+                            <span class="advertising-end-date">
+                                <i class="fas fa-calendar-alt"></i>
+                                <%= publicidad.fecha_fin
+                                    ? new Date(publicidad.fecha_fin).toLocaleDateString('es-ES')
+                                    : 'Sin fecha de fin' %>
+                            </span>
+                        </div>
+
+                        <div class="advertising-body">
+                            <p class="advertising-type">
+                                <i class="fas fa-tags"></i> 
+                                 <%= publicidad.tipo %>
+                            </p>
+                            <p class="advertising-content"><%= publicidad.contenido %></p>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="empty-state text-center mt-5">
+                <i class="fa-solid fa-newspaper fa-3x mb-3"></i>
+                <h3>No hay publicidades</h3>
+                <p>Por el momento, no hay ninguna publicidad registrada</p>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/publicidad/publicidadScripts') %>
+
+</body>
+</html>
