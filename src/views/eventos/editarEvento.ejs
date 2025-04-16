@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Incluir head -->
+<%- include('../layout/eventos/editarEventoHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1 class="my-4">Editar Evento</h1>
+        
+        <!-- Formulario -->
+        <form action="/eventos/editarEvento/<%= evento._id %>?_method=PUT" method="POST">
+            <div class="form-group mb-3">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" required 
+                       value="<%= evento.nombre %>">
+            </div>
+            
+            <div class="form-group mb-3">
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" name="tipo" class="form-control" required 
+                       value="<%= evento.tipo %>">
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" rows="3" class="form-control" required><%= evento.descripcion %></textarea>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" class="form-control" required 
+                       value="<%= evento.fecha ? new Date(evento.fecha).toISOString().split('T')[0] : '' %>">
+            </div>
+            
+            <div class="form-group mb-4">
+                <label for="ubicacion">Ubicación:</label>
+                <input type="text" id="ubicacion" name="ubicacion" class="form-control" required 
+                       value="<%= evento.ubicacion %>">
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+                <a href="/eventos" class="btn btn-outline ms-2">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Incluir scripts -->
+    <%- include('../layout/eventos/editarEventoScripts') %>
+</body>
+</html>
+
