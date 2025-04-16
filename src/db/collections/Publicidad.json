@@ -1,0 +1,34 @@
+[
+	{
+	  "_id": 1,
+	  "patrocinador": "Supermercado Loaiza",
+	  "contenido": "¡Pásate por Ciudad Neily y compra tus alimentos en nuestro supermercado!",
+	  "tipo": "Publicidad radiofónica",
+	  "fecha_inicio": "2009-04-12",
+	  "fecha_fin": "2012-02-05"
+	},
+	{
+	  "_id": 2,
+	  "patrocinador": "Mall Jerusalem",
+	  "contenido": "¡Visita Mall Jerusalem para que compres en nuestros locales!",
+	  "tipo": "Publicidad digital",
+	  "fecha_inicio": "2013-05-20",
+	  "fecha_fin": "2014-09-01"
+	},
+	{
+	  "_id": 3,
+	  "patrocinador": "City Mall",
+	  "contenido": "¡City Mall es el mejor lugar de compras para productos personales y comestibles!",
+	  "tipo": "Publicidad televisiva",
+	  "fecha_inicio": "2014-07-14",
+	  "fecha_fin": "2015-03-01"
+	},
+	{
+	  "_id": 4,
+	  "patrocinador": "Plaza Los Ángeles",
+	  "contenido": "¡Nuevo centro de comercio y mercado próximamente en Paso Canoas!",
+	  "tipo": "Publicidad Informativa",
+	  "fecha_inicio": "2021-03-19",
+	  "fecha_fin": "2022-12-09"
+	}
+]

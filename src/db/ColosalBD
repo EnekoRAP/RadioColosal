@@ -1,0 +1,14 @@
+-- Crear la base de datos
+use ColosalBD
+
+-- Crear las colecciones
+db.createCollection("Locutores");
+db.createCollection("Programacion");
+db.createCollection("Publicidad");
+db.createCollection("Noticias");
+db.createCollection("Eventos");
+db.createCollection("Oyentes");
+db.createCollection("Comentarios");
+db.createCollection("Multimedios");
+db.createCollection("Clientes");
+db.createCollection("Tarifas");

@@ -1,0 +1,30 @@
+[
+	{
+	  "_id": 1,
+	  "tipo": "Spot Publicitario",
+	  "cobertura": "Radio",
+	  "tiempo": "15 SEG",
+	  "precio": 5650
+	},
+	{
+	  "_id": 2,
+	  "tipo": "Spot Publicitario",
+	  "cobertura": "Radio e Internet",
+	  "tiempo": "30 SEG",
+	  "precio": 10735
+	},
+	{
+	  "_id": 3,
+	  "tipo": "Spot Publicitario",
+	  "cobertura": "Internet",
+	  "tiempo": "45 SEG",
+	  "precio": 15820
+	},
+	{
+	  "_id": 4,
+	  "tipo": "Spot Publicitario",
+	  "cobertura": "Radio e Internet",
+	  "tiempo": "60 SEG",
+	  "precio": 20340
+	}
+]

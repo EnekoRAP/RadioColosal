@@ -1,0 +1,54 @@
+[
+	{
+	  "_id": 1,
+	  "nombre": "Delbis Aguero",
+	  "biografia": "Locutor que tiene más años de estar en Colosal, operando desde 2002.",
+	  "redSocial": {
+		"instagram": "instagram.com/delbisaguero/",
+		"facebook": "facebook.com/delbis"
+	  },
+	  "idProgramas": [
+		1,
+		2
+	  ]
+	},
+	{
+	  "_id": 2,
+	  "nombre": "Byron Obando",
+	  "biografia": "Locutor que le gusta pasar un rato agradable y mientras disfruta la buena música.",
+	  "redSocial": {
+		"instagram": "instagram.com/byron_locutor/",
+		"facebook": "facebook.com/ByronLocutor"
+	  },
+	  "idProgramas": [
+		3,
+		4
+	  ]
+	},
+	{
+	  "_id": 3,
+	  "nombre": "Argenis Fernández",
+	  "biografia": "Primera voz que escuchan desde el amanecer, acompañándo a todos los oyentes que escuchan Colosal FM a esas horas.",
+	  "redSocial": {
+		"instagram": "instagram.com/argenis_fernandez_el_profe/",
+		"facebook": "facebook.com/argenisaloyman"
+	  },
+	  "idProgramas": [
+		5,
+		6
+	  ]
+	},
+	{
+	  "_id": 4,
+	  "nombre": "Dylan Castillo",
+	  "biografia": "Loctor que le encanta compartir en la hora del Prime Time en las noches.",
+	  "redSocial": {
+		"instagram": "instagram.com/d_castillo07/",
+		"facebook": "facebook.com/dilan.castillojimenez"
+	  },
+	  "idProgramas": [
+		7,
+		8
+	  ]
+	}
+]

@@ -1,0 +1,30 @@
+[
+	{
+	  "_id": 1,
+	  "titulo": "Choque Automovilístico en Carretera",
+	  "contenido": "Cerca de Río Claro, se dió un fuerte choque entre dos automóviles.",
+	  "fecha": "2024-11-20",
+	  "autor": "Ricardo Vargas"
+	},
+	{
+	  "_id": 2,
+	  "titulo": "Blouqeos en la Frontera",
+	  "contenido": "Los ticos deciden hacer manifestaciones cerca de la frontera panameña, cosa que los policías no han tolerado y han empezado a bloquear las calles.",
+	  "fecha": "2021-10-09",
+	  "autor": "Arianna Barquero"
+	},
+	{
+	  "_id": 3,
+	  "titulo": "Incedio en Locales Comerciales",
+	  "contenido": "Incendio masivo acaba con algunos locales del Depósito Libre de Golfito.",
+	  "fecha": "2012-05-17",
+	  "autor": "Fernanda Rivas"
+	},
+	{
+	  "_id": 4,
+	  "titulo": "Venezolanos en la Frontera",
+	  "contenido": "La forntera panameña se llena de inmigrantes venezolanos, haciendo que los costarricenses se alarmen y tomen precaución.",
+	  "fecha": "2023-10-21",
+	  "autor": "Brian Ramírez"
+	}
+]
