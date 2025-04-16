@@ -15,6 +15,9 @@
             <a href="/" class="btn btn-outline">
                 <i class="fas fa-arrow-left"></i> Volver al Inicio
             </a>
+            <a href="/noticias/agregarNoticia" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Agregar Noticia
+            </a>
         </div>
 
         <!-- Mensajes de error o éxito -->
@@ -32,25 +35,37 @@
 
         <!-- Mostrar noticias -->
         <% if (noticias.length > 0) { %>
-            <div class="news-grid">
+            <div class="news-list">
                 <% noticias.forEach(noticia => { %>
-                    <div class="news-card">
-                        <div class="news-header">
-                            <h3 class="news-title"><%= noticia.titulo %></h3>
-                            <span class="news-date">
+                    <div class="news-card mb-4 p-3 border rounded shadow-sm">
+                        <div class="news-header mb-2">
+                            <h3 class="news-title mb-0"><%= noticia.titulo %></h3>
+                            <small class="text-muted">
                                 <i class="fas fa-calendar-alt"></i> 
                                 <%= noticia.fecha
                                     ? new Date(noticia.fecha).toLocaleDateString('es-ES') 
                                     : 'Sin fecha' %>
-                            </span>
+                            </small>
                         </div>
 
-                        <div class="news-body">
-                            <p class="news-author">
+                        <div class="news-body mb-3">
+                            <p class="news-author mb-1">
                                 <i class="fas fa-user"></i> 
                                 <strong>Autor:</strong> <%= noticia.autor || 'Desconocido' %>
                             </p>
                             <p class="news-content"><%= noticia.contenido %></p>
+                        </div>
+
+                        <!-- Acciones -->
+                        <div class="news-actions mt-2">
+                            <a href="/noticias/editarNoticia/<%= noticia._id %>" class="btn btn-outline me-2">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <form action="/noticias/<%= noticia._id %>?_method=DELETE" method="POST" style="display: inline;">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta noticia?')">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
+                            </form>
                         </div>
                     </div>
                 <% }); %>
@@ -60,6 +75,9 @@
                 <i class="fa-solid fa-newspaper fa-3x mb-3"></i>
                 <h3>No hay noticias</h3>
                 <p>Por el momento, no hay ninguna noticia registrada</p>
+                <a href="/noticias/agregarNoticia" class="btn btn-primary mt-3">
+                    <i class="fas fa-plus"></i> Agregar Primera Noticia
+                </a>
             </div>
         <% } %>
     </div>

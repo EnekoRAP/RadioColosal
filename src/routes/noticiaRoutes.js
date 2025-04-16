@@ -8,6 +8,8 @@ router.get('/agregarNoticia', noticiaController.agregarNoticia);
 // Lista de noticias
 router.get('/', noticiaController.getNoticias);
 
+
+
 // Form de editar noticia
 router.get('/editarNoticia/:id', noticiaController.editarNoticia);
 
