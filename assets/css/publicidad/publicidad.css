@@ -266,26 +266,25 @@ h1::after {
 }
 
 
-    .advertising-grid {
-        display: grid;
-        gap: 20px;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        margin-top: 20px;
-    }
+.advertising-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-    .advertising-card {
-        border: 1px solid #ddd;
-        padding: 20px;
-        border-radius: 12px;
-        background-color: #fff;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    }
+.advertising-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
 
     .advertising-header {
         margin-bottom: 10px;
     }
 
-    .news-sponsor {
+    .advertising-sponsor {
         margin: 0;
         font-size: 1.25rem;
     }

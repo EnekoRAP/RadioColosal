@@ -8,7 +8,7 @@
 
     <!-- Contenedor principal -->
     <div class="container">
-        <h1>Agregar Publicidad</h1>
+        <h1>Nueva publicidad</h1>
         
         <!-- Mensaje de error -->
         <% if (typeof error !== 'undefined') { %>
@@ -23,20 +23,20 @@
             </div>
             
             <div class="form-group">
-                <label for="contenido">Contenido:</label>
-                <textarea id="contenido" name="contenido" rows="5" required></textarea>
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" name="tipo" required>
             </div>
 
             <div class="form-group">
-                <label for="tipo">Tipo:</label>
-                <input type="text" id="tipo" name="tipo" required>
+                <label for="contenido">Contenido:</label>
+                <textarea id="contenido" name="contenido" rows="3" required></textarea>
             </div>
             
             <div class="form-group">
                 <label for="fecha_inicio">Fecha de inicio:</label>
                 <input type="date" id="fecha_inicio" name="fecha_inicio" required>
             </div>
-
+            
             <div class="form-group">
                 <label for="fecha_fin">Fecha de fin:</label>
                 <input type="date" id="fecha_fin" name="fecha_fin" required>
