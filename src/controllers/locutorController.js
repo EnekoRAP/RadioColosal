@@ -1,18 +1,21 @@
 const locutorService = require('../services/locutorService');
+const programacionService = require('../models/programacion');
 
-class LocutorController {
-    async showCreateForm(req, res) {
+class locutorController {
+    async agregarLocutor(req, res) {
         try {
+            const programas = await programacionService.find();
             res.render('locutores/agregarLocutor', {
                 locutor: {
                     nombre: '',
-                    apellido: '',
-                    alias: '',
-                    email: '',
-                    telefono: '',
-                    estado: 'Activo'
+                    biografia: '',
+                    redSocial: {
+                        instagram: '',
+                        facebook: ''
+                    },
+                    idProgramas: []
                 },
-                estados: ['Activo', 'Inactivo', 'Vacaciones'],
+                programas,
                 error: null
             });
         } catch (error) {
@@ -20,25 +23,27 @@ class LocutorController {
         }
     }
 
-    async listLocutores(req, res) {
+    async getLocutores(req, res) {
         try {
             const locutores = await locutorService.getLocutores();
             res.render('locutores/locutores', { 
-                locutores,
-                estados: ['Activo', 'Inactivo', 'Vacaciones']
+                locutores
             });
         } catch (error) {
             res.status(500).send('Error al obtener locutores');
         }
     }
 
-    async showEditForm(req, res) {
+
+
+    async editarLocutor(req, res) {
         try {
             const { id } = req.params;
             const locutor = await locutorService.getLocutorById(id);
+            const programas = await programacionService.find();
             res.render('locutores/editarLocutor', { 
                 locutor,
-                estados: ['Activo', 'Inactivo', 'Vacaciones'],
+                programas,
                 error: null
             });
         } catch (error) {
@@ -48,13 +53,16 @@ class LocutorController {
 
     async createLocutor(req, res) {
         try {
-            await locutorService.createLocutor(req.body);
+            
+            const data = this._prepareFormData(req.body);
+            await locutorService.createLocutor(data);
             res.redirect('/locutores');
         } catch (error) {
+            const programas = await programacionService.find();
             res.status(500).render('locutores/agregarLocutor', {
                 error: 'Error al crear el locutor',
                 locutor: req.body,
-                estados: ['Activo', 'Inactivo', 'Vacaciones']
+                programas
             });
         }
     }
@@ -62,15 +70,19 @@ class LocutorController {
     async updateLocutor(req, res) {
         try {
             const { id } = req.params;
-            await locutorService.updateLocutor(id, req.body);
+            const data = this._prepareFormData(req.body);
+            await locutorService.updateLocutor(id, data);
             res.redirect('/locutores');
         } catch (error) {
-            res.status(500).render('locutores/editarLocutor', {
-                error: 'Error al actualizar el locutor',
+            console.error("Error al crear locutor:", error); // 👈 esto
+            const programas = await programacionService.find();
+            res.status(500).render('locutores/agregarLocutor', {
+                error: 'Error al crear el locutor',
                 locutor: req.body,
-                estados: ['Activo', 'Inactivo', 'Vacaciones']
+                programas
             });
         }
+        
     }
 
     async deleteLocutor(req, res) {
@@ -82,6 +94,22 @@ class LocutorController {
             res.status(500).send('Error al eliminar el locutor');
         }
     }
+
+    // ✅ Método privado para formatear los datos del formulario
+    _prepareFormData(body) {
+        const data = {
+            nombre: body.nombre,
+            biografia: body.biografia,
+            redSocial: {
+                instagram: body['redSocial.instagram'] || '',
+                facebook: body['redSocial.facebook'] || ''
+            },
+            idProgramas: Array.isArray(body.idProgramas)
+                ? body.idProgramas.map(Number)
+                : [Number(body.idProgramas)]
+        };
+        return data;
+    }
 }
 
-module.exports = new LocutorController();
+module.exports = new locutorController();

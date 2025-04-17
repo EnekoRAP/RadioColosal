@@ -1,58 +1,69 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Agregar Locutor</title>
-</head>
-<body>
-    <h1>Agregar Nuevo Locutor</h1>
+<html lang="en">
+    
+       
+<!-- Incluir head -->
+<%- include('../layout/locutores/agregarLocutorHead') %>
 
-    <% if (error) { %>
-        <div style="color: red;">
-            Error: <%= error %>
-        </div>
-    <% } %>
+<body class="min-vh-100 d-flex flex-column">
+
+    <!--  Body wrapper -->
+    <div class="container">
+        <h1>Agregar Nuevo Locutor</h1>
+        
+        <!-- Body -->
+        <% if (error) { %>
+            <div class="alert-error"><%= error %></div>
+        <% } %>
 
     <form action="/locutores/agregarLocutor" method="POST">
-        <div>
-            <label>Nombre:</label>
-            <input type="text" name="nombre" value="<%= locutor.nombre %>" required>
+
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
         </div>
-        
-        <div>
-            <label>Apellido:</label>
-            <input type="text" name="apellido" value="<%= locutor.apellido %>" required>
+
+        <div class="form-group">
+            <label for="biografia">Biografía</label>
+            <textarea id="biografia" name="biografia" placeholder="Escribe una breve biografía..." required></textarea>
         </div>
-        
-        <div>
-            <label>Alias:</label>
-            <input type="text" name="alias" value="<%= locutor.alias %>">
+
+        <div class="social-media-section">
+            <h3>Redes Sociales</h3>
+                <div class="social-input-group">
+                <div class="form-group">
+                <label for="instagram">Instagram</label>
+                <input type="text" id="instagram" name="redSocial.instagram" placeholder="@usuario">
+            </div>
+            <div>
+                <div class="form-group">
+                <label for="facebook">Facebook</label>
+                <input type="text" id="facebook" name="redSocial.facebook" placeholder="https://facebook.com/usuario">                
+            </div>
         </div>
-        
-        <div>
-            <label>Email:</label>
-            <input type="email" name="email" value="<%= locutor.email %>" required>
+                </div>
         </div>
-        
         <div>
-            <label>Teléfono:</label>
-            <input type="text" name="telefono" value="<%= locutor.telefono %>" required>
-        </div>
-        
-        <div>
-            <label>Estado:</label>
-            <select name="estado" required>
-                <% estados.forEach(estado => { %>
-                    <option value="<%= estado %>" <%= locutor.estado === estado ? 'selected' : '' %>>
-                        <%= estado %>
+            <label for="idProgramas">Programas:</label>
+            <select id="idProgramas" name="idProgramas" multiple required title="Selecciona uno o más programas">
+                <% programas.forEach(programa => { %>
+                    <option value="<%= programa._id %>" 
+                        <%= (locutor.idProgramas || []).includes(programa._id) ? 'selected' : '' %>>
+                        <%= programa.nombre %>
                     </option>
                 <% }); %>
             </select>
+            <small>Mantén presionada Ctrl (Windows) o Cmd (Mac) para seleccionar múltiples</small>
         </div>
         
+        <div class="form-actions">
         <div>
-            <button type="submit">Guardar</button>
-            <a href="/locutores">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Crear Locutor</button>
+            <a href="/" class="btn btn-cancel">Volver al Inicio</a>
         </div>
     </form>
+    </div>
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/locutores/agregarLocutorScripts') %>
 </body>
 </html>

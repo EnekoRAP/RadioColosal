@@ -1,6 +1,6 @@
 const Locutor = require('../models/locutor');
 
-class LocutorService {
+class locutorService {
     async createLocutor(data) {
         const locutor = new Locutor(data);
         await locutor.save();
@@ -8,11 +8,13 @@ class LocutorService {
     }
 
     async getLocutores() {
-        return await Locutor.find().sort({ apellido: 1, nombre: 1 });
+        return await Locutor.find()
+            .populate('idProgramas') 
+            .sort({ nombre: 1 });     
     }
 
-    async getLocutorById(id) {
-        return await Locutor.findById(id);
+    async editarLocutor(id) {
+        return await Locutor.findById(id).populate('idProgramas');
     }
 
     async updateLocutor(id, updateData) {
@@ -27,4 +29,4 @@ class LocutorService {
     }
 }
 
-module.exports = new LocutorService();
+module.exports = new locutorService();

@@ -1,46 +1,106 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Locutores</title>
-</head>
-<body>
-    <h1>Locutores</h1>
-    <a href="/locutores/agregarLocutor">Agregar Locutor</a>
+<html lang="en">
 
-    <% if (locutores.length === 0) { %>
-        <p>No hay locutores registrados.</p>
-    <% } else { %>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Alias</th>
-                    <th>Email</th>
-                    <th>Teléfono</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
+<!-- Incluir head -->
+<%- include('../layout/locutores/locutorHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!--  Body wrapper -->
+    <div class="container">
+        <h1>Locutores Registrados</h1>
+        
+        <!-- Body -->
+        <div class="header-actions">
+            <a href="/" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+            <a href="/locutores/agregarLocutor" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Agregar Locutor
+            </a>
+        </div>
+        
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i> <%= error === 'delete_error' ? 'Error al eliminar el locutor' : error %>
+            </div>
+        <% } %>
+        
+        <% if (typeof success !== 'undefined') { %>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> locutor eliminado correctamente
+            </div>
+        <% } %>
+        
+        <% if (locutores.length > 0) { %>
+            <div class="locuts-grid">
                 <% locutores.forEach(locutor => { %>
-                    <tr>
-                        <td><%= locutor.nombre %></td>
-                        <td><%= locutor.apellido %></td>
-                        <td><%= locutor.alias || '-' %></td>
-                        <td><%= locutor.email %></td>
-                        <td><%= locutor.telefono %></td>
-                        <td><%= locutor.estado %></td>
-                        <td>
-                            <a href="/locutores/editarLocutor/<%= locutor._id %>">Editar</a>
+                    <div class="locut-card">
+                        <div class="locut-header">
+                            <h3 class="locut-name"><%= locutor.nombre %></h3>
+                            <span class="locut-Programas"><%= locutor.idProgramas %></span>
+                        </div>
+                        
+                        <div class="locut-body">
+                            <div class="locut-info">
+                                <p><i class="fas fa-pen"></i> <%= locutor.biografia %></p>
+                                <p><i class="fas fa-globe"></i> 
+                                    <a href="<%= locutor.redSocial %>" target="_blank"><%= locutor.redSocial %></a>
+                                </p>
+                            </div>
+                            
+                            <% if (locutor.redSocial && (locutor.redSocial.facebook || locutor.redSocial.instagram )) { %>
+                                <div class="social-links">
+                                    <h4>Redes Sociales</h4>
+                                    <div class="social-list">
+                                        <% if (locutor.redSocial.facebook) { %>
+                                            <div class="social-item">
+                                                <a href="<%= locutor.redSocial.facebook %>" target="_blank">
+                                                    <i class="fab fa-facebook-f"></i> Facebook
+                                                </a>
+                                            </div>
+                                        <% } %>
+                                        
+                                        
+                                        <% if (locutor.redSocial.instagram) { %>
+                                            <div class="social-item">
+                                                <a href="<%= locutor.redSocial.instagram %>" target="_blank">
+                                                    <i class="fab fa-instagram"></i> Instagram
+                                                </a>
+                                            </div>
+                                        <% } %>
+                                        
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                        
+                        <div class="locut-actions">
+                            <a href="/locutores/editarLocutor/<%= locutor._id %>" class="btn btn-outline">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
                             <form action="/locutores/<%= locutor._id %>?_method=DELETE" method="POST" style="display: inline;">
-                                <button type="submit" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este locutor?')">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
                             </form>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
                 <% }); %>
-            </tbody>
-        </table>
-    <% } %>
+            </div>
+        <% } else { %>
+            <div class="empty-state">
+                <i class="fas fa-user-friends"></i>
+                <h3>No hay locutores registrados</h3>
+                <p>Aún no has agregado ningún cliente a tu base de datos</p>
+                <a href="/locutores/agregarLocutor" class="btn btn-primary" style="margin-top: 20px;">
+                    <i class="fas fa-plus"></i> Agregar Primer Locutor
+                </a>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/locutores/locutorScripts') %>
 </body>
 </html>

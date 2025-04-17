@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Incluir head -->
+<%- include('../layout/programaciones/programacionHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!--  Body wrapper -->
+    <div class="container">
+        <h1>Programaciones Registradas</h1>
+        
+        <!-- Body -->
+        <div class="header-actions">
+            <a href="/" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+            <a href="/programaciones/agregarProgramacion" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Agregar Programacion
+            </a>
+        </div>
+        
+        <% if (programaciones.length > 0) { %>
+            <% diasSemana.forEach(function(dia) { %>
+                <% const programacionesDia = programaciones.filter(function(m) { return m.dia === dia; }); %>
+                <% if (programacionesDia.length > 0) { %>
+                    <div class="day-section">
+                        <div class="day-header">
+                            <h2 class="day-title">
+                                <i class="fas fa-calendar-day"></i> <%= dia %>
+                            </h2>
+                            <span class="media-count"><%= programacionesDia.length %> programacion(s)</span>
+                        </div>
+                        
+                        <div class="media-grid">
+                            <% programacionesDia.forEach(function(programacion) { %>
+                                <div class="media-card">
+                                    <div class="media-content">
+                                        <h3 class="media-nombre"><%= programacion.titulo %></h3>
+                                       
+                                        <p class="media-description"><%= programacion.descripcion %></p>
+                                        <div class="media-schedule">
+                                            <i class="fas fa-clock"></i>
+                                            <span><%= programacion.horario.inicio %> - <%= programacion.horario.fin %></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="media-actions">
+                                        <a href="/programaciones/editarProgramacion/<%= programacion._id %>" class="btn btn-outline">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                        <form action="/programaciones/<%= programacion._id %>?_method=DELETE" method="POST" style="display: inline;">
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Eliminar esta Programacion?')">
+                                                <i class="fas fa-trash-alt"></i> Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                <% } %>
+            <% }); %>
+        <% } else { %>
+            <div class="empty-state">
+                <i class="fas fa-film"></i>
+                <h3>No hay programaciones</h3>
+                <p>Aún no has agregado ningún contenido programacion</p>
+                <a href="/programaciones/agregarProgramacion" class="btn btn-primary" style="margin-top: 20px;">
+                    <i class="fas fa-plus"></i> Agregar Primer Programacion
+                </a>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/programaciones/programacionScripts') %>
+</body>
+</html>

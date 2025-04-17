@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Incluir head -->
+<%- include('../layout/programaciones/editarProgramacionHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!--  Body wrapper -->
+    <div class="container">
+        <h1>Editar Programacion</h1>
+        
+        <!-- Body -->
+        <% if (error) { %>
+            <div class="alert-error">
+                <i class="fas fa-exclamation-circle"></i> <%= error %>
+            </div>
+        <% } %>
+
+        <form action="/programaciones/<%= programacion._id %>?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            
+            <div class="form-group">
+                <label for="titulo">Nombre de la programacion</label>
+                <input type="text" id="nombre" name="nombre" value="<%= programacion.nombre %>" required
+                       placeholder="">
+            </div>
+            
+            <div class="form-group">
+                <label for="descripcion">Descripción del Contenido</label>
+                <textarea id="descripcion" name="descripcion" required
+                          placeholder="Describe el contenido multimedia..."><%= programacion.descripcion %></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="dia">Día de Publicación</label>
+                <select id="dia" name="dia" required>
+                    <% diasSemana.forEach(function(dia) { %>
+                        <option value="<%= dia %>" <%= programacion.dia === dia ? 'selected' : '' %>>
+                            <%= dia %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
+            
+            <div class="schedule-container">
+                <h3><i class="fas fa-clock"></i> Configuración de Horario</h3>
+                <div class="time-grid">
+                    <div class="form-group">
+                        <div class="time-input-group">
+                            <i class="fas fa-play"></i>
+                            <input type="time" id="horario.inicio" name="horario.inicio" 
+                                   value="<%= programacion.horario.inicio %>" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="time-input-group">
+                            <i class="fas fa-stop"></i>
+                            <input type="time" id="horario.fin" name="horario.fin" 
+                                   value="<%= programacion.horario.fin %>" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+                <a href="/programaciones" class="btn btn-outline">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/programaciones/editarProgramacionScripts') %>
+</body>
+</html>
+

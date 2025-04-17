@@ -17,38 +17,34 @@
             <label>Nombre:</label>
             <input type="text" name="nombre" value="<%= locutor.nombre %>" required>
         </div>
-        
+
         <div>
-            <label>Apellido:</label>
-            <input type="text" name="apellido" value="<%= locutor.apellido %>" required>
+            <label>Biografía:</label>
+            <textarea name="biografia" rows="4" cols="50" required><%= locutor.biografia %></textarea>
         </div>
-        
+
         <div>
-            <label>Alias:</label>
-            <input type="text" name="alias" value="<%= locutor.alias %>">
+            <label>Instagram:</label>
+            <input type="text" name="redSocial.instagram" value="<%= locutor.redSocial?.instagram || '' %>">
         </div>
-        
+
         <div>
-            <label>Email:</label>
-            <input type="email" name="email" value="<%= locutor.email %>" required>
+            <label>Facebook:</label>
+            <input type="text" name="redSocial.facebook" value="<%= locutor.redSocial?.facebook || '' %>">
         </div>
-        
+
         <div>
-            <label>Teléfono:</label>
-            <input type="text" name="telefono" value="<%= locutor.telefono %>" required>
-        </div>
-        
-        <div>
-            <label>Estado:</label>
-            <select name="estado" required>
-                <% estados.forEach(estado => { %>
-                    <option value="<%= estado %>" <%= locutor.estado === estado ? 'selected' : '' %>>
-                        <%= estado %>
+            <label>Programas:</label>
+            <select name="idProgramas" multiple required>
+                <% programas.forEach(programa => { %>
+                    <option value="<%= programa._id %>"
+                        <%= (locutor.idProgramas || []).includes(programa._id) ? 'selected' : '' %>>
+                        <%= programa.nombre %>
                     </option>
                 <% }); %>
             </select>
         </div>
-        
+
         <div>
             <button type="submit">Guardar Cambios</button>
             <a href="/locutores">Cancelar</a>
@@ -56,3 +52,4 @@
     </form>
 </body>
 </html>
+
