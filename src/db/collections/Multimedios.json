@@ -1,0 +1,46 @@
+[
+	{
+	  "_id": 1,
+	  "titulo": "Santa Misa",
+	  "tipo": "Transmisión en Vivo",
+	  "descripcion": "Segmento religioso transmitido en vivo desde una iglesia local.",
+	  "dia": "Domingo",
+	  "horario": {
+		"inicio": "07:00",
+		"fin": "08:00"
+	  }
+	},
+	{
+	  "_id": 2,
+	  "titulo": "¡Ah Qué Kiko!",
+	  "tipo": "Serie de Comedia",
+	  "descripcion": "Situación mexicana en dónde Kiko es empleado en una pequeña tienda, perteneciente a Don Ramón. Y este último sufrirá las travesuras y ocurrencias de Kiko.",
+	  "dia": "Sábado",
+	  "horario": {
+		"inicio": "17:30",
+		"fin": "18:00"
+	  }
+	},
+	{
+	  "_id": 3,
+	  "titulo": "Conferencia de Prensa",
+	  "tipo": "Segmento Noticiero en Vivo",
+	  "descripcion": "Rodrigo Chávez dará una conferencia de Prensa en donde impondrá nuevas leyes que los costarricenses deberán tomar en cuenta.",
+	  "dia": "Miércoles",
+	  "horario": {
+		"inicio": "13:30",
+		"fin": "14:30"
+	  }
+	},
+	{
+	  "_id": 4,
+	  "titulo": "Beetlejuice Beetlejuice",
+	  "tipo": "Película de Comedio y Terror",
+	  "descripcion": "Luego de más de 22 años, el super fantasma Beetlejuice regresa para entretener a la audiencia por un gran rato.",
+	  "dia": "Viernes",
+	  "horario": {
+		"inicio": "21:00",
+		"fin": "22:30"
+	  }
+	}
+]

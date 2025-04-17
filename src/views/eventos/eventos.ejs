@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Incluir head -->
+<%- include('../layout/eventos/eventoHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1 class="my-4">Eventos</h1>
+
+        <!-- Acciones del encabezado -->
+        <div class="header-actions mb-4">
+            <a href="/" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+            <a href="/eventos/agregarEvento" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Nuevo evento
+            </a>
+        </div>
+
+        <!-- Mensajes de error o éxito -->
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i> <%= error === 'delete_error' ? 'Error al eliminar el evento' : error %>
+            </div>
+        <% } %>
+
+        <% if (typeof success !== 'undefined') { %>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> <%= success %>
+            </div>
+        <% } %>
+
+        <!-- Mostrar eventos -->
+        <% if (eventos.length > 0) { %>
+            <div class="news-list">
+                <% eventos.forEach(evento => { %>
+                    <div class="news-card mb-4 p-3 border rounded shadow-sm">
+                        <div class="news-header mb-2">
+                            <h3 class="news-title mb-0"><%= evento.nombre %></h3>
+                            <small class="text-muted">
+                                <i class="fas fa-calendar-alt"></i> 
+                                <%= evento.fecha
+                                    ? new Date(evento.fecha).toLocaleDateString('es-ES') 
+                                    : 'Sin fecha' %>
+                            </small>
+                        </div>
+
+                        <div class="news-body mb-3">
+                            <p class="news-author mb-1">
+                                <strong>Tipo:</strong> <%= evento.tipo || 'Desconocido' %>
+                            </p>
+                            <p class="news-content">
+                                <i class="fas fa-map-marker-alt"></i> 
+                                <strong>Ubicación:</strong> <%= evento.ubicacion || 'No especificada' %>
+                            </p>
+                            
+                            <p class="news-content"><%= evento.descripcion %></p>
+                        </div>
+
+                        <!-- Acciones -->
+                        <div class="news-actions mt-2">
+                            <a href="/eventos/editarEvento/<%= evento._id %>" class="btn btn-outline me-2">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <form action="/eventos/<%= evento._id %>?_method=DELETE" method="POST" style="display: inline;">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta evento?')">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="empty-state text-center mt-5">
+                <i class="fa-solid fa-calendar"></i>
+                <h3>No hay eventos</h3>
+                <p>Por el momento, no hay ninguna evento pendiente</p>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/eventos/eventoScripts') %>
+
+</body>
+</html>

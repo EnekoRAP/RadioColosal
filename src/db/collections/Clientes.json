@@ -1,0 +1,48 @@
+[
+	{
+	  "_id": 1,
+	  "tipo": "Banco Comercial",
+	  "nombre": "Banco Nacional",
+	  "telefono": "555-6789",
+	  "sitio_web": "bncr.fi.cr/",
+	  "red_social": {
+		"facebook": "facebook.com/bnmascerca/",
+		"x": "x.com/bnmascerca",
+		"instagram": "instagram.com/bnmascerca/"
+	  }
+	},
+	{
+	  "_id": 2,
+	  "tipo": "Empresa de Cable",
+	  "nombre": "Cable Centro",
+	  "telefono": "2783-3800",
+	  "sitio_web": "colosalcr.com/",
+	  "red_social": {
+		"facebook": "facebook.com/CableCentroSa/"
+	  }
+	},
+	{
+	  "_id": 3,
+	  "tipo": "Empresa de Telecomunicaciones",
+	  "nombre": "Claro",
+	  "telefono": "7002-7002",
+	  "sitio_web": "claro.cr/personas/",
+	  "red_social": {
+		"facebook": "facebook.com/clarocostarica",
+		"x": "x.com/claro_costarica",
+		"youtube": "youtube.com/@ClaroCostaRica1"
+	  }
+	},
+	{
+	  "_id": 4,
+	  "tipo": "Institución de Educación Universitaria",
+	  "nombre": "Universidad Católica de Costa Rica",
+	  "telefono": "4111-7272",
+	  "sitio_web": "ucatolica.ac.cr/",
+	  "red_social": {
+		"facebook": "facebook.com/ucatcr/",
+		"youtube": "youtube.com/user/ucatolicacostarica",
+		"x": "x.com/ucatolicacr/"
+	  }
+	}
+]

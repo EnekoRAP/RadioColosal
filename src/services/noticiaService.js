@@ -13,6 +13,7 @@ class noticiaService {
         return await Noticia.find();
     }
 
+
     async getNoticiaById(id) {
         return await Noticia.findById(id);
     }

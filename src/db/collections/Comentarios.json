@@ -1,0 +1,30 @@
+[
+	{
+	  "_id": 1,
+	  "idOyente": 1,
+	  "idPrograma": 5,
+	  "comentario": "¡Muy buena la selección de música en este programa!",
+	  "calificacion": 5
+	},
+	{
+	  "_id": 2,
+	  "idOyente": 2,
+	  "idPrograma": 6,
+	  "comentario": "No transmiten el tipo de música que me gusta",
+	  "calificacion": 1
+	},
+	{
+	  "_id": 3,
+	  "idOyente": 3,
+	  "idPrograma": 7,
+	  "comentario": "¡Me encanta la música romántica que transmiten! Aún así, es muy repetitiva en algunos casos.",
+	  "calificacion": 3
+	},
+	{
+	  "_id": 4,
+	  "idOyente": 4,
+	  "idPrograma": 6,
+	  "comentario": "¡Buena selección de música latina y rock latino que hicieron esta semana!",
+	  "calificacion": 5
+	}
+]

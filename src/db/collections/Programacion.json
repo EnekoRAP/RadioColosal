@@ -1,0 +1,82 @@
+[
+	{
+	  "_id": 1,
+	  "dia": "Lunes - Viernes",
+	  "horario": {
+		"inicio": "07:30",
+		"fin": "08:00"
+	  },
+	  "nombre": "La Bendición de la Mañana",
+	  "descripcion": "Bloque Religioso, media hora de prédica."
+	},
+	{
+	  "_id": 2,
+	  "dia": "Lunes - Sábado",
+	  "horario": {
+		"inicio": "07:00",
+		"fin": "07:30"
+	  },
+	  "nombre": "Panorama",
+	  "descripcion": "Espacio exclusivo de informes y publicidad."
+	},
+	{
+	  "_id": 3,
+	  "dia": "Lunes - Viernes",
+	  "horario": {
+		"inicio": "08:00",
+		"fin": "09:00"
+	  },
+	  "nombre": "Vivencias",
+	  "descripcion": "Charla entretenida acerca de experiencias vividas por nuestros oyentes y locutores."
+	},
+	{
+	  "_id": 4,
+	  "dia": "Sábado",
+	  "horario": {
+		"inicio": "09:00",
+		"fin": "11:00"
+	  },
+	  "nombre": "Clásicos del Sábado",
+	  "descripcion": "Selección de clásicos por parte de nuestros oyentes, al estilo del sábado."
+	},
+	{
+	  "_id": 5,
+	  "dia": "Lunes - Viernes",
+	  "horario": {
+		"inicio": "13:00",
+		"fin": "15:00"
+	  },
+	  "nombre": "Programación Variada",
+	  "descripcion": "Damos un cambio de página y escuchamos música de otros estilos de género"
+	},
+	{
+	  "_id": 6,
+	  "dia": "Lunes - Viernes",
+	  "horario": {
+		"inicio": "08:00",
+		"fin": "12:00"
+	  },
+	  "nombre": "Mezclas Colosal",
+	  "descripcion": "Mezcla de música latina con un poco de otros géneros poupulares."
+	},
+	{
+	  "_id": 7,
+	  "dia": "Lunes - Viernes",
+	  "horario": {
+		"inicio": "17:00",
+		"fin": "18:00"
+	  },
+	  "nombre": "Los Clásicos de la Tarde",
+	  "descripcion": "Música tropical, latina y romántica de las décadas de los '80s y 90's que marcaron tu juventud."
+	},
+	{
+	  "_id": 8,
+	  "dia": "Lunes - Viernes",
+	  "horario": {
+		"inicio": "19:00",
+		"fin": "21:00"
+	  },
+	  "nombre": "Prime Time",
+	  "descripcion": "La mejor selección de la noche en base a los temas favoritos de los oyentes."
+	}
+]

@@ -1,0 +1,34 @@
+[
+	{
+	  "_id": 1,
+	  "nombre": "Cristopher Rodríguez",
+	  "correo": "crodriguez@gmail.com",
+	  "telefono": "6283-7138",
+	  "fecha_registro": "2025-02-19",
+	  "generos": "Rock, Hip-hop"
+	},
+	{
+	  "_id": 2,
+	  "nombre": "Brenda Rojas",
+	  "correo": "brojas@gmail.com",
+	  "telefono": "6101-8372",
+	  "fecha_registro": "2025-02-22",
+	  "generos": "Bachata, K-pop"
+	},
+	{
+	  "_id": 3,
+	  "nombre": "Melani Vargas",
+	  "correo": "mvargas@gmail.com",
+	  "telefono": "6042-8705",
+	  "fecha_registro": "2025-02-10",
+	  "generos": "Romántica, Tropical"
+	},
+	{
+	  "_id": 4,
+	  "nombre": "Roger Pereira",
+	  "correo": "rpereira@gmail.com",
+	  "telefono": "7200-7283",
+	  "fecha_registro": "2025-02-23",
+	  "generos": "Latina, Rock"
+	}
+]

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Incluir head -->
+<%- include('../layout/publicidad/publicidadHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1 class="my-4">Publicidades</h1>
+
+        <!-- Acciones del encabezado -->
+        <div class="header-actions mb-4">
+            <a href="/" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+            <a href="/publicidad/agregarPublicidad" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Nueva publicidad
+            </a>
+        </div>
+
+        <!-- Mensajes de error o éxito -->
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i> <%= error === 'delete_error' ? 'Error al eliminar la publicidad' : error %>
+            </div>
+        <% } %>
+
+        <% if (typeof success !== 'undefined') { %>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> <%= success %>
+            </div>
+        <% } %>
+
+        <!-- Mostrar publicidades -->
+        <% if (publicidades.length > 0) { %>
+            <div class="advertising-list">
+                <% publicidades.forEach(publicidad => { %>
+                    <div class="advertising-card mb-4 p-3 border rounded shadow-sm">
+                        <div class="advertising-header mb-2">
+                            <h3 class="advertising-sponsor mb-0"><%= publicidad.patrocinador %></h3>
+                            <small class="text-muted">
+                                <i class="fas fa-play-circle"></i> 
+                                <%= publicidad.fecha_inicio
+                                    ? new Date(publicidad.fecha_inicio).toLocaleDateString('es-ES') 
+                                    : 'Sin fecha de inicio' %>
+                            </small>
+                        </br>
+                            <small class="text-muted">
+                                <i class="fas fa-stop-circle"></i> 
+                                <%= publicidad.fecha_fin
+                                    ? new Date(publicidad.fecha_fin).toLocaleDateString('es-ES') 
+                                    : 'Sin fecha de fin' %>
+                            </small>
+                        </div>
+
+                        <div class="advertising-body mb-3">
+                            <p class="advertising-type mb-1">
+                                <strong>Tipo:</strong> <%= publicidad.tipo || 'Desconocido' %>
+                            </p>
+                            
+                            <p class="advertising-content"><%= publicidad.contenido %></p>
+                        </div>
+
+                        <!-- Acciones -->
+                        <div class="advertising-actions mt-2">
+                            <a href="/publicidad/editarPublicidad/<%= publicidad._id %>" class="btn btn-outline me-2">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <form action="/publicidad/<%= publicidad._id %>?_method=DELETE" method="POST" style="display: inline;">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta publicidad?')">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="empty-state text-center mt-5">
+                <i class="fa-solid fa-calendar"></i>
+                <h3>No hay publicidades</h3>
+                <p>Por el momento, no hay ninguna publicidad disponible</p>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/publicidad/publicidadScripts') %>
+
+</body>
+</html>

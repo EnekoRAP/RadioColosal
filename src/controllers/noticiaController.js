@@ -21,6 +21,7 @@ class noticiaController {
         }
     }
 
+
     async editarNoticia(req, res) {
         try {
             const { id } = req.params;
