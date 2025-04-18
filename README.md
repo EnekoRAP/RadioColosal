@@ -2,18 +2,22 @@
 
 This project is a desktop application developed in Node.js, using SCSS for the graphical interface, and connected to an MongoDB database. The application allows you to perform CRUD (Create, Read, Update, Delete) operations in various collections of a Costa Rican radio station system, such as announcers, programming, advertising, news, events, listeners, comments, multimedia, clients, and rates.
 
-## Requirements 📋🧰
+## Requirements 📋✅
 
 - 🍃 MongoDB Compass (v8.0.6 current)
 - 🐚 MongoDB Shell (v2.5.0 optional)
 - 📜 MongoDB Script: `ColosalBD`
 - 🟢 Node.js (v22.14.0 LTS or equivalent)
 
-## Configuration ⚙️🛠️
+## Configuration 🚀⚙️
 
-### Step 1: Create a new database with the same name as the script in MongoDB Compass 🏗️🧱
+**Step 1: Create a new database with the same name as the script in MongoDB Compass** 🏗️🧱
 
-### Step 2: Create all the collections that come within the script 📂📁
+```bash
+use ColosalBD
+  ```
+
+**Step 2: Create all the collections that come within the script in MongoDB Shell** 📂📁
 
 ```bash
 db.createCollection("Locutores");
@@ -28,27 +32,19 @@ db.createCollection("Clientes");
 db.createCollection("Tarifas");
   ```
 
-### Step 3: Open VS Code and install all the application dependencies 💻📦
-
-```bash
-npm init -y
-npm install apexcharts@^3.37.0 bootstrap@^5.3.0 ejs@^3.1.10 express@^4.21.1 jquery@^3.6.3 method-override@^3.0.0 mongoose@^8.8.3
-npm install --save-dev nodemon@^3.1.7 sass@^1.54.8
-  ```
-
-### Step 4: Run the application ▶️🚀
+**Step 3: Open the project in VS Code and run the application using a new terminal** 🆕🚀
 
 ```bash
 npm run dev
   ```
 
-### Step 5: Access the application in the browser with the URL 🌐🔗
+**Step 4: Access the application in the browser with the URL** 🌐🔗
 
 ```bash
-http://localhost:${PORT}
+http://localhost:3000
   ```
 
-## Features ✨🧩
+## Features ✨🔍
 
 - 🎤 **Registered Speakers**
 - 🗓️ **Programming List**
