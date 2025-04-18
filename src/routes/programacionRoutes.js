@@ -2,22 +2,22 @@ const express = require('express');
 const router = express.Router();
 const programacionController = require('../controllers/programacionController');
 
-// Formulario de creacion
+// Formulario de creación
 router.get('/agregarProgramacion', programacionController.showCreateForm);
 
-// Procesar creacion
+// Procesar creación
 router.post('/agregarProgramacion', programacionController.createProgramacion);
 
-// Listar multimedios
+// Listar programación
 router.get('/', programacionController.listProgramaciones);
 
-// Formulario de edicion
+// Formulario de edición
 router.get('/editarProgramacion/:id', programacionController.showEditForm);
 
-// Procesar actualizacion
+// Procesar actualización
 router.put('/:id', programacionController.updateProgramacion);
 
-// Eliminar multimedia
+// Eliminar programación
 router.delete('/:id', programacionController.deleteProgramacion);
 
 module.exports = router;

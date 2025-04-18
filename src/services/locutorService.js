@@ -1,6 +1,7 @@
 const Locutor = require('../models/locutor');
+const Programacion = require('../models/programacion');
 
-class locutorService {
+class LocutorService {
     async createLocutor(data) {
         const locutor = new Locutor(data);
         await locutor.save();
@@ -9,24 +10,28 @@ class locutorService {
 
     async getLocutores() {
         return await Locutor.find()
-            .populate('idProgramas') 
-            .sort({ nombre: 1 });     
+            .sort({ nombre: 1 })
+            .populate('programas', 'nombre');
     }
 
-    async editarLocutor(id) {
-        return await Locutor.findById(id).populate('idProgramas');
+    async getLocutorById(id) {
+        return await Locutor.findById(id).populate('programas', 'nombre');
     }
 
     async updateLocutor(id, updateData) {
         return await Locutor.findByIdAndUpdate(id, updateData, {
             new: true,
             runValidators: true
-        });
+        }).populate('programas', 'nombre');
     }
 
     async deleteLocutor(id) {
         return await Locutor.findByIdAndDelete(id);
     }
+
+    async getAllProgramas() {
+        return await Programacion.find({}, 'nombre _id').sort({ nombre: 1 });
+    }
 }
 
-module.exports = new locutorService();
+module.exports = new LocutorService();

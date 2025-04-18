@@ -17,34 +17,37 @@
             <label>Nombre:</label>
             <input type="text" name="nombre" value="<%= locutor.nombre %>" required>
         </div>
-
+        
         <div>
             <label>Biografía:</label>
-            <textarea name="biografia" rows="4" cols="50" required><%= locutor.biografia %></textarea>
+            <textarea name="biografia"><%= locutor.biografia %></textarea>
         </div>
-
+        
         <div>
-            <label>Instagram:</label>
-            <input type="text" name="redSocial.instagram" value="<%= locutor.redSocial?.instagram || '' %>">
+            <h3>Redes Sociales</h3>
+            <div>
+                <label>Instagram:</label>
+                <input type="text" name="redSocial.instagram" value="<%= locutor.redSocial.instagram %>">
+            </div>
+            <div>
+                <label>Facebook:</label>
+                <input type="text" name="redSocial.facebook" value="<%= locutor.redSocial.facebook %>">
+            </div>
         </div>
-
-        <div>
-            <label>Facebook:</label>
-            <input type="text" name="redSocial.facebook" value="<%= locutor.redSocial?.facebook || '' %>">
-        </div>
-
+        
         <div>
             <label>Programas:</label>
-            <select name="idProgramas" multiple required>
+            <select name="programas" multiple>
                 <% programas.forEach(programa => { %>
-                    <option value="<%= programa._id %>"
-                        <%= (locutor.idProgramas || []).includes(programa._id) ? 'selected' : '' %>>
+                    <option value="<%= programa._id %>" 
+                        <%= locutor.programas.some(p => p.equals(programa._id)) ? 'selected' : '' %>>
                         <%= programa.nombre %>
                     </option>
                 <% }); %>
             </select>
+            <small>Mantén presionado Ctrl para seleccionar múltiples</small>
         </div>
-
+        
         <div>
             <button type="submit">Guardar Cambios</button>
             <a href="/locutores">Cancelar</a>

@@ -2,15 +2,7 @@ const Programacion = require('../models/programacion');
 
 class ProgramacionService {
     async createProgramacion(data) {
-        const programacion = new Programacion({
-            nombre: data.nombre,
-            descripcion: data.descripcion,
-            dia: data.dia,
-            horario: {
-                inicio: data.horario.inicio,
-                fin: data.horario.fin
-            }
-        });
+        const programacion = new Programacion(data);
         await programacion.save();
         return programacion;
     }
@@ -24,7 +16,7 @@ class ProgramacionService {
     }
 
     async updateProgramacion(id, updateData) {
-        return await Multimedio.findByIdAndUpdate(id, updateData, {
+        return await Programacion.findByIdAndUpdate(id, updateData, {
             new: true,
             runValidators: true
         });

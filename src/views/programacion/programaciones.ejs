@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Programación</title>
+</head>
+<body>
+    <h1>Programación</h1>
+    <a href="/programacion/agregarProgramacion">Agregar Programación</a>
+
+    <% if (programaciones.length === 0) { %>
+        <p>No hay programación registrada.</p>
+    <% } else { %>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Día</th>
+                    <th>Horario</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% programaciones.forEach(programacion => { %>
+                    <tr>
+                        <td><%= programacion.nombre %></td>
+                        <td><%= programacion.dia %></td>
+                        <td><%= programacion.horario.inicio %> - <%= programacion.horario.fin %></td>
+                        <td><%= programacion.descripcion %></td>
+                        <td>
+                            <a href="/programacion/editarProgramacion/<%= programacion._id %>">Editar</a>
+                            <form action="/programacion/<%= programacion._id %>?_method=DELETE" method="POST" style="display: inline;">
+                                <button type="submit" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } %>
+</body>
+</html>

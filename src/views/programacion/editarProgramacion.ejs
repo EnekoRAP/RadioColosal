@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Programación</title>
+</head>
+<body>
+    <h1>Editar Programación</h1>
+
+    <% if (error) { %>
+        <div style="color: red;">
+            Error: <%= error %>
+        </div>
+    <% } %>
+
+    <form action="/programacion/<%= programacion._id %>?_method=PUT" method="POST">
+        <div>
+            <label>Nombre del Programa:</label>
+            <input type="text" name="nombre" value="<%= programacion.nombre %>" required>
+        </div>
+        
+        <div>
+            <label>Día:</label>
+            <select name="dia" required>
+                <% diasSemana.forEach(dia => { %>
+                    <option value="<%= dia %>" <%= programacion.dia === dia ? 'selected' : '' %>>
+                        <%= dia %>
+                    </option>
+                <% }); %>
+            </select>
+        </div>
+        
+        <div>
+            <label>Horario:</label>
+            <div>
+                <label>Inicio:</label>
+                <input type="time" name="horario.inicio" value="<%= programacion.horario.inicio %>" required>
+            </div>
+            <div>
+                <label>Fin:</label>
+                <input type="time" name="horario.fin" value="<%= programacion.horario.fin %>" required>
+            </div>
+        </div>
+        
+        <div>
+            <label>Descripción:</label>
+            <textarea name="descripcion" required><%= programacion.descripcion %></textarea>
+        </div>
+        
+        <div>
+            <button type="submit">Guardar Cambios</button>
+            <a href="/programacion">Cancelar</a>
+        </div>
+    </form>
+</body>
+</html>
+
