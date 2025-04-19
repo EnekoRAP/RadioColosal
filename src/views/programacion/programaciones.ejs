@@ -1,42 +1,79 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Programación</title>
-</head>
-<body>
-    <h1>Programación</h1>
-    <a href="/programacion/agregarProgramacion">Agregar Programación</a>
+<html lang="en">
 
-    <% if (programaciones.length === 0) { %>
-        <p>No hay programación registrada.</p>
-    <% } else { %>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Día</th>
-                    <th>Horario</th>
-                    <th>Descripción</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% programaciones.forEach(programacion => { %>
-                    <tr>
-                        <td><%= programacion.nombre %></td>
-                        <td><%= programacion.dia %></td>
-                        <td><%= programacion.horario.inicio %> - <%= programacion.horario.fin %></td>
-                        <td><%= programacion.descripcion %></td>
-                        <td>
-                            <a href="/programacion/editarProgramacion/<%= programacion._id %>">Editar</a>
-                            <form action="/programacion/<%= programacion._id %>?_method=DELETE" method="POST" style="display: inline;">
-                                <button type="submit" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
-                            </form>
-                        </td>
-                    </tr>
-                <% }); %>
-            </tbody>
-        </table>
-    <% } %>
+<!-- Incluir head -->
+<%- include('../layout/programaciones/programacionHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1>Programación de Emisiones</h1>
+
+        <!-- Acciones superiores -->
+        <div class="header-actions">
+            <a href="/" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+            <a href="/programacion/agregarProgramacion" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Agregar Programación
+            </a>
+        </div>
+
+        <!-- Contenido principal -->
+        <% if (programaciones.length > 0) { %>
+            <% diasSemana.forEach(function(dia) { %>
+                <% const programacionesDia = programaciones.filter(p => p.dia === dia); %>
+                <% if (programacionesDia.length > 0) { %>
+                    <div class="day-section">
+                        <div class="day-header">
+                            <h2 class="day-title">
+                                <i class="fas fa-calendar-day"></i> <%= dia %>
+                            </h2>
+                            <span class="media-count"><%= programacionesDia.length %> programa(s)</span>
+                        </div>
+
+                        <div class="media-grid">
+                            <% programacionesDia.forEach(function(programa) { %>
+                                <div class="media-card">
+                                    <div class="media-content">
+                                        <h3 class="media-title"><%= programa.nombre %></h3>
+                                        <p class="media-description"><%= programa.descripcion %></p>
+                                        <div class="media-schedule">
+                                            <i class="fas fa-clock"></i>
+                                            <span><%= programa.horario.inicio %> - <%= programa.horario.fin %></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="media-actions">
+                                        <a href="/programacion/editarProgramacion/<%= programa._id %>" class="btn btn-outline">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                        <form action="/programacion/<%= programa._id %>?_method=DELETE" method="POST" style="display: inline;">
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Eliminar esta programación?')">
+                                                <i class="fas fa-trash-alt"></i> Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                <% } %>
+            <% }); %>
+        <% } else { %>
+            <div class="empty-state">
+                <i class="fas fa-broadcast-tower"></i>
+                <h3>No hay programación registrada</h3>
+                <p>Aún no has agregado ningún programa.</p>
+                <a href="/programacion/agregarProgramacion" class="btn btn-primary" style="margin-top: 20px;">
+                    <i class="fas fa-plus"></i> Agregar Primer Programa
+                </a>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Incluir scripts -->
+    <%- include('../layout/programaciones/programacionScripts') %>
 </body>
 </html>

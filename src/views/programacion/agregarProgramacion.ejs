@@ -1,55 +1,74 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Agregar Programación</title>
-</head>
-<body>
-    <h1>Agregar Nueva Programación</h1>
+<html lang="en">
 
-    <% if (error) { %>
-        <div style="color: red;">
-            Error: <%= error %>
-        </div>
-    <% } %>
+<!-- Incluir head -->
+<%- include('../layout/programaciones/agregarProgramacionHead') %>
 
-    <form action="/programacion/agregarProgramacion" method="POST">
-        <div>
-            <label>Nombre del Programa:</label>
-            <input type="text" name="nombre" value="<%= programacion.nombre %>" required>
-        </div>
-        
-        <div>
-            <label>Día:</label>
-            <select name="dia" required>
-                <% diasSemana.forEach(dia => { %>
-                    <option value="<%= dia %>" <%= programacion.dia === dia ? 'selected' : '' %>>
-                        <%= dia %>
-                    </option>
-                <% }); %>
-            </select>
-        </div>
-        
-        <div>
-            <label>Horario:</label>
-            <div>
-                <label>Inicio:</label>
-                <input type="time" name="horario.inicio" value="<%= programacion.horario.inicio %>" required>
+<body class="min-vh-100 d-flex flex-column">
+
+    <!-- Body wrapper -->
+    <div class="container">
+        <h1>Agregar Nueva Programación</h1>
+
+        <!-- Mostrar error si existe -->
+        <% if (error) { %>
+            <div class="alert-error">
+                <i class="fas fa-exclamation-circle"></i> <%= error %>
             </div>
-            <div>
-                <label>Fin:</label>
-                <input type="time" name="horario.fin" value="<%= programacion.horario.fin %>" required>
+        <% } %>
+
+        <form action="/programacion/agregarProgramacion" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre del Programa</label>
+                <input type="text" id="nombre" name="nombre" value="<%= programacion.nombre || '' %>" required
+                       placeholder="Ej: Noticias al Día, La Hora Musical...">
             </div>
-        </div>
-        
-        <div>
-            <label>Descripción:</label>
-            <textarea name="descripcion" required><%= programacion.descripcion %></textarea>
-        </div>
-        
-        <div>
-            <button type="submit">Guardar</button>
-            <a href="/programacion">Cancelar</a>
-        </div>
-    </form>
+
+            <div class="form-group">
+                <label for="dia">Día</label>
+                <select id="dia" name="dia" required>
+                    <% diasSemana.forEach(dia => { %>
+                        <option value="<%= dia %>" <%= programacion.dia === dia ? 'selected' : '' %>>
+                            <%= dia %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Horario</label>
+                <div class="horario-container">
+                    <div class="time-input-group">
+                        <i class="fas fa-clock"></i>
+                        <input type="time" id="horario.inicio" name="horario.inicio" 
+                               value="<%= programacion.horario.inicio || '' %>" required>
+                    </div>
+                    <div class="time-input-group">
+                        <i class="fas fa-clock"></i>
+                        <input type="time" id="horario.fin" name="horario.fin" 
+                               value="<%= programacion.horario.fin || '' %>" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" required
+                          placeholder="Describe brevemente el contenido del programa..."><%= programacion.descripcion || '' %></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Guardar Programación
+                </button>
+                <a href="/programacion" class="btn btn-outline">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/programaciones/agregarProgramacionScripts') %>
 </body>
 </html>

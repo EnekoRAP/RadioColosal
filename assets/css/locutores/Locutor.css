@@ -164,7 +164,7 @@ h1::after {
     font-weight: 600;
 }
 
-.locut-Programas {
+.locut-type {
     display: inline-block;
     margin-top: 5px;
     padding: 3px 10px;
@@ -228,7 +228,7 @@ h1::after {
     font-size: 1rem;
 }
 
-.client-actions {
+.locut-actions {
     display: flex;
     justify-content: flex-end;
     gap: 10px;

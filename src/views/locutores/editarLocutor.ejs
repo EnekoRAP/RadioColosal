@@ -1,58 +1,80 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Editar Locutor</title>
-</head>
-<body>
-    <h1>Editar Locutor</h1>
+<html lang="en">
 
-    <% if (error) { %>
-        <div style="color: red;">
-            Error: <%= error %>
-        </div>
-    <% } %>
+<!-- Incluir head -->
+<%- include('../layout/locutores/editarLocutorHead') %>
 
-    <form action="/locutores/<%= locutor._id %>?_method=PUT" method="POST">
-        <div>
-            <label>Nombre:</label>
-            <input type="text" name="nombre" value="<%= locutor.nombre %>" required>
-        </div>
-        
-        <div>
-            <label>Biografía:</label>
-            <textarea name="biografia"><%= locutor.biografia %></textarea>
-        </div>
-        
-        <div>
-            <h3>Redes Sociales</h3>
-            <div>
-                <label>Instagram:</label>
-                <input type="text" name="redSocial.instagram" value="<%= locutor.redSocial.instagram %>">
+<body class="min-vh-100 d-flex flex-column">
+
+    <!-- Body wrapper -->
+    <div class="container">
+        <h1>Editar Locutor</h1>
+
+        <% if (error) { %>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i> <%= error %>
             </div>
-            <div>
-                <label>Facebook:</label>
-                <input type="text" name="redSocial.facebook" value="<%= locutor.redSocial.facebook %>">
+        <% } %>
+
+        <form action="/locutores/<%= locutor._id %>?_method=PUT" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre del Locutor</label>
+                <input type="text" id="nombre" name="nombre" value="<%= locutor.nombre %>" required>
             </div>
-        </div>
-        
-        <div>
-            <label>Programas:</label>
-            <select name="programas" multiple>
-                <% programas.forEach(programa => { %>
-                    <option value="<%= programa._id %>" 
-                        <%= locutor.programas.some(p => p.equals(programa._id)) ? 'selected' : '' %>>
-                        <%= programa.nombre %>
-                    </option>
-                <% }); %>
-            </select>
-            <small>Mantén presionado Ctrl para seleccionar múltiples</small>
-        </div>
-        
-        <div>
-            <button type="submit">Guardar Cambios</button>
-            <a href="/locutores">Cancelar</a>
-        </div>
-    </form>
+
+            <div class="form-group">
+                <label for="biografia">Biografía</label>
+                <textarea id="biografia" name="biografia" rows="5"><%= locutor.biografia %></textarea>
+            </div>
+
+            <div class="social-section">
+                <h3><i class="fas fa-share-alt"></i> Redes Sociales</h3>
+                <div class="social-grid">
+                    <div class="form-group">
+                        <div class="social-input-group">
+                            <i class="fab fa-instagram"></i>
+                            <input type="text" id="instagram" name="redSocial.instagram"
+                                value="<%= locutor.redSocial.instagram %>" placeholder="URL de Instagram">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="social-input-group">
+                            <i class="fab fa-facebook-f"></i>
+                            <input type="text" id="facebook" name="redSocial.facebook"
+                                value="<%= locutor.redSocial.facebook %>" placeholder="URL de Facebook">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="programas">Programas</label>
+                <select id="programas" name="programas" multiple class="form-control">
+                    <% programas.forEach(programa => { %>
+                        <option value="<%= programa._id %>" 
+                            <%= locutor.programas.some(p => p.equals(programa._id)) ? 'selected' : '' %>>
+                            <%= programa.nombre %>
+                        </option>
+                    <% }) %>
+                </select>
+                <small class="form-text text-muted">Mantén presionado Ctrl (Cmd en Mac) para seleccionar varios programas</small>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+                <a href="/locutores" class="btn btn-outline">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/locutores/editarLocutorScripts') %>
 </body>
 </html>
+
 
