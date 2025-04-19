@@ -9,7 +9,8 @@
     <!--  Body wrapper -->
     <div class="container">
         <h1>Locutores Registrados</h1>
-        
+        <br> <!-- Salto de línea entre título y acciones -->
+
         <!-- Acciones -->
         <div class="header-actions">
             <a href="/" class="btn btn-outline">
@@ -19,17 +20,20 @@
                 <i class="fas fa-plus"></i> Agregar Locutor
             </a>
         </div>
+        <br> <!-- Salto de línea entre acciones y alertas -->
 
         <% if (typeof error !== 'undefined') { %>
             <div class="alert alert-error">
                 <i class="fas fa-exclamation-circle"></i> <%= error %>
             </div>
+            <br>
         <% } %>
 
         <% if (typeof success !== 'undefined') { %>
             <div class="alert alert-success">
                 <i class="fas fa-check-circle"></i> <%= success %>
             </div>
+            <br>
         <% } %>
 
         <% if (locutores.length > 0) { %>
@@ -88,6 +92,7 @@
                             </form>
                         </div>
                     </div>
+                    <br> <!-- Salto entre cada tarjeta -->
                 <% }); %>
             </div>
         <% } else { %>
