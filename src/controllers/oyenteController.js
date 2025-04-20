@@ -1,45 +1,85 @@
 const oyenteService = require('../services/oyenteService');
 
-class oyenteController {
-
-    async agregarOyente(req, res) {
+class OyenteController {
+    async showCreateForm(req, res) {
         try {
-            res.render('oyentes/agregarOyente');
+            res.render('oyentes/agregarOyente', {
+                oyente: {
+                    nombre: '',
+                    correo: '',
+                    telefono: '',
+                    fecha_registro: '',
+                    generos: ''
+                },
+                error: null
+            });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al cargar el formulario');
         }
     }
 
-    async getOyentes(req, res) {
+    async listOyentes(req, res) {
         try {
             const oyentes = await oyenteService.getOyentes();
             res.render('oyentes/oyentes', { oyentes });
-        } catch(error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+        } catch (error) {
+            res.status(500).send('Error al obtener oyentes');
         }
     }
 
-    async editarOyente(req, res) {
+    async showEditForm(req, res) {
         try {
             const { id } = req.params;
             const oyente = await oyenteService.getOyenteById(id);
-            res.render('oyentes/editarOyente', { oyente });
+            res.render('oyentes/editarOyente', {
+                oyente,
+                error: null
+            });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al cargar el oyente para edición');
         }
     }
 
-    async createOyentes(req, res) {
+    async createOyente(req, res) {
         try {
             const { nombre, correo, telefono, fecha_registro, generos } = req.body;
-            const nuevoOyente = await oyenteService.createOyente({ nombre, correo, telefono, fecha_registro, generos });
+
+            await oyenteService.createOyente({
+                nombre,
+                correo,
+                telefono,
+                fecha_registro,
+                generos
+            });
+
             res.redirect('/oyentes');
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).render('oyentes/agregarOyente', {
+                error: 'Error al crear el oyente',
+                oyente: req.body
+            });
+        }
+    }
+
+    async updateOyente(req, res) {
+        try {
+            const { id } = req.params;
+            const { nombre, correo, telefono, fecha_registro, generos } = req.body;
+
+            await oyenteService.updateOyente(id, {
+                nombre,
+                correo,
+                telefono,
+                fecha_registro,
+                generos
+            });
+
+            res.redirect('/oyentes');
+        } catch (error) {
+            res.status(500).render('oyentes/editarOyente', {
+                error: 'Error al actualizar el oyente',
+                oyente: req.body
+            });
         }
     }
 
@@ -49,23 +89,9 @@ class oyenteController {
             await oyenteService.deleteOyente(id);
             res.redirect('/oyentes');
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al eliminar el oyente');
         }
     }
-
-    async updateOyente(req, res) {
-        try {
-            const { id } = req.params;
-            const { nombre, correo, telefono, fecha_registro, generos } = req.body;
-            const oyenteActualizado = await oyenteService.updateOyente(id, { nombre, correo, telefono, fecha_registro, generos });
-            res.redirect('/oyentes');
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
-        }
-    }
-
 }
 
 module.exports = new oyenteController();

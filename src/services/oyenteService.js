@@ -1,8 +1,6 @@
 const Oyente = require('../models/oyente');
 
 class oyenteService {
-
-    // Operaciones CRUD
     async createOyente(data) {
         const oyente = new Oyente(data);
         await oyente.save();

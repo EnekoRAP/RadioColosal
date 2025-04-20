@@ -2,22 +2,22 @@ const express = require('express');
 const router = express.Router();
 const oyenteController = require('../controllers/oyenteController');
 
-// Form de nuevo oyente
-router.get('/agregarOyente', oyenteController.agregarOyente);
+// Formulario de creacion
+router.get('/agregarOyente', oyenteController.showCreateForm);
 
-// Lista de oyentes
-router.get('/', oyenteController.getOyentes);
+// Procesar creacion
+router.post('/agregarOyente', oyenteController.createOyente);
 
-// Form de editar oyente
-router.get('/editarOyente/:id', oyenteController.editarOyente);
+// Listar oyentes
+router.get('/', oyenteController.listOyentes);
 
-// Eliminar oyente desde el listado
+// Formulario de edicion
+router.get('/editarOyente/:id', oyenteController.showEditForm);
+
+// Procesar actualizacion
+router.put('/:id', oyenteController.updateOyente);
+
+// Eliminar locutor
 router.delete('/:id', oyenteController.deleteOyente);
-
-// Solicitud de form de nuevo oyente
-router.post('/agregarOyente', oyenteController.createOyentes);
-
-// Solicitud de editar oyente
-router.put('/editarOyente/:id', oyenteController.updateOyente);
 
 module.exports = router;
