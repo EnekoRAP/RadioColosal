@@ -53,27 +53,134 @@ label {
     color: var(--dark-color);
 }
 
-input[type="text"],
-input[type="date"],
-textarea {
+input[type="text"] {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #d1d5db;
     border-radius: var(--border-radius);
     font-size: 1rem;
     transition: border-color 0.3s;
-    font-family: inherit; 
-    resize: vertical; 
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+input[type="email"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input[type="email"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+input[type="tel"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input[type="tel"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+input[type="date"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input[type="date"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    resize: vertical;
+    min-height: 120px;
+}
+
 textarea:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
 }
 
+/* Estilo del select múltiple */
+select[multiple] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #fff;
+    color: var(--primary-color); /* Azul para el texto */
+    transition: border-color 0.3s, box-shadow 0.3s;
+    min-height: 140px;
+}
+
+
+select[multiple]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+
+select[multiple] option {
+    color: #111; 
+    padding: 0.5rem;
+    background-color: #fff;
+    transition: background-color 0.2s ease-in-out;
+}
+
+
+
+select[multiple] option:hover {
+    background-color: #f3f4f6; /* Gris claro */
+    cursor: pointer;
+}
+
+
+select[multiple] option:checked {
+    background-color: rgba(67, 97, 238, 0.1); /* Azul claro */
+    font-weight: 600;
+}
+
+
+small {
+    display: block;
+    margin-top: 0.5rem;
+    color: #3b82f6; 
+    font-weight: 500;
+    font-size: 0.9rem;
+}
 
 
 .social-media-section {
@@ -131,10 +238,43 @@ textarea:focus {
 
 .form-actions {
     display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
+   
     gap: 1rem;
+    margin-top: 2rem;
 }
+
+
+.form-actions button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.form-actions button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+.form-actions a {
+    background-color: #e0e0e0;
+    color: #333;
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-actions a:hover {
+    background-color: #cfcfcf;
+    color: #000;
+}
+
 
 @media (max-width: 768px) {
     .container {

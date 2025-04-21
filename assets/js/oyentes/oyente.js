@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     deleteForms.forEach(form => {
         form.addEventListener('submit', function(e) {
-            if (!confirm('¿Estás seguro de que deseas eliminar aal oyente?')) {
+            if (!confirm('¿Estás seguro de que deseas eliminar al oyente?')) {
                 e.preventDefault();
             }
         });

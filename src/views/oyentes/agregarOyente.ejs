@@ -1,47 +1,57 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Agregar Oyente</title>
-</head>
-<body>
-    <h1>Agregar Nuevo Oyente</h1>
+<html lang="es">
 
-    <% if (error) { %>
-        <div style="color: red;">
-            Error: <%= error %>
-        </div>
-    <% } %>
+<!-- Incluir head -->
+<%- include('../layout/oyentes/agregarOyenteHead') %>
 
-    <form action="/oyentes/agregarOyente" method="POST">
-        <div>
-            <label>Nombre:</label>
-            <input type="text" name="nombre" value="<%= oyente.nombre %>" required>
-        </div>
-        
-        <div>
-            <label>Correo:</label>
-            <input type="email" name="correo" value="<%= oyente.correo %>" required>
-        </div>
-        
-        <div>
-            <label>Teléfono:</label>
-            <input type="tel" name="telefono" value="<%= oyente.telefono %>" required>
-        </div>
-        
-        <div>
-            <label>Fecha de Registro:</label>
-            <input type="date" name="fecha_registro" value="<%= oyente.fecha_registro %>" required>
-        </div>
-        
-        <div>
-            <label>Géneros Musicales Favoritos:</label>
-            <input type="text" name="generos" value="<%= oyente.generos %>">
-        </div>
-        
-        <div>
-            <button type="submit">Guardar</button>
-            <a href="/oyentes">Cancelar</a>
-        </div>
-    </form>
+<body class="min-vh-100 d-flex flex-column">
+
+    <!--  Body wrapper -->
+    <div class="container">
+        <h1>Agregar Nuevo Oyente</h1>
+
+        <!-- Body -->
+        <% if (error) { %>
+            <div class="alert-error">
+                Error: <%= error %>
+            </div>
+        <% } %>
+
+        <form action="/oyentes/agregarOyente" method="POST">
+            <div class="form-group">
+                <label>Nombre:</label>
+                <input type="text" name="nombre" value="<%= oyente.nombre %>" required>
+            </div>
+
+            <div class="form-group">
+                <label>Correo:</label>
+                <input type="email" name="correo" value="<%= oyente.correo %>" required>
+            </div>
+
+            <div class="form-group">
+                <label>Teléfono:</label>
+                <input type="tel" name="telefono" value="<%= oyente.telefono %>" required>
+            </div>
+
+            <div class="form-group">
+                <label>Fecha de Registro:</label>
+                <input type="date" name="fecha_registro" value="<%= oyente.fecha_registro %>" required>
+            </div>
+
+            <div class="form-group">
+                <label>Géneros Musicales Favoritos:</label>
+                <input type="text" name="generos" value="<%= oyente.generos %>">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="/oyentes" class="btn btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Incluir scripts -->
+    <%- include('../layout/oyentes/agregarOyenteScripts') %>
 </body>
+
 </html>

@@ -1,44 +1,69 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Oyentes</title>
-</head>
-<body>
-    <h1>Oyentes</h1>
-    <a href="/oyentes/agregarOyente">Agregar Oyente</a>
+<html lang="en">
 
-    <% if (oyentes.length === 0) { %>
-        <p>No hay oyentes registrados.</p>
-    <% } else { %>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                    <th>Fecha Registro</th>
-                    <th>Géneros</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
+<!-- Incluir head -->
+<%- include('../layout/oyentes/oyenteHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <div class="container">
+        <h1 class="my-4">Oyentes</h1>
+
+        <!-- Acciones del encabezado -->
+        <div class="header-actions mb-4">
+            <a href="/" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+            <a href="/oyentes/agregarOyente" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Agregar Oyente
+            </a>
+        </div>
+
+        <!-- Mostrar oyentes -->
+        <% if (oyentes.length > 0) { %>
+            <div class="listener-grid">
                 <% oyentes.forEach(oyente => { %>
-                    <tr>
-                        <td><%= oyente.nombre %></td>
-                        <td><%= oyente.correo %></td>
-                        <td><%= oyente.telefono %></td>
-                        <td><%= oyente.fecha_registro.toLocaleDateString() %></td>
-                        <td><%= oyente.generos || '-' %></td>
-                        <td>
-                            <a href="/oyentes/editarOyente/<%= oyente._id %>">Editar</a>
+                    <div class="listener-card">
+                        <div class="listener-header">
+                            <h3 class="listener-name"><%= oyente.nombre %></h3>
+                            <span class="listener-genre"><%= oyente.generos || 'Sin preferencia' %></span>
+                        </div>
+                        <div class="listener-body">
+                            <div class="listener-info">
+                                <i class="fas fa-envelope"></i> <%= oyente.correo %>
+                            </div>
+                            <div class="listener-info">
+                                <i class="fas fa-phone"></i> <%= oyente.telefono %>
+                            </div>
+                            <div class="listener-info">
+                                <i class="fas fa-calendar-alt"></i>
+                                <%= oyente.fecha_registro
+                                    ? new Date(oyente.fecha_registro).toLocaleDateString('es-ES')
+                                    : 'Sin fecha' %>
+                            </div>
+                        </div>
+                        <div class="listener-actions">
+                            <a href="/oyentes/editarOyente/<%= oyente._id %>" class="btn btn-outline">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
                             <form action="/oyentes/<%= oyente._id %>?_method=DELETE" method="POST" style="display: inline;">
-                                <button type="submit" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este oyente?')">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
                             </form>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
                 <% }); %>
-            </tbody>
-        </table>
-    <% } %>
+            </div>
+        <% } else { %>
+            <div class="empty-state text-center mt-5">
+                <i class="fa-solid fa-users"></i>
+                <h3>No hay oyentes registrados</h3>
+                <p>Cuando se registren oyentes, aparecerán aquí.</p>
+            </div>
+        <% } %>
+    </div>
+
+    <%- include('../layout/oyentes/oyenteHead') %>
 </body>
 </html>
