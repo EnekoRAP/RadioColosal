@@ -1,4 +1,4 @@
-<!doctype html>
+<!Doctype html>
 <html lang="es">
 
 <!-- Incluir head -->
@@ -8,7 +8,7 @@
 
     <!--  Body wrapper -->
     <div class="container">
-        <h1>Comentarios</h1>
+        <h1>Comentarios Publicados</h1>
         <br>
 
         <!-- Body -->
@@ -37,15 +37,20 @@
         <% } %>
 
         <% if (comentarios.length > 0) { %>
-            <div class="locuts-grid">
+            <div class="comments-grid">
                 <% comentarios.forEach(comentario => { %>
-                    <div class="locut-card">
-                        <div class="locut-header">
-                            <h3 class="locut-name"><%= comentario.idOyente.nombre %></h3>
-                            <span class="locut-type"><%= comentario.idPrograma.nombre %></span>
+                    <div class="comment-card">
+                        <div class="comment-header">
+                            <h3 class="comment-name">
+                                <%= comentario.idOyente ? comentario.idOyente.nombre : 'Oyente desconocido' %>
+                            </h3>
+                            <span class="comment-nom">
+                                <%= comentario.idPrograma ? comentario.idPrograma.nombre : 'Programa desconocido' %>
+                            </span>
                         </div>
+                    
 
-                        <div class="locut-body">
+                        <div class="comment-body">
                             <p><strong>Comentario:</strong> <%= comentario.comentario %></p>
 
                             <p><strong>Calificación:</strong>
@@ -57,7 +62,7 @@
                             <p><strong>Fecha:</strong> <%= new Date(comentario.fecha).toLocaleDateString() %></p>
                         </div>
 
-                        <div class="client-actions">
+                        <div class="comment-actions">
                             <a href="/comentarios/editarComentario/<%= comentario._id %>" class="btn btn-outline">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
