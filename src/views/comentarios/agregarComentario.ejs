@@ -6,10 +6,13 @@
 
 <body class="min-vh-100 d-flex flex-column">
 
+    <!--  Body wrapper -->
+    <div class="container">
+        <h1>Agregar Nuevo Comentario</h1>
+
+        <!-- Body -->
         <% if (error) { %>
-            <div class="form-error">
-                <strong>Error:</strong> <%= error %>
-            </div>
+            <div class="alert-error"><%= error %></div>
         <% } %>
 
         <form action="/comentarios/agregarComentario" method="POST">
