@@ -1,44 +1,91 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Comentarios</title>
-</head>
-<body>
-    <h1>Comentarios</h1>
-    <a href="/comentarios/agregarComentario">Agregar Comentario</a>
+<html lang="es">
 
-    <% if (comentarios.length === 0) { %>
-        <p>No hay comentarios registrados.</p>
-    <% } else { %>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Oyente</th>
-                    <th>Programa</th>
-                    <th>Comentario</th>
-                    <th>Calificación</th>
-                    <th>Fecha</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
+<!-- Incluir head con estilos e íconos -->
+<%- include('../layout/comentarios/comentarioHead') %>
+
+<body class="min-vh-100 d-flex flex-column">
+
+    <div class="container">
+        <h1>Comentarios</h1>
+        <br>
+
+        <!-- Acciones -->
+        <div class="header-actions">
+            <a href="/" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+            <a href="/comentarios/agregarComentario" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Agregar Comentario
+            </a>
+        </div>
+        <br>
+
+        <!-- Mensajes de éxito o error -->
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i> <%= error %>
+            </div>
+            <br>
+        <% } %>
+
+        <% if (typeof success !== 'undefined') { %>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> <%= success %>
+            </div>
+            <br>
+        <% } %>
+
+        <!-- Lista de comentarios -->
+        <% if (comentarios.length > 0) { %>
+            <div class="locuts-grid">
                 <% comentarios.forEach(comentario => { %>
-                    <tr>
-                        <td><%= comentario.idOyente.nombre %></td>
-                        <td><%= comentario.idPrograma.nombre %></td>
-                        <td><%= comentario.comentario %></td>
-                        <td><%= '★'.repeat(comentario.calificacion) %></td>
-                        <td><%= comentario.fecha.toLocaleDateString() %></td>
-                        <td>
-                            <a href="/comentarios/editarComentario/<%= comentario._id %>">Editar</a>
+                    <div class="locut-card">
+                        <div class="locut-header">
+                            <h3 class="locut-name"><%= comentario.idOyente.nombre %></h3>
+                            <span class="locut-type"><%= comentario.idPrograma.nombre %></span>
+                        </div>
+
+                        <div class="locut-body">
+                            <p><strong>Comentario:</strong> <%= comentario.comentario %></p>
+
+                            <p><strong>Calificación:</strong>
+                                <span style="color: #f4c542; font-size: 1.2em;">
+                                    <%= '★'.repeat(comentario.calificacion) %>
+                                </span>
+                            </p>
+
+                            <p><strong>Fecha:</strong> <%= new Date(comentario.fecha).toLocaleDateString() %></p>
+                        </div>
+
+                        <div class="client-actions">
+                            <a href="/comentarios/editarComentario/<%= comentario._id %>" class="btn btn-outline">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
                             <form action="/comentarios/<%= comentario._id %>?_method=DELETE" method="POST" style="display: inline;">
-                                <button type="submit" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este comentario?')">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
                             </form>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
+                    <br>
                 <% }); %>
-            </tbody>
-        </table>
-    <% } %>
+            </div>
+        <% } else { %>
+            <!-- Mensaje cuando no hay comentarios -->
+            <div class="empty-state">
+                <i class="fas fa-comment-slash fa-3x"></i>
+                <h3>No hay comentarios registrados</h3>
+                <p>Aún no se ha dejado ningún comentario</p>
+                <a href="/comentarios/agregarComentario" class="btn btn-primary" style="margin-top: 20px;">
+                    <i class="fas fa-plus"></i> Agregar Primer Comentario
+                </a>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Incluir scripts necesarios -->
+    <%- include('../layout/comentarios/comentarioScripts') %>
 </body>
 </html>

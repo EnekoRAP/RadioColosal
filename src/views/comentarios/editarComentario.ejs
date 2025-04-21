@@ -1,55 +1,72 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Editar Comentario</title>
-</head>
-<body>
-    <h1>Editar Comentario</h1>
+<html lang="es">
 
-    <% if (error) { %>
-        <div style="color: red;">
-            Error: <%= error %>
-        </div>
-    <% } %>
+<!-- Incluir head con estilos e íconos -->
+<%- include('../layout/comentarios/editarComentarioHead') %>
 
-    <form action="/comentarios/<%= comentario._id %>?_method=PUT" method="POST">
-        <div>
-            <label>Nombre del Oyente:</label>
-            <input type="text" name="nombreOyente" value="<%= comentario.nombreOyente %>" 
-                   list="oyentesList" required>
-            <datalist id="oyentesList">
-                <% oyentes.forEach(oyente => { %>
-                    <option value="<%= oyente.nombre %>">
-                <% }); %>
-            </datalist>
-        </div>
-        
-        <div>
-            <label>Nombre del Programa:</label>
-            <input type="text" name="nombrePrograma" value="<%= comentario.nombrePrograma %>" 
-                   list="programasList" required>
-            <datalist id="programasList">
-                <% programas.forEach(programa => { %>
-                    <option value="<%= programa.nombre %>">
-                <% }); %>
-            </datalist>
-        </div>
-        
-        <div>
-            <label>Comentario:</label>
-            <textarea name="comentario" required><%= comentario.comentario %></textarea>
-        </div>
-        
-        <div>
-            <label>Calificación (1-5):</label>
-            <input type="number" name="calificacion" min="1" max="5" 
-                   value="<%= comentario.calificacion %>" required>
-        </div>
-        
-        <div>
-            <button type="submit">Guardar Cambios</button>
-            <a href="/comentarios">Cancelar</a>
-        </div>
-    </form>
+<body class="min-vh-100 d-flex flex-column">
+
+    <div class="container mt-4">
+        <h1>Editar Comentario</h1>
+
+        <% if (error) { %>
+            <div class="alert alert-danger">
+                Error: <%= error %>
+            </div>
+        <% } %>
+
+        <form action="/comentarios/<%= comentario._id %>?_method=PUT" method="POST">
+            <!-- Nombre del Oyente -->
+            <div class="form-group">
+                <label for="nombreOyente">Nombre del Oyente:</label>
+                <input type="text" name="nombreOyente" class="form-control" value="<%= comentario.nombreOyente %>" 
+                       list="oyentesList" required>
+                <datalist id="oyentesList">
+                    <% oyentes.forEach(oyente => { %>
+                        <option value="<%= oyente.nombre %>">
+                    <% }); %>
+                </datalist>
+            </div>
+
+            <!-- Nombre del Programa -->
+            <div class="form-group">
+                <label for="nombrePrograma">Nombre del Programa:</label>
+                <input type="text" name="nombrePrograma" class="form-control" value="<%= comentario.nombrePrograma %>" 
+                       list="programasList" required>
+                <datalist id="programasList">
+                    <% programas.forEach(programa => { %>
+                        <option value="<%= programa.nombre %>">
+                    <% }); %>
+                </datalist>
+            </div>
+
+            <!-- Comentario -->
+            <div class="form-group">
+                <label for="comentario">Comentario:</label>
+                <textarea name="comentario" class="form-control" rows="5" required><%= comentario.comentario %></textarea>
+            </div>
+
+            <!-- Calificación -->
+            <div class="form-group">
+                <label for="calificacion">Calificación (1-5):</label>
+                <input type="number" name="calificacion" class="form-control" min="1" max="5" 
+                       value="<%= comentario.calificacion %>" required>
+            </div>
+
+            <!-- Botones -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    Guardar Cambios
+                </button>
+                <a href="/comentarios" class="btn btn-outline-secondary">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Incluir scripts necesarios -->
+    <%- include('../layout/comentarios/editarComentarioScripts') %>
 </body>
+
 </html>
