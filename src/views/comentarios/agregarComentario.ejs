@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agregar Comentario</title>
+</head>
+<body>
+    <h1>Agregar Nuevo Comentario</h1>
+
+    <% if (error) { %>
+        <div style="color: red;">
+            Error: <%= error %>
+        </div>
+    <% } %>
+
+    <form action="/comentarios/agregarComentario" method="POST">
+        <div>
+            <label>Nombre del Oyente:</label>
+            <input type="text" name="nombreOyente" value="<%= comentario.nombreOyente %>" 
+                   list="oyentesList" required>
+            <datalist id="oyentesList">
+                <% oyentes.forEach(oyente => { %>
+                    <option value="<%= oyente.nombre %>">
+                <% }); %>
+            </datalist>
+        </div>
+        
+        <div>
+            <label>Nombre del Programa:</label>
+            <input type="text" name="nombrePrograma" value="<%= comentario.nombrePrograma %>" 
+                   list="programasList" required>
+            <datalist id="programasList">
+                <% programas.forEach(programa => { %>
+                    <option value="<%= programa.nombre %>">
+                <% }); %>
+            </datalist>
+        </div>
+        
+        <div>
+            <label>Comentario:</label>
+            <textarea name="comentario" required><%= comentario.comentario %></textarea>
+        </div>
+        
+        <div>
+            <label>Calificación (1-5):</label>
+            <input type="number" name="calificacion" min="1" max="5" 
+                   value="<%= comentario.calificacion %>" required>
+        </div>
+        
+        <div>
+            <button type="submit">Guardar</button>
+            <a href="/comentarios">Cancelar</a>
+        </div>
+    </form>
+</body>
+</html>

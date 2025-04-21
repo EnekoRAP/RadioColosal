@@ -8,7 +8,7 @@ class OyenteController {
                     nombre: '',
                     correo: '',
                     telefono: '',
-                    fecha_registro: '',
+                    fecha_registro: new Date().toISOString().split('T')[0],
                     generos: ''
                 },
                 error: null
@@ -21,7 +21,9 @@ class OyenteController {
     async listOyentes(req, res) {
         try {
             const oyentes = await oyenteService.getOyentes();
-            res.render('oyentes/oyentes', { oyentes });
+            res.render('oyentes/oyentes', { 
+                oyentes
+            });
         } catch (error) {
             res.status(500).send('Error al obtener oyentes');
         }
@@ -31,8 +33,11 @@ class OyenteController {
         try {
             const { id } = req.params;
             const oyente = await oyenteService.getOyenteById(id);
-            res.render('oyentes/editarOyente', {
-                oyente,
+            res.render('oyentes/editarOyente', { 
+                oyente: {
+                    ...oyente._doc,
+                    fecha_registro: oyente.fecha_registro.toISOString().split('T')[0]
+                },
                 error: null
             });
         } catch (error) {
@@ -43,15 +48,15 @@ class OyenteController {
     async createOyente(req, res) {
         try {
             const { nombre, correo, telefono, fecha_registro, generos } = req.body;
-
-            await oyenteService.createOyente({
-                nombre,
-                correo,
-                telefono,
-                fecha_registro,
+            
+            await oyenteService.createOyente({ 
+                nombre, 
+                correo, 
+                telefono, 
+                fecha_registro: new Date(fecha_registro),
                 generos
             });
-
+            
             res.redirect('/oyentes');
         } catch (error) {
             res.status(500).render('oyentes/agregarOyente', {
@@ -66,14 +71,14 @@ class OyenteController {
             const { id } = req.params;
             const { nombre, correo, telefono, fecha_registro, generos } = req.body;
 
-            await oyenteService.updateOyente(id, {
-                nombre,
-                correo,
-                telefono,
-                fecha_registro,
+            await oyenteService.updateOyente(id, { 
+                nombre, 
+                correo, 
+                telefono, 
+                fecha_registro: new Date(fecha_registro),
                 generos
             });
-
+            
             res.redirect('/oyentes');
         } catch (error) {
             res.status(500).render('oyentes/editarOyente', {
@@ -94,4 +99,4 @@ class OyenteController {
     }
 }
 
-module.exports = new oyenteController();
+module.exports = new OyenteController();

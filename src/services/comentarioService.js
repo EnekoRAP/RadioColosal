@@ -2,70 +2,54 @@ const Comentario = require('../models/comentario');
 const Oyente = require('../models/oyente');
 const Programacion = require('../models/programacion');
 
-class comentarioService {
-
-    // Operaciones CRUD
+class ComentarioService {
     async createComentario(data) {
         const comentario = new Comentario(data);
         await comentario.save();
-
-        const oyente = await Oyente.findById(data.idOyente);
-        if (oyente) {
-            oyente.comentarios = oyente.comentarios || [];
-            oyente.comentarios.push(comentario._id);
-            await oyente.save();
-        }
-
-        const programacion = await Programacion.findById(data.idPrograma);
-        if (programacion) {
-            programacion.comentarios = programacion.comentarios || [];
-            programacion.comentarios.push(comentario._id);
-            await programacion.save();
-        }
-
         return comentario;
     }
-    
+
     async getComentarios() {
         return await Comentario.find()
-        .populate('idOyente') 
-        .populate('idPrograma');
+            .populate('idOyente', 'nombre')
+            .populate('idPrograma', 'nombre')
+            .sort({ fecha: -1 });
     }
-    
+
     async getComentarioById(id) {
         return await Comentario.findById(id)
-        .populate('idOyente')
-        .populate('idPrograma');
+            .populate('idOyente', 'nombre')
+            .populate('idPrograma', 'nombre');
     }
-    
-    async updateComentario(id, data) {
-        return await Comentario.findByIdAndUpdate(id, data, { new: true });
+
+    async updateComentario(id, updateData) {
+        return await Comentario.findByIdAndUpdate(id, updateData, {
+            new: true,
+            runValidators: true
+        });
     }
 
     async deleteComentario(id) {
-        const comentario = await Comentario.findByIdAndDelete(id);
-        if (comentario) {
-            
-            const oyente = await Oyente.findById(comentario.idOyente);
-            if (oyente) {
-                oyente.comentarios = oyente.comentarios.filter(
-                    postId => !postId.equals(comentario._id)
-                );
-                await oyente.save();
-            }
-            
-            const programa = await Programa.findById(comentario.idPrograma);
-            if (programa) {
-                programa.comentarios = programa.comentarios.filter(
-                    postId => !postId.equals(comentario._id)
-                );
-                await programa.save();
-            }
-        }
-        
-        return comentario;
+        return await Comentario.findByIdAndDelete(id);
     }
 
+    async getOyentes() {
+        return await Oyente.find({}, 'nombre _id').sort({ nombre: 1 });
+    }
+
+    async getProgramas() {
+        return await Programacion.find({}, 'nombre _id').sort({ nombre: 1 });
+    }
+
+    // Nuevo método para buscar por nombre
+    async findOyenteByName(nombre) {
+        return await Oyente.findOne({ nombre });
+    }
+
+    // Nuevo método para buscar por nombre
+    async findProgramaByName(nombre) {
+        return await Programacion.findOne({ nombre });
+    }
 }
 
-module.exports = new comentarioService();
+module.exports = new ComentarioService();

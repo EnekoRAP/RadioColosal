@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Oyente</title>
+</head>
+<body>
+    <h1>Editar Oyente</h1>
+
+    <% if (error) { %>
+        <div style="color: red;">
+            Error: <%= error %>
+        </div>
+    <% } %>
+
+    <form action="/oyentes/<%= oyente._id %>?_method=PUT" method="POST">
+        <div>
+            <label>Nombre:</label>
+            <input type="text" name="nombre" value="<%= oyente.nombre %>" required>
+        </div>
+        
+        <div>
+            <label>Correo:</label>
+            <input type="email" name="correo" value="<%= oyente.correo %>" required>
+        </div>
+        
+        <div>
+            <label>Teléfono:</label>
+            <input type="tel" name="telefono" value="<%= oyente.telefono %>" required>
+        </div>
+        
+        <div>
+            <label>Fecha de Registro:</label>
+            <input type="date" name="fecha_registro" value="<%= oyente.fecha_registro %>" required>
+        </div>
+        
+        <div>
+            <label>Géneros Musicales Favoritos:</label>
+            <input type="text" name="generos" value="<%= oyente.generos %>">
+        </div>
+        
+        <div>
+            <button type="submit">Guardar Cambios</button>
+            <a href="/oyentes">Cancelar</a>
+        </div>
+    </form>
+</body>
+</html>

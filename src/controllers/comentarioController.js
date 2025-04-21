@@ -1,63 +1,136 @@
 const comentarioService = require('../services/comentarioService');
-const Oyente = require('../models/oyente');
-const Programacion = require('../models/programacion');
 
-class comentarioController {
+class ComentarioController {
+    async showCreateForm(req, res) {
+        try {
+            const [oyentes, programas] = await Promise.all([
+                comentarioService.getOyentes(),
+                comentarioService.getProgramas()
+            ]);
+            
+            res.render('comentarios/agregarComentario', {
+                comentario: {
+                    nombreOyente: '',
+                    nombrePrograma: '',
+                    comentario: '',
+                    calificacion: 3
+                },
+                oyentes,
+                programas,
+                error: null
+            });
+        } catch (error) {
+            res.status(500).send('Error al cargar el formulario');
+        }
+    }
 
-    async getComentarios(req, res) {
+    async listComentarios(req, res) {
         try {
             const comentarios = await comentarioService.getComentarios();
-            res.render('comentarios/comentarios', { comentarios });
+            res.render('comentarios/comentarios', { 
+                comentarios
+            });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al obtener comentarios');
         }
     }
 
-    async agregarComentario(req, res) {
-        try {
-            const oyentes = await Oyente.find();
-            const programas = await Programacion.find();
-            res.render('comentarios/agregarComentario', { oyentes, programas });
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
-        }
-    }
-
-    async createComentarios(req, res) {
-        try {
-            const { idOyente, idPrograma, comentario, calificacion } = req.body;
-            const nuevoComenatrio = await comentarioService.createComentario({ idOyente, idPrograma, comentario, calificacion });
-            res.redirect('/comentarios');
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
-        }
-    }
-
-    async editarComentario(req, res) {
+    async showEditForm(req, res) {
         try {
             const { id } = req.params;
-            const comentario = await comentarioService.getComentarioById(id);
-            const oyentes = await Oyente.find();
-            const programas = await Programacion.find();
-            res.render('comentarios/editarComentario', { comentario, oyentes, programas });
+            const [comentario, oyentes, programas] = await Promise.all([
+                comentarioService.getComentarioById(id),
+                comentarioService.getOyentes(),
+                comentarioService.getProgramas()
+            ]);
+            
+            res.render('comentarios/editarComentario', { 
+                comentario: {
+                    ...comentario._doc,
+                    nombreOyente: comentario.idOyente.nombre,
+                    nombrePrograma: comentario.idPrograma.nombre
+                },
+                oyentes,
+                programas,
+                error: null
+            });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al cargar el comentario para edición');
+        }
+    }
+
+    async createComentario(req, res) {
+        try {
+            const { nombreOyente, nombrePrograma, comentario, calificacion } = req.body;
+            
+            // Buscar IDs basados en los nombres
+            const [oyente, programa] = await Promise.all([
+                comentarioService.findOyenteByName(nombreOyente),
+                comentarioService.findProgramaByName(nombrePrograma)
+            ]);
+
+            if (!oyente || !programa) {
+                throw new Error('Oyente o programa no encontrado');
+            }
+
+            await comentarioService.createComentario({ 
+                idOyente: oyente._id, 
+                idPrograma: programa._id, 
+                comentario, 
+                calificacion: parseInt(calificacion)
+            });
+            
+            res.redirect('/comentarios');
+        } catch (error) {
+            const [oyentes, programas] = await Promise.all([
+                comentarioService.getOyentes(),
+                comentarioService.getProgramas()
+            ]);
+            
+            res.status(500).render('comentarios/agregarComentario', {
+                error: error.message,
+                comentario: req.body,
+                oyentes,
+                programas
+            });
         }
     }
 
     async updateComentario(req, res) {
         try {
             const { id } = req.params;
-            const { idOyente, idPrograma, comentario, calificacion } = req.body;
-            const comentarioActualizado = await comentarioService.updateComentario(id, { idOyente, idPrograma, comentario, calificacion });
-            res.redirect('/comentarios'); 
+            const { nombreOyente, nombrePrograma, comentario, calificacion } = req.body;
+
+            // Buscar IDs basados en los nombres
+            const [oyente, programa] = await Promise.all([
+                comentarioService.findOyenteByName(nombreOyente),
+                comentarioService.findProgramaByName(nombrePrograma)
+            ]);
+
+            if (!oyente || !programa) {
+                throw new Error('Oyente o programa no encontrado');
+            }
+
+            await comentarioService.updateComentario(id, { 
+                idOyente: oyente._id, 
+                idPrograma: programa._id, 
+                comentario, 
+                calificacion: parseInt(calificacion)
+            });
+            
+            res.redirect('/comentarios');
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            const [oyentes, programas] = await Promise.all([
+                comentarioService.getOyentes(),
+                comentarioService.getProgramas()
+            ]);
+            
+            res.status(500).render('comentarios/editarComentario', {
+                error: error.message,
+                comentario: req.body,
+                oyentes,
+                programas
+            });
         }
     }
 
@@ -67,11 +140,9 @@ class comentarioController {
             await comentarioService.deleteComentario(id);
             res.redirect('/comentarios');
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: error.message });
+            res.status(500).send('Error al eliminar el comentario');
         }
     }
-
 }
 
-module.exports = new comentarioController();
+module.exports = new ComentarioController();

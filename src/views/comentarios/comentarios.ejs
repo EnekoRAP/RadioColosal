@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Comentarios</title>
+</head>
+<body>
+    <h1>Comentarios</h1>
+    <a href="/comentarios/agregarComentario">Agregar Comentario</a>
+
+    <% if (comentarios.length === 0) { %>
+        <p>No hay comentarios registrados.</p>
+    <% } else { %>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Oyente</th>
+                    <th>Programa</th>
+                    <th>Comentario</th>
+                    <th>Calificación</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% comentarios.forEach(comentario => { %>
+                    <tr>
+                        <td><%= comentario.idOyente.nombre %></td>
+                        <td><%= comentario.idPrograma.nombre %></td>
+                        <td><%= comentario.comentario %></td>
+                        <td><%= '★'.repeat(comentario.calificacion) %></td>
+                        <td><%= comentario.fecha.toLocaleDateString() %></td>
+                        <td>
+                            <a href="/comentarios/editarComentario/<%= comentario._id %>">Editar</a>
+                            <form action="/comentarios/<%= comentario._id %>?_method=DELETE" method="POST" style="display: inline;">
+                                <button type="submit" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } %>
+</body>
+</html>

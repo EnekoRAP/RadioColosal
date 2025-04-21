@@ -2,22 +2,22 @@ const express = require('express');
 const router = express.Router();
 const comentarioController = require('../controllers/comentarioController');
 
-// Form de nuevo comentario
-router.get('/agregarComentario', comentarioController.agregarComentario);
+// Mostrar formulario de creación
+router.get('/agregarComentario', comentarioController.showCreateForm);
 
-// Lista de comentarios
-router.get('/', comentarioController.getComentarios);
+// Procesar creación de comentario
+router.post('/agregarComentario', comentarioController.createComentario);
 
-// Form de editar oyente
-router.get('/editarComentario/:id', comentarioController.editarComentario);
+// Listar todos los comentarios
+router.get('/', comentarioController.listComentarios);
 
-// Eliminar comentario desde el listado
+// Mostrar formulario de edición
+router.get('/editarComentario/:id', comentarioController.showEditForm);
+
+// Procesar actualización de comentario
+router.put('/:id', comentarioController.updateComentario);
+
+// Eliminar comentario
 router.delete('/:id', comentarioController.deleteComentario);
-
-// Solicitud de form de nuevo comentario
-router.post('/agregarComentario', comentarioController.createComentarios);
-
-// Solicitud de editar comentario
-router.put('/editarComentario/:id', comentarioController.updateComentario);
 
 module.exports = router;

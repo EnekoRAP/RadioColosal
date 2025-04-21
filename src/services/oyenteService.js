@@ -1,6 +1,6 @@
 const Oyente = require('../models/oyente');
 
-class oyenteService {
+class OyenteService {
     async createOyente(data) {
         const oyente = new Oyente(data);
         await oyente.save();
@@ -8,21 +8,23 @@ class oyenteService {
     }
 
     async getOyentes() {
-        return await Oyente.find();
+        return await Oyente.find().sort({ fecha_registro: -1 });
     }
 
     async getOyenteById(id) {
         return await Oyente.findById(id);
     }
 
-    async updateOyente(id, data) {
-        return await Oyente.findByIdAndUpdate(id, data, { new: true })
+    async updateOyente(id, updateData) {
+        return await Oyente.findByIdAndUpdate(id, updateData, {
+            new: true,
+            runValidators: true
+        });
     }
 
     async deleteOyente(id) {
         return await Oyente.findByIdAndDelete(id);
     }
-
 }
 
-module.exports = new oyenteService();
+module.exports = new OyenteService();

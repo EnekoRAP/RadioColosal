@@ -1,55 +1,47 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
+<head>
+    <title>Agregar Oyente</title>
+</head>
+<body>
+    <h1>Agregar Nuevo Oyente</h1>
 
-<!-- Incluir head -->
-<%- include('../layout/oyentes/agregarOyenteHead') %>
+    <% if (error) { %>
+        <div style="color: red;">
+            Error: <%= error %>
+        </div>
+    <% } %>
 
-<body class="min-vh-100 d-flex flex-column">
-
-    <!-- Contenedor principal -->
-    <div class="container">
-        <h1>Registrar Oyente</h1>
+    <form action="/oyentes/agregarOyente" method="POST">
+        <div>
+            <label>Nombre:</label>
+            <input type="text" name="nombre" value="<%= oyente.nombre %>" required>
+        </div>
         
-        <!-- Mensaje de error -->
-        <% if (typeof error !== 'undefined') { %>
-            <div class="alert-error"><%= error %></div>
-        <% } %>
-
-        <!-- Formulario -->
-        <form action="/oyentes/agregarOyente" method="POST">
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
-            </div>
-
-            <div class="form-group">
-                <label for="correo">Correo Electrónico:</label>
-                <input type="text" id="correo" name="correo" required>
-            </div>
-
-            <div class="form-group">
-                <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono" required>
-            </div>
-
-            <div class="form-group">
-                <label for="fecha_registro">Fecha de registro:</label>
-                <input type="date" id="fecha_registro" name="fecha_registro" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="generos">Géneros Favoritos:</label>
-                <input type="text" id="generos" name="generos" required>
-            </div>
-            
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Registrar</button>
-                <a href="/" class="btn btn-cancel">Volver al Inicio</a>
-            </div>
-        </form>
-    </div>
-
-    <!-- Incluir scripts de js -->
-    <%- include('../layout/noticias/agregarNoticiaScripts') %>
+        <div>
+            <label>Correo:</label>
+            <input type="email" name="correo" value="<%= oyente.correo %>" required>
+        </div>
+        
+        <div>
+            <label>Teléfono:</label>
+            <input type="tel" name="telefono" value="<%= oyente.telefono %>" required>
+        </div>
+        
+        <div>
+            <label>Fecha de Registro:</label>
+            <input type="date" name="fecha_registro" value="<%= oyente.fecha_registro %>" required>
+        </div>
+        
+        <div>
+            <label>Géneros Musicales Favoritos:</label>
+            <input type="text" name="generos" value="<%= oyente.generos %>">
+        </div>
+        
+        <div>
+            <button type="submit">Guardar</button>
+            <a href="/oyentes">Cancelar</a>
+        </div>
+    </form>
 </body>
 </html>
