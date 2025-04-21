@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
 <!-- Incluir head -->
@@ -6,16 +6,15 @@
 
 <body class="min-vh-100 d-flex flex-column">
 
-    <!-- Contenedor principal -->
+    <!--  Body wrapper -->
     <div class="container">
         <h1>Publicar Noticia</h1>
         
-        <!-- Mensaje de error -->
+        <!-- Body -->
         <% if (typeof error !== 'undefined') { %>
             <div class="alert-error"><%= error %></div>
         <% } %>
 
-        <!-- Formulario -->
         <form action="/noticias/agregarNoticia" method="POST">
             <div class="form-group">
                 <label for="titulo">Título:</label>

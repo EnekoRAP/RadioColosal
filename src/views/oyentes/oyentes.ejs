@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <!-- Incluir head -->
@@ -6,10 +6,11 @@
 
 <body class="min-vh-100 d-flex flex-column">
 
+    <!--  Body wrapper -->
     <div class="container">
         <h1 class="my-4">Oyentes</h1>
 
-        <!-- Acciones del encabezado -->
+        <!-- Body -->
         <div class="header-actions mb-4">
             <a href="/" class="btn btn-outline">
                 <i class="fas fa-arrow-left"></i> Volver al Inicio
@@ -19,7 +20,6 @@
             </a>
         </div>
 
-        <!-- Mostrar oyentes -->
         <% if (oyentes.length > 0) { %>
             <div class="listener-grid">
                 <% oyentes.forEach(oyente => { %>
@@ -64,6 +64,8 @@
         <% } %>
     </div>
 
+    <!-- Incluir scripts de js -->
     <%- include('../layout/oyentes/oyenteHead') %>
+    
 </body>
 </html>

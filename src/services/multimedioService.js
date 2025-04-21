@@ -1,6 +1,7 @@
 const Multimedio = require('../models/multimedio');
 
 class MultimedioService {
+
     async createMultimedio(data) {
         const multimedio = new Multimedio({
             titulo: data.titulo,
@@ -34,6 +35,7 @@ class MultimedioService {
     async deleteMultimedio(id) {
         return await Multimedio.findByIdAndDelete(id);
     }
+    
 }
 
 module.exports = new MultimedioService();

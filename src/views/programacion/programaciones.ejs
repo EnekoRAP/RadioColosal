@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <!-- Incluir head -->
@@ -6,11 +6,11 @@
 
 <body class="min-vh-100 d-flex flex-column">
 
-    <!-- Contenedor principal -->
+    <!-- Body wrapper -->
     <div class="container">
         <h1>Programación de Emisiones</h1>
 
-        <!-- Acciones superiores -->
+        <!-- Body -->
         <div class="header-actions">
             <a href="/" class="btn btn-outline">
                 <i class="fas fa-arrow-left"></i> Volver al Inicio
@@ -20,7 +20,6 @@
             </a>
         </div>
 
-        <!-- Contenido principal -->
         <% if (programaciones.length > 0) { %>
             <% diasSemana.forEach(function(dia) { %>
                 <% const programacionesDia = programaciones.filter(p => p.dia === dia); %>
@@ -75,5 +74,6 @@
 
     <!-- Incluir scripts -->
     <%- include('../layout/programaciones/programacionScripts') %>
+    
 </body>
 </html>

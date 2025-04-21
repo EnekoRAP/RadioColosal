@@ -4,9 +4,9 @@ const clienteController = require('../controllers/clienteController');
 
 // Form de nuevo cliente
 router.get('/agregarCliente', clienteController.agregarCliente);
+
 // Procesar formulario de creacion (POST)
 router.post('/agregarCliente', clienteController.createClientes);
-
 
 // Lista de clientes
 router.get('/', clienteController.getClientes);

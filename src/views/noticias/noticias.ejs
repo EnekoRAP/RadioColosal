@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
 <!-- Incluir head -->
@@ -6,11 +6,11 @@
 
 <body class="min-vh-100 d-flex flex-column">
 
-    <!-- Contenedor principal -->
+    <!--  Body wrapper -->
     <div class="container">
         <h1 class="my-4">Noticias</h1>
 
-        <!-- Acciones del encabezado -->
+        <!-- Body -->
         <div class="header-actions mb-4">
             <a href="/" class="btn btn-outline">
                 <i class="fas fa-arrow-left"></i> Volver al Inicio
@@ -20,7 +20,6 @@
             </a>
         </div>
 
-        <!-- Mensajes de error o éxito -->
         <% if (typeof error !== 'undefined') { %>
             <div class="alert alert-error">
                 <i class="fas fa-exclamation-circle"></i> <%= error === 'delete_error' ? 'Error al eliminar la noticia' : error %>
@@ -33,7 +32,6 @@
             </div>
         <% } %>
 
-        <!-- Mostrar noticias -->
         <% if (noticias.length > 0) { %>
             <div class="news-list">
                 <% noticias.forEach(noticia => { %>
@@ -56,7 +54,6 @@
                             <p class="news-content"><%= noticia.contenido %></p>
                         </div>
 
-                        <!-- Acciones -->
                         <div class="news-actions mt-2">
                             <a href="/noticias/editarNoticia/<%= noticia._id %>" class="btn btn-outline me-2">
                                 <i class="fas fa-edit"></i> Editar

@@ -2,7 +2,6 @@ const Evento = require('../models/evento');
 
 class eventoService {
 
-    // Operaciones CRUD
     async createEvento(data) {
         const evento = new Evento(data);
         await evento.save();

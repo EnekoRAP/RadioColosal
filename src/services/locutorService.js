@@ -2,6 +2,7 @@ const Locutor = require('../models/locutor');
 const Programacion = require('../models/programacion');
 
 class LocutorService {
+
     async createLocutor(data) {
         const locutor = new Locutor(data);
         await locutor.save();
@@ -32,6 +33,7 @@ class LocutorService {
     async getAllProgramas() {
         return await Programacion.find({}, 'nombre _id').sort({ nombre: 1 });
     }
+    
 }
 
 module.exports = new LocutorService();

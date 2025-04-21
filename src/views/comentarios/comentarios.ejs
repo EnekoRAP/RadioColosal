@@ -1,16 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
-<!-- Incluir head con estilos e íconos -->
+<!-- Incluir head -->
 <%- include('../layout/comentarios/comentarioHead') %>
 
 <body class="min-vh-100 d-flex flex-column">
 
+    <!--  Body wrapper -->
     <div class="container">
         <h1>Comentarios</h1>
         <br>
 
-        <!-- Acciones -->
+        <!-- Body -->
         <div class="header-actions">
             <a href="/" class="btn btn-outline">
                 <i class="fas fa-arrow-left"></i> Volver al Inicio
@@ -21,7 +22,6 @@
         </div>
         <br>
 
-        <!-- Mensajes de éxito o error -->
         <% if (typeof error !== 'undefined') { %>
             <div class="alert alert-error">
                 <i class="fas fa-exclamation-circle"></i> <%= error %>
@@ -36,7 +36,6 @@
             <br>
         <% } %>
 
-        <!-- Lista de comentarios -->
         <% if (comentarios.length > 0) { %>
             <div class="locuts-grid">
                 <% comentarios.forEach(comentario => { %>
@@ -73,7 +72,6 @@
                 <% }); %>
             </div>
         <% } else { %>
-            <!-- Mensaje cuando no hay comentarios -->
             <div class="empty-state">
                 <i class="fas fa-comment-slash fa-3x"></i>
                 <h3>No hay comentarios registrados</h3>
@@ -85,7 +83,8 @@
         <% } %>
     </div>
 
-    <!-- Incluir scripts necesarios -->
+    <!-- Incluir scripts de js -->
     <%- include('../layout/comentarios/comentarioScripts') %>
+    
 </body>
 </html>

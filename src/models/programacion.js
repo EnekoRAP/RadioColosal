@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const programacionSchema = new mongoose.Schema({
+
     dia: { type: String, required: true },
     horario: {
         inicio: { type: String, required: true },
@@ -8,6 +9,9 @@ const programacionSchema = new mongoose.Schema({
     },
     nombre: { type: String, required: true },
     descripcion: { type: String, required: true }
-}, { collection: 'Programacion' });
+    
+}, 
+
+{ collection: 'Programacion' });
 
 module.exports = mongoose.model('Programacion', programacionSchema);

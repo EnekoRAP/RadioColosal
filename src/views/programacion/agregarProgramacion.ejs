@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <!-- Incluir head -->
@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Agregar Nueva Programación</h1>
 
-        <!-- Mostrar error si existe -->
+        <!-- Body -->
         <% if (error) { %>
             <div class="alert-error">
                 <i class="fas fa-exclamation-circle"></i> <%= error %>
@@ -70,5 +70,6 @@
 
     <!-- Incluir scripts de js -->
     <%- include('../layout/programaciones/agregarProgramacionScripts') %>
+    
 </body>
 </html>

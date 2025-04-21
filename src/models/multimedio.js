@@ -10,7 +10,7 @@ const multimedioSchema = new mongoose.Schema({
         inicio: { type: String, required: true },
         fin: { type: String, required: true }
     },
-
+    
 },
 
 { collection: 'Multimedios' });

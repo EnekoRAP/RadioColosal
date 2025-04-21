@@ -1,4 +1,3 @@
-
 :root {
     --primary-color: #4361ee;
     --secondary-color: #3f37c9;
@@ -102,7 +101,6 @@ input[type="number"]:focus {
     box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
 }
 
-/* Estilo del select múltiple */
 select[multiple] {
     width: 100%;
     padding: 0.75rem;
@@ -111,18 +109,16 @@ select[multiple] {
     font-size: 1rem;
     font-family: inherit;
     background-color: #fff;
-    color: var(--primary-color); /* Azul para el texto */
+    color: var(--primary-color); 
     transition: border-color 0.3s, box-shadow 0.3s;
     min-height: 140px;
 }
-
 
 select[multiple]:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
 }
-
 
 select[multiple] option {
     color: #111; 
@@ -131,19 +127,15 @@ select[multiple] option {
     transition: background-color 0.2s ease-in-out;
 }
 
-
-
 select[multiple] option:hover {
-    background-color: #f3f4f6; /* Gris claro */
+    background-color: #f3f4f6; 
     cursor: pointer;
 }
 
-
 select[multiple] option:checked {
-    background-color: rgba(67, 97, 238, 0.1); /* Azul claro */
+    background-color: rgba(67, 97, 238, 0.1); 
     font-weight: 600;
 }
-
 
 small {
     display: block;
@@ -152,7 +144,6 @@ small {
     font-weight: 500;
     font-size: 0.9rem;
 }
-
 
 .social-media-section {
     background-color: #f8fafc;

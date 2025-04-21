@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
 <!-- Incluir head con estilos e íconos -->
@@ -16,7 +16,6 @@
         <% } %>
 
         <form action="/comentarios/<%= comentario._id %>?_method=PUT" method="POST">
-            <!-- Nombre del Oyente -->
             <div class="form-group">
                 <label for="nombreOyente">Nombre del Oyente:</label>
                 <input type="text" name="nombreOyente" class="form-control" value="<%= comentario.nombreOyente %>" 
@@ -28,7 +27,6 @@
                 </datalist>
             </div>
 
-            <!-- Nombre del Programa -->
             <div class="form-group">
                 <label for="nombrePrograma">Nombre del Programa:</label>
                 <input type="text" name="nombrePrograma" class="form-control" value="<%= comentario.nombrePrograma %>" 
@@ -40,20 +38,17 @@
                 </datalist>
             </div>
 
-            <!-- Comentario -->
             <div class="form-group">
                 <label for="comentario">Comentario:</label>
                 <textarea name="comentario" class="form-control" rows="5" required><%= comentario.comentario %></textarea>
             </div>
 
-            <!-- Calificación -->
             <div class="form-group">
                 <label for="calificacion">Calificación (1-5):</label>
                 <input type="number" name="calificacion" class="form-control" min="1" max="5" 
                        value="<%= comentario.calificacion %>" required>
             </div>
 
-            <!-- Botones -->
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-save"></i> Guardar Cambios
@@ -67,6 +62,7 @@
 
     <!-- Incluir scripts necesarios -->
     <%- include('../layout/comentarios/editarComentarioScripts') %>
+    
 </body>
 
 </html>

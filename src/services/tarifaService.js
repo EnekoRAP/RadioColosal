@@ -1,6 +1,7 @@
 const Tarifa = require('../models/tarifa');
 
 class TarifaService {
+
     async createTarifa(data) {
         const tarifa = new Tarifa(data);
         await tarifa.save();
@@ -25,6 +26,7 @@ class TarifaService {
     async deleteTarifa(id) {
         return await Tarifa.findByIdAndDelete(id);
     }
+
 }
 
 module.exports = new TarifaService();

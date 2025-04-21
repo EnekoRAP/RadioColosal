@@ -2,7 +2,6 @@ const Publicidad = require('../models/publicidad');
 
 class publicidadService {
 
-    // Operaciones CRUD
     async createPublicidad(data) {
         const publicidad = new Publicidad(data);
         await publicidad.save();

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const comentarioSchema = new mongoose.Schema({
+
     idOyente: { 
         type: mongoose.Schema.Types.ObjectId, 
         required: true, 
@@ -25,6 +26,9 @@ const comentarioSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-}, { collection: 'Comentarios' });
+    
+}, 
+
+{ collection: 'Comentarios' });
 
 module.exports = mongoose.model('Comentario', comentarioSchema);

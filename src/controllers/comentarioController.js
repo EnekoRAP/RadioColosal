@@ -1,6 +1,7 @@
 const comentarioService = require('../services/comentarioService');
 
 class ComentarioController {
+    
     async showCreateForm(req, res) {
         try {
             const [oyentes, programas] = await Promise.all([
@@ -63,7 +64,6 @@ class ComentarioController {
         try {
             const { nombreOyente, nombrePrograma, comentario, calificacion } = req.body;
             
-            // Buscar IDs basados en los nombres
             const [oyente, programa] = await Promise.all([
                 comentarioService.findOyenteByName(nombreOyente),
                 comentarioService.findProgramaByName(nombrePrograma)
@@ -101,7 +101,6 @@ class ComentarioController {
             const { id } = req.params;
             const { nombreOyente, nombrePrograma, comentario, calificacion } = req.body;
 
-            // Buscar IDs basados en los nombres
             const [oyente, programa] = await Promise.all([
                 comentarioService.findOyenteByName(nombreOyente),
                 comentarioService.findProgramaByName(nombrePrograma)

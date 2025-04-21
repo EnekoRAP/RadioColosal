@@ -1,6 +1,7 @@
 const Programacion = require('../models/programacion');
 
 class ProgramacionService {
+
     async createProgramacion(data) {
         const programacion = new Programacion(data);
         await programacion.save();
@@ -25,6 +26,7 @@ class ProgramacionService {
     async deleteProgramacion(id) {
         return await Programacion.findByIdAndDelete(id);
     }
+
 }
 
 module.exports = new ProgramacionService();

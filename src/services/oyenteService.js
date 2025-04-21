@@ -1,6 +1,7 @@
 const Oyente = require('../models/oyente');
 
 class OyenteService {
+
     async createOyente(data) {
         const oyente = new Oyente(data);
         await oyente.save();
@@ -25,6 +26,7 @@ class OyenteService {
     async deleteOyente(id) {
         return await Oyente.findByIdAndDelete(id);
     }
+    
 }
 
 module.exports = new OyenteService();

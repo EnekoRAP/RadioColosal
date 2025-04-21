@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
 <!-- Incluir head -->
@@ -6,11 +6,11 @@
 
 <body class="min-vh-100 d-flex flex-column">
 
-    <!-- Contenedor principal -->
+    <!-- Body wrapper -->
     <div class="container">
         <h1 class="my-4">Editar Publicidad</h1>
         
-        <!-- Formulario -->
+        <!-- Body -->
         <form action="/publicidad/editarPublicidad/<%= publicidad._id %>?_method=PUT" method="POST">
             <div class="form-group mb-3">
                 <label for="patrocinador">Patrocinador:</label>
@@ -54,5 +54,6 @@
 
     <!-- Incluir scripts -->
     <%- include('../layout/publicidad/editarPublicidadScripts') %>
+    
 </body>
 </html>

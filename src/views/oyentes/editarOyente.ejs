@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
 <!-- Incluir head con estilos -->
@@ -6,9 +6,11 @@
 
 <body class="min-vh-100 d-flex flex-column">
 
+    <!--  Body wrapper -->
     <div class="container">
         <h1>Editar Oyente</h1>
 
+        <!-- Body -->
         <% if (error) { %>
             <div class="alert alert-error">
                 <i class="fas fa-exclamation-circle"></i> <%= error %>
@@ -55,5 +57,6 @@
 
     <!-- Incluir scripts de js -->
     <%- include('../layout/oyentes/editarOyenteScripts') %>
+    
 </body>
 </html>

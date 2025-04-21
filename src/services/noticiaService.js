@@ -2,7 +2,6 @@ const Noticia = require('../models/noticia');
 
 class noticiaService {
 
-    // Operaciones CRUD
     async createNoticia(data) {
         const noticia = new Noticia(data);
         await noticia.save();

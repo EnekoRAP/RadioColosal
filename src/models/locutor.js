@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const locutorSchema = new mongoose.Schema({
+    
     nombre: { type: String, required: true },
     biografia: { type: String },
     redSocial: {
@@ -11,6 +12,9 @@ const locutorSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Programacion' 
     }]
-}, { collection: 'Locutores' });
+    
+}, 
+
+{ collection: 'Locutores' });
 
 module.exports = mongoose.model('Locutor', locutorSchema);

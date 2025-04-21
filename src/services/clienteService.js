@@ -2,9 +2,7 @@ const Cliente = require('../models/cliente');
 
 class clienteService {
 
-    // Operaciones CRUD
     async createCliente(data) {
-        
         const red_social = {
             facebook: data.red_social?.facebook || '',
             x: data.red_social?.x || '',

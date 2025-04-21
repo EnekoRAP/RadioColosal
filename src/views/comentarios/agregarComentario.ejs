@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
 <!-- Incluir head -->
@@ -17,7 +17,6 @@
 
         <form action="/comentarios/agregarComentario" method="POST">
 
-            <!-- Nombre del Oyente -->
             <div class="form-group">
                 <label class="form-label">Nombre del Oyente:</label>
                 <input class="form-input" type="text" name="nombreOyente" value="<%= comentario.nombreOyente %>" 
@@ -29,7 +28,6 @@
                 </datalist>
             </div>
 
-            <!-- Nombre del Programa -->
             <div class="form-group">
                 <label class="form-label">Nombre del Programa:</label>
                 <input class="form-input" type="text" name="nombrePrograma" value="<%= comentario.nombrePrograma %>" 
@@ -41,28 +39,26 @@
                 </datalist>
             </div>
 
-            <!-- Comentario -->
             <div class="form-group">
                 <label class="form-label">Comentario:</label>
                 <textarea class="form-textarea" name="comentario" required><%= comentario.comentario %></textarea>
             </div>
 
-            <!-- Calificación -->
             <div class="form-group">
                 <label class="form-label">Calificación (1-5):</label>
                 <input class="form-input" type="number" name="calificacion" min="1" max="5" 
                     value="<%= comentario.calificacion %>" required>
             </div>
 
-            <!-- Botones -->
             <div class="form-actions">
                 <button type="submit" class="form-button">Guardar</button>
                 <a href="/comentarios" class="form-button cancel">Cancelar</a>
             </div>
         </form>
     </div>
-
-<!-- Incluir scripts de js -->
-<%- include('../layout/comentarios/agregarComentarioScripts') %>
+    
+    <!-- Incluir scripts de js -->
+    <%- include('../layout/comentarios/agregarComentarioScripts') %>
+    
 </body>
 </html>

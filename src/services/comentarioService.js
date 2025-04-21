@@ -3,6 +3,7 @@ const Oyente = require('../models/oyente');
 const Programacion = require('../models/programacion');
 
 class ComentarioService {
+
     async createComentario(data) {
         const comentario = new Comentario(data);
         await comentario.save();
@@ -41,15 +42,14 @@ class ComentarioService {
         return await Programacion.find({}, 'nombre _id').sort({ nombre: 1 });
     }
 
-    // Nuevo método para buscar por nombre
     async findOyenteByName(nombre) {
         return await Oyente.findOne({ nombre });
     }
 
-    // Nuevo método para buscar por nombre
     async findProgramaByName(nombre) {
         return await Programacion.findOne({ nombre });
     }
+    
 }
 
 module.exports = new ComentarioService();

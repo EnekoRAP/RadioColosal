@@ -1,6 +1,7 @@
 const tarifaService = require('../services/tarifaService');
 
 class TarifaController {
+
     async showCreateForm(req, res) {
         try {
             res.render('tarifas/agregarTarifa', {
